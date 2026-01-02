@@ -15,9 +15,9 @@
         :root {
             --color-cream: #F7F4ED;
             --color-warm-white: #FEFDFB;
-            --color-sage: #8BA888;
-            --color-sage-dark: #6B8A68;
-            --color-forest: #2D4A3E;
+            --color-peach: #fac189;
+            --color-orange-light: #f15614;
+            --color-orange: #f54a00;
             --color-earth: #B8860B;
             --color-earth-light: #D4A84B;
             --color-charcoal: #2A2A28;
@@ -85,19 +85,16 @@
         }
         
         .logo {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            font-weight: 500;
-            color: var(--color-forest);
-            text-decoration: none;
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            text-decoration: none;
         }
-        
-        .logo svg {
-            width: 32px;
-            height: 32px;
+
+        .logo-img{
+            height: 32px;     /* tweak as needed */
+            width: auto;
+            display: block;
         }
         
         .nav-links {
@@ -115,11 +112,11 @@
         }
         
         .nav-links a:hover {
-            color: var(--color-forest);
+            color: var(--color-orange);
         }
         
         .nav-cta {
-            background: var(--color-forest);
+            background: var(--color-orange);
             color: var(--color-cream) !important;
             padding: 0.75rem 1.5rem;
             border-radius: 100px;
@@ -139,7 +136,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 8rem 2rem 4rem;
+            padding: 4rem 2rem 4rem;
             position: relative;
             overflow: hidden;
         }
@@ -191,7 +188,7 @@
         .hero-badge svg {
             width: 16px;
             height: 16px;
-            color: var(--color-sage);
+            color: var(--color-peach);
         }
         
         @keyframes fadeInUp {
@@ -207,7 +204,7 @@
         
         .hero h1 {
             font-family: var(--font-display);
-            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-size: clamp(2rem, 5vw, 4rem);
             font-weight: 400;
             line-height: 1.1;
             color: var(--color-charcoal);
@@ -219,7 +216,7 @@
         
         .hero h1 em {
             font-style: italic;
-            color: var(--color-sage-dark);
+            color: var(--color-orange-light);
         }
         
         .hero-subtitle {
@@ -256,7 +253,7 @@
         }
         
         .btn-primary {
-            background: var(--color-forest);
+            background: var(--color-orange);
             color: var(--color-cream);
         }
         
@@ -272,7 +269,7 @@
         }
         
         .btn-secondary:hover {
-            border-color: var(--color-sage);
+            border-color: var(--color-peach);
             background: var(--color-warm-white);
         }
         
@@ -299,162 +296,24 @@
             opacity: 1;
             transform: scale(1.05);
         }
-        
-        /* Phone Mockup */
-        .hero-phone {
-            margin-top: 4rem;
-            position: relative;
+
+        /* HERO PREVIEW IMAGE */
+        .hero-preview{
+            width: 100%;
+            max-width: 1100px;      /* keeps it classy on big screens */
+            margin: 3rem auto 0;
             opacity: 0;
             animation: fadeInUp 1s var(--ease-smooth) 1.2s forwards;
         }
-        
-        .phone-frame {
-            width: 280px;
-            height: 580px;
-            background: var(--color-charcoal);
-            border-radius: 40px;
-            padding: 12px;
-            box-shadow: 
-                0 50px 100px -20px rgba(0,0,0,0.25),
-                0 30px 60px -30px rgba(0,0,0,0.3),
-                inset 0 1px 0 rgba(255,255,255,0.1);
-            position: relative;
-        }
-        
-        .phone-screen {
+
+        .app-preview{
             width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #1a3a2f 0%, #2d5a4a 100%);
-            border-radius: 30px;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .phone-notch {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 120px;
-            height: 28px;
-            background: var(--color-charcoal);
-            border-radius: 0 0 20px 20px;
-        }
-        
-        .phone-content {
-            padding: 50px 20px 20px;
-            color: white;
-        }
-        
-        .phone-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 24px;
-        }
-        
-        .phone-title {
-            font-family: var(--font-display);
-            font-size: 1.3rem;
-            font-weight: 500;
-        }
-        
-        .phone-avatar {
-            width: 36px;
-            height: 36px;
-            background: linear-gradient(135deg, var(--color-sage) 0%, var(--color-earth) 100%);
-            border-radius: 50%;
-        }
-        
-        .phone-card {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 16px;
-            margin-bottom: 16px;
-        }
-        
-        .phone-card-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 12px;
-        }
-        
-        .phone-card-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--color-earth);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .phone-card-title {
-            font-weight: 600;
-            font-size: 0.95rem;
-        }
-        
-        .phone-card-subtitle {
-            font-size: 0.8rem;
-            opacity: 0.7;
-        }
-        
-        .phone-map {
-            height: 120px;
-            background: linear-gradient(135deg, rgba(139, 168, 136, 0.3) 0%, rgba(45, 74, 62, 0.5) 100%);
-            border-radius: 12px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .phone-map::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 20%;
-            width: 60%;
-            height: 2px;
-            background: var(--color-earth);
-            border-radius: 2px;
-            transform: rotate(-5deg);
-        }
-        
-        .phone-map::after {
-            content: '';
-            position: absolute;
-            top: 45%;
-            left: 75%;
-            width: 12px;
-            height: 12px;
-            background: var(--color-earth);
-            border-radius: 50%;
-            box-shadow: 0 0 0 4px rgba(184, 134, 11, 0.3);
-        }
-        
-        .phone-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            margin-top: 12px;
-        }
-        
-        .phone-stat {
-            text-align: center;
-            padding: 8px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 10px;
-        }
-        
-        .phone-stat-value {
-            font-weight: 600;
-            font-size: 1rem;
-        }
-        
-        .phone-stat-label {
-            font-size: 0.7rem;
-            opacity: 0.6;
+            height: auto;           /* preserves 1600x900 ratio */
+            display: block;
+            border-radius: 24px;
+            box-shadow:
+                0 50px 100px -20px rgba(0,0,0,0.22),
+                0 30px 60px -30px rgba(0,0,0,0.25);
         }
         
         /* Features Section */
@@ -472,7 +331,7 @@
         .section-label {
             font-size: 0.85rem;
             font-weight: 600;
-            color: var(--color-sage-dark);
+            color: var(--color-orange-light);
             text-transform: uppercase;
             letter-spacing: 0.1em;
             margin-bottom: 1rem;
@@ -495,6 +354,7 @@
         }
         
         .feature-card {
+            position:relative;
             background: var(--color-cream);
             border-radius: 24px;
             padding: 2.5rem;
@@ -506,10 +366,39 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.08);
         }
         
+        /* Coming soon stamp (PNG) */
+        .coming-soon-stamp {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            width: 92px;      /* <- change this to taste (70–110px usually) */
+            height: auto;
+            opacity: 0.95;
+            pointer-events: none; /* so it doesn't block clicks */
+            filter: drop-shadow(0 6px 12px rgba(0,0,0,0.12));
+        }
+
+        /* Optional: make "coming soon" cards feel different */
+        .feature-card.coming-soon {
+            background: #F2EFE7;                 /* slightly muted */
+            border: 1px solid rgba(42,42,40,0.08);
+        }
+
+        .feature-card.coming-soon:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Optional: mute the icon too */
+        .feature-card.coming-soon .feature-icon {
+            background: linear-gradient(135deg, rgba(90,90,88,0.25), rgba(90,90,88,0.12));
+            color: rgba(42,42,40,0.7);
+        }
+        
         .feature-icon {
             width: 56px;
             height: 56px;
-            background: linear-gradient(135deg, var(--color-sage) 0%, var(--color-forest) 100%);
+            background: linear-gradient(135deg, var(--color-peach) 0%, var(--color-orange) 100%);
             border-radius: 16px;
             display: flex;
             align-items: center;
@@ -559,7 +448,7 @@
         .step-number {
             width: 64px;
             height: 64px;
-            background: var(--color-forest);
+            background: var(--color-orange);
             color: var(--color-cream);
             border-radius: 20px;
             display: flex;
@@ -585,223 +474,212 @@
             max-width: 600px;
         }
         
-        /* Testimonials */
-        .testimonials {
+        /* Founders */
+        .founders {
             padding: 8rem 2rem;
-            background: var(--color-forest);
+            background: var(--color-orange);
             color: var(--color-cream);
             position: relative;
             overflow: hidden;
         }
         
-        .testimonials::before {
+        .founders::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            inset: 0;
             background: 
-                radial-gradient(ellipse at 0% 0%, rgba(139, 168, 136, 0.2) 0%, transparent 50%),
-                radial-gradient(ellipse at 100% 100%, rgba(184, 134, 11, 0.15) 0%, transparent 50%);
+                radial-gradient(ellipse at 0% 0%, rgba(139, 168, 136, 0.18) 0%, transparent 52%),
+                radial-gradient(ellipse at 100% 100%, rgba(184, 134, 11, 0.14) 0%, transparent 55%);
         }
-        
-        .testimonials .section-header {
+
+        .founders .section-header,
+        .founders .founders-grid {
             position: relative;
             z-index: 1;
         }
         
-        .testimonials .section-label {
-            color: var(--color-sage);
+        .founders .section-label {
+            color: var(--color-peach);
         }
         
-        .testimonials .section-title {
+        .founders .section-title {
             color: var(--color-cream);
         }
-        
-        .testimonials-grid {
+
+        .founders-subtitle{
+            margin: 1rem auto 0;
+            max-width: 720px;
+            color: rgba(255,255,255,0.82);
+            opacity: 1;
+        }
+
+        /* Keep the nice side-by-side card layout */
+        .founders-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 2rem;
             max-width: 1200px;
             margin: 0 auto;
-            position: relative;
-            z-index: 1;
         }
-        
-        .testimonial-card {
+
+        @media (max-width: 900px) {
+            .founders-grid { grid-template-columns: 1fr; }
+        }
+
+        .founders-card {
             background: rgba(255,255,255,0.08);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.12);
             border-radius: 24px;
-            padding: 2rem;
-        }
-        
-        .testimonial-stars {
-            color: var(--color-earth-light);
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-        }
-        
-        .testimonial-text {
-            font-size: 1.1rem;
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
-            opacity: 0.95;
-        }
-        
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .testimonial-avatar {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, var(--color-sage) 0%, var(--color-earth) 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-        
-        .testimonial-name {
-            font-weight: 600;
-        }
-        
-        .testimonial-location {
-            font-size: 0.9rem;
-            opacity: 0.7;
-        }
-        
-        /* Pricing */
-        .pricing {
-            padding: 8rem 2rem;
-            background: var(--color-warm-white);
-        }
-        
-        .pricing-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        .pricing-card {
-            background: var(--color-cream);
-            border-radius: 24px;
-            padding: 2.5rem;
+            padding: 2.25rem;
             position: relative;
-            border: 2px solid transparent;
-            transition: border-color 0.3s var(--ease-smooth);
         }
-        
-        .pricing-card.featured {
-            border-color: var(--color-sage);
-            background: var(--color-warm-white);
-        }
-        
-        .pricing-card.featured::before {
-            content: 'Most Popular';
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--color-sage-dark);
-            color: white;
-            padding: 0.4rem 1rem;
-            border-radius: 100px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-        
-        .pricing-plan {
-            font-weight: 600;
-            color: var(--color-slate);
+
+        .founders-kicker{
+            font-size: 0.85rem;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
+            font-weight: 700;
+            color: rgba(255,255,255,0.78);
+            margin-bottom: 0.9rem;
         }
-        
-        .pricing-price {
+
+        .founders-big{
             font-family: var(--font-display);
-            font-size: 3rem;
+            font-size: 1.9rem;
+            line-height: 1.15;
             font-weight: 500;
-            color: var(--color-charcoal);
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
         }
-        
-        .pricing-price span {
-            font-size: 1rem;
-            font-weight: 400;
-            color: var(--color-slate);
+
+        .founders-lead{
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.86);
+            margin-bottom: 1.35rem;
         }
-        
-        .pricing-desc {
-            color: var(--color-slate);
-            margin-bottom: 2rem;
-        }
-        
-        .pricing-features {
+
+        .founders-perks{
             list-style: none;
-            margin-bottom: 2rem;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: 0.9rem;
         }
-        
-        .pricing-features li {
+
+        .founders-perks li{
             display: flex;
+            gap: 0.7rem;
+            align-items: flex-start;
+            line-height: 1.6;
+            color: rgba(255,255,255,0.92);
+            font-size: 1.02rem;
+        }
+
+        .perk-tick{
+            width: 24px;
+            height: 24px;
+            border-radius: 8px;
+            display: inline-flex;
             align-items: center;
-            gap: 0.75rem;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid var(--color-mist);
+            justify-content: center;
+            flex: 0 0 24px;
+            background: rgba(255,255,255,0.14);
+            border: 1px solid rgba(255,255,255,0.18);
+            font-weight: 900;
+        }
+
+        .perk-note{
+            display: block;
+            margin-top: 0.15rem;
+            font-size: 0.92rem;
+            color: rgba(255,255,255,0.72);
+        }
+
+        .founders-cta{
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        /* In founders section, make primary button pop on orange */
+        .founders .btn-primary{
+            background: var(--color-cream);
             color: var(--color-charcoal);
         }
-        
-        .pricing-features li:last-child {
-            border-bottom: none;
+
+        .founders .btn-primary:hover{
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
         }
-        
-        .pricing-features svg {
-            width: 20px;
-            height: 20px;
-            color: var(--color-sage-dark);
-            flex-shrink: 0;
+
+        .founders .btn-secondary{
+            color: var(--color-cream);
+            border-color: rgba(255,255,255,0.28);
         }
-        
-        .pricing-card .btn {
-            width: 100%;
-            justify-content: center;
+
+        .founders .btn-secondary:hover{
+            border-color: rgba(255,255,255,0.48);
+            background: rgba(255,255,255,0.08);
         }
-        
-        /* CTA Section */
+
+        .founders-note{
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.72);
+        }
+
+        /* CTA Section (Sunset background full-width) */
         .cta {
+            position: relative;
             padding: 8rem 2rem;
-            background: var(--color-cream);
             text-align: center;
+
+            /* IMPORTANT: your image */
+            background-image: url("assets/img/SunsetBackground.png");
+            background-size: cover;          /* fills the whole section */
+            background-position: center;     /* keeps it nicely framed */
+            background-repeat: no-repeat;
         }
-        
+
+        /* dark overlay for readable text */
+        .cta::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(0,0,0,0.35),
+                rgba(0,0,0,0.25)
+            );
+            pointer-events: none;
+        }
+
+        /* keep content above overlay */
         .cta-content {
+            position: relative;
+            z-index: 1;
             max-width: 700px;
             margin: 0 auto;
         }
-        
+
         .cta h2 {
             font-family: var(--font-display);
             font-size: clamp(2.5rem, 5vw, 3.5rem);
             font-weight: 400;
-            color: var(--color-charcoal);
+            color: #fff;
             margin-bottom: 1.5rem;
+            text-shadow: 0 8px 30px rgba(0,0,0,0.35);
         }
-        
+
         .cta p {
             font-size: 1.2rem;
-            color: var(--color-slate);
+            color: rgba(255,255,255,0.88);
             margin-bottom: 2.5rem;
+            text-shadow: 0 6px 20px rgba(0,0,0,0.25);
         }
+
         
         .cta-stores {
             display: flex;
@@ -911,6 +789,20 @@
         
         /* Responsive */
         @media (max-width: 768px) {
+            .hero{
+                padding: 7rem 1.25rem 3rem;  /* tighter spacing on mobile */
+            }
+
+            .hero-preview{
+                max-width: none;
+                width: 100vw;               /* full width */
+                margin-left: calc(50% - 50vw);
+                margin-right: calc(50% - 50vw);
+                margin-top: 2rem;
+            }
+            .app-preview{
+                border-radius: 0;           /* no rounding on mobile */
+            }
             .nav-links {
                 display: none;
             }
@@ -939,23 +831,18 @@
                 height: 500px;
             }
         }
+
     </style>
 </head>
 <body>
     <!-- Navigation -->
     <nav id="navbar">
         <a href="#" class="logo">
-            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="2"/>
-                <path d="M8 16C8 16 12 8 16 8C20 8 24 16 24 16C24 16 20 24 16 24C12 24 8 16 8 16Z" stroke="currentColor" stroke-width="2" fill="none"/>
-                <circle cx="16" cy="16" r="3" fill="currentColor"/>
-            </svg>
-            EveryVoyage
+            <img src="assets/brand/Logo.png" alt="EveryVoyage" class="logo-img">
         </a>
         <ul class="nav-links">
             <li><a href="#features">Features</a></li>
             <li><a href="#how-it-works">How It Works</a></li>
-            <li><a href="#pricing">Pricing</a></li>
             <li><a href="#download" class="nav-cta">Download</a></li>
         </ul>
     </nav>
@@ -968,12 +855,12 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
             </svg>
-            Loved by 10,000+ motorhome adventurers
+            New app for motorhome adventurers
         </div>
         
-        <h1>Record <em>every</em> voyage.<br>Relive the adventure.</h1>
+        <h1>Record <em>every</em> voyage.<br>Share the adventure.</h1>
         
-        <p class="hero-subtitle">The motorhome travel companion. Automatically track your journeys, capture memories, and share adventures with fellow travelers.</p>
+        <p class="hero-subtitle">The motorhome travel companion. Automatically track your journeys, capture memories, and share adventures with fellow voyagers.</p>
         
         <div class="hero-actions">
             <a href="#download" class="btn btn-primary">
@@ -992,46 +879,13 @@
             <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" class="store-badge"></a>
         </div>
         
-        <div class="hero-phone">
-            <div class="phone-frame">
-                <div class="phone-screen">
-                    <div class="phone-notch"></div>
-                    <div class="phone-content">
-                        <div class="phone-header">
-                            <span class="phone-title">My Voyages</span>
-                            <div class="phone-avatar"></div>
-                        </div>
-                        <div class="phone-card">
-                            <div class="phone-card-header">
-                                <div class="phone-card-icon">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-                                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <div class="phone-card-title">Scotland Highlands</div>
-                                    <div class="phone-card-subtitle">Oct 2025 · 12 days</div>
-                                </div>
-                            </div>
-                            <div class="phone-map"></div>
-                            <div class="phone-stats">
-                                <div class="phone-stat">
-                                    <div class="phone-stat-value">847</div>
-                                    <div class="phone-stat-label">miles</div>
-                                </div>
-                                <div class="phone-stat">
-                                    <div class="phone-stat-value">23</div>
-                                    <div class="phone-stat-label">stops</div>
-                                </div>
-                                <div class="phone-stat">
-                                    <div class="phone-stat-value">142</div>
-                                    <div class="phone-stat-label">photos</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="hero-preview">
+            <img
+              src="assets/img/AppPreview.png"
+              alt="EveryVoyage app preview"
+              class="app-preview"
+              loading="lazy"
+            >
         </div>
     </section>
 
@@ -1063,7 +917,7 @@
                     </svg>
                 </div>
                 <h3>Photo Memories</h3>
-                <p>Add photos to any point on your journey. We automatically extract location data so your memories are always pinned to the right spot.</p>
+                <p>Post photos and updates from the road. Link them to your recorded journeys, highlight hidden gems, and inspire fellow friends.</p>
             </div>
             
             <div class="feature-card">
@@ -1080,7 +934,8 @@
                 <p>Write diary entries at each stop. Document your experiences, favourite campsites, and hidden gems you discover along the way.</p>
             </div>
             
-            <div class="feature-card">
+            <div class="feature-card coming-soon">
+                <img class="coming-soon-stamp" src="assets/img/ComingSoon.png" alt="Coming soon">
                 <div class="feature-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
@@ -1101,7 +956,7 @@
                     </svg>
                 </div>
                 <h3>Connect & Share</h3>
-                <p>Follow other travelers, share your voyages, and get inspired by adventures from the motorhome community across the UK and Europe.</p>
+                <p>Follow other explorers, share your voyages, and get inspired by adventures from the motorhome community across the UK and Europe.</p>
             </div>
             
             <div class="feature-card">
@@ -1112,7 +967,7 @@
                         <line x1="6" y1="20" x2="6" y2="14"/>
                     </svg>
                 </div>
-                <h3>Trip Statistics</h3>
+                <h3>Trip Summaries</h3>
                 <p>See your total miles traveled, countries visited, and days on the road. Track your motorhome mileage and look back on years of adventure.</p>
             </div>
         </div>
@@ -1153,143 +1008,99 @@
             <div class="step">
                 <div class="step-number">4</div>
                 <div class="step-content">
-                    <h3>Share & Inspire</h3>
+                    <h3>Explore Together</h3>
                     <p>Share your voyages with friends and the community. Discover routes from fellow travelers and plan your next adventure.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials -->
-    <section class="testimonials">
+    <!-- Founders -->
+    <section class="founders" id="founders">
         <div class="section-header">
-            <p class="section-label">Testimonials</p>
-            <h2 class="section-title">Loved by adventurers</h2>
+            <p class="section-label">Founders</p>
+            <h2 class="section-title">Become a Founding Member</h2>
+            <p class="founders-subtitle">
+                Download today and you’ll be marked as a Founder — with perks that last forever. We’re building EveryVoyage for motorhome travellers,
+                and we want to build it <em>with you</em>.
+            </p>
         </div>
         
-        <div class="testimonials-grid">
-            <div class="testimonial-card">
-                <div class="testimonial-stars">★★★★★</div>
-                <p class="testimonial-text">"Finally an app that understands motorhome travel! I've recorded 47 journeys across Europe and love looking back at all our adventures."</p>
-                <div class="testimonial-author">
-                    <div class="testimonial-avatar">SM</div>
-                    <div>
-                        <div class="testimonial-name">Sarah M.</div>
-                        <div class="testimonial-location">Bristol, UK</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="testimonial-card">
-                <div class="testimonial-stars">★★★★★</div>
-                <p class="testimonial-text">"The voyage feature is brilliant. We can now share our France trip with family and they can see exactly where we've been."</p>
-                <div class="testimonial-author">
-                    <div class="testimonial-avatar">JT</div>
-                    <div>
-                        <div class="testimonial-name">James T.</div>
-                        <div class="testimonial-location">Edinburgh, UK</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="testimonial-card">
-                <div class="testimonial-stars">★★★★★</div>
-                <p class="testimonial-text">"Simple, beautiful, and doesn't kill my phone battery. Exactly what I needed for logging our weekend trips in the campervan."</p>
-                <div class="testimonial-author">
-                    <div class="testimonial-avatar">HD</div>
-                    <div>
-                        <div class="testimonial-name">Henrik D.</div>
-                        <div class="testimonial-location">Copenhagen, DK</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        <div class="founders-grid">
+            <!-- Card 1: Perks + CTA -->
+            <div class="founders-card">
+                <div class="founders-kicker">Founder perks</div>
+                <div class="founders-big">Founder status, for life.</div>
+                <p class="founders-lead">
+                    The first 1,000 people to download and create an account become Founders. You’ll get early access, recognition, and a direct voice in what we build next.
+                </p>
 
-    <!-- Pricing -->
-    <section class="pricing" id="pricing">
-        <div class="section-header">
-            <p class="section-label">Pricing</p>
-            <h2 class="section-title">Start free, upgrade when you're ready</h2>
-        </div>
-        
-        <div class="pricing-cards">
-            <div class="pricing-card">
-                <p class="pricing-plan">Free</p>
-                <p class="pricing-price">£0 <span>/ forever</span></p>
-                <p class="pricing-desc">Perfect for weekend trips</p>
-                <ul class="pricing-features">
+                <ul class="founders-perks">
                     <li>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="20 6 9 17 4 12"/>
-                        </svg>
-                        12 journeys per year
+                        <span class="perk-tick">✔</span>
+                        <div>
+                            <strong>Free access for life</strong>
+                        </div>
                     </li>
                     <li>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="20 6 9 17 4 12"/>
-                        </svg>
-                        GPS route recording
+                        <span class="perk-tick">✔</span>
+                        <div>
+                            <strong>Founder badge on your profile</strong>
+                        </div>
                     </li>
                     <li>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="20 6 9 17 4 12"/>
-                        </svg>
-                        Photo uploads (50 per journey)
+                        <span class="perk-tick">✔</span>
+                        <div>
+                            <strong>Early access to new features</strong>
+                        </div>
                     </li>
                     <li>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="20 6 9 17 4 12"/>
-                        </svg>
-                        Diary entries
-                    </li>
-                    <li>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="20 6 9 17 4 12"/>
-                        </svg>
-                        Basic statistics
+                        <span class="perk-tick">✔</span>
+                        <div>
+                            <strong>Help shape the future of the app</strong>
+                        </div>
                     </li>
                 </ul>
-                <a href="#download" class="btn btn-secondary">Get Started</a>
+
+                <div class="founders-cta">
+                    <a href="#download" class="btn btn-primary">Download & become a founder</a>
+                    <a href="#features" class="btn btn-secondary">See features</a>
+                </div>
+
+                <p class="founders-note">Founder spots are limited to the first 1,000 voyagers who download and create an account.</p>
             </div>
-            
-            <div class="pricing-card featured">
-                <p class="pricing-plan">Premium</p>
-                <p class="pricing-price">£1.99 <span>/ month</span></p>
-                <p class="pricing-desc">For serious adventurers</p>
-                <ul class="pricing-features">
-                    <li>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="20 6 9 17 4 12"/>
-                        </svg>
-                        Unlimited journeys
-                    </li>
-                    <li>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="20 6 9 17 4 12"/>
-                        </svg>
-                        Create & organize voyages
-                    </li>
-                    <li>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="20 6 9 17 4 12"/>
-                        </svg>
-                        Unlimited photo uploads
-                    </li>
-                    <li>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="20 6 9 17 4 12"/>
-                        </svg>
-                        Advanced statistics & exports
-                    </li>
-                    <li>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="20 6 9 17 4 12"/>
-                        </svg>
-                        Priority support
-                    </li>
-                </ul>
-                <a href="#download" class="btn btn-primary">Start Free Trial</a>
+
+            <!-- Card 2: “Why founders” -->
+            <div class="founders-card">
+                <div class="founders-kicker">Why we’re doing this</div>
+                <div class="founders-big">Built with the community.</div>
+                <p class="founders-lead">
+                    EveryVoyage is made for life on the road — the quick overnight stops, the hidden gems, the “how did we find this place?” moments.
+                </p>
+                <p class="founders-lead" style="margin-bottom: 0;">
+                    Founders are our inner circle: you’ll get early access and a direct line to influence the details that matter — from journey recording,
+                    to posts, to discovering stops across Europe.
+                </p>
+
+                <div class="founders-cta" style="margin-top: 1.5rem;">
+                    <a href="#download" class="btn btn-primary">Claim a founder spot</a>
+                    <a href="#how-it-works" class="btn btn-secondary">How it works</a>
+                </div>
+
+                <p class="founders-note">Tip: add your first journey and post to lock in your Founder status feel from day one.</p>
+            </div>
+
+            <!-- Card 3: Badge preview -->
+            <div class="founders-card">
+                <div class="founders-kicker">Founder badge preview</div>
+                <div class="founders-big">Stand out in the feed.</div>
+                <p class="founders-lead">
+                    Founders get a visible badge and a special profile picture shape — so everyone knows you were there from the start.
+                </p>
+
+
+
+                <p class="founders-note">You’ll also get early access to new features and help decide what we build next.</p>
             </div>
         </div>
     </section>
@@ -1325,7 +1136,6 @@
                 <h4>Product</h4>
                 <ul>
                     <li><a href="#features">Features</a></li>
-                    <li><a href="#pricing">Pricing</a></li>
                     <li><a href="#download">Download</a></li>
                     <li><a href="#">Roadmap</a></li>
                 </ul>
@@ -1421,8 +1231,8 @@
             });
         }, observerOptions);
 
-        // Observe feature cards, steps, testimonials, and pricing cards
-        document.querySelectorAll('.feature-card, .step, .testimonial-card, .pricing-card').forEach((el, index) => {
+        // Observe feature cards, steps, founders
+        document.querySelectorAll('.feature-card, .step, .founders-card').forEach((el, index) => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(30px)';
             el.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
