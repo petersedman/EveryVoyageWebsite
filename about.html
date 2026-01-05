@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About EveryVoyage</title>
+  <meta name="description" content="Learn more about EveryVoyage and why we’re building a better motorhome travel companion.">
+  <link rel="icon" type="image/png" href="assets/icons/favicon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --color-cream:#F7F4ED;
+      --color-warm-white:#FEFDFB;
+      --color-peach:#fac189;
+      --color-orange-light:#f15614;
+      --color-orange:#f54a00;
+      --color-charcoal:#2A2A28;
+      --color-slate:#5A5A58;
+      --color-mist:#E8E5DE;
+
+      --font-display:'Fraunces', Georgia, serif;
+      --font-body:'DM Sans', system-ui, sans-serif;
+    }
+
+    *,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
+
+    body{
+      font-family:var(--font-body);
+      background:var(--color-cream);
+      color:var(--color-charcoal);
+      line-height:1.7;
+    }
+
+    body::before{
+      content:'';
+      position:fixed;
+      inset:0;
+      opacity:0.03;
+      pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:100;
+      padding:1.5rem 2rem;
+      background:rgba(247,244,237,0.92);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--color-mist);
+    }
+    .topbar-inner{
+      margin:0 auto;
+    }
+    .logo img{ height:50px; }
+
+    .page{
+      max-width:900px;
+      margin:2.5rem auto 5rem;
+      padding:0 1.5rem;
+    }
+
+    .card{
+      background:rgba(254,253,251,0.95);
+      border:1px solid rgba(232,229,222,0.95);
+      border-radius:24px;
+      padding:2.5rem;
+      box-shadow:0 18px 50px rgba(0,0,0,0.08);
+    }
+
+    h1{
+      font-family:var(--font-display);
+      font-size:clamp(2.1rem,4vw,2.8rem);
+      font-weight:500;
+      margin-bottom:1rem;
+    }
+
+    h2{
+      font-family:var(--font-display);
+      font-size:1.4rem;
+      margin:2rem 0 0.6rem;
+      font-weight:500;
+    }
+
+    p{
+      color:var(--color-slate);
+      margin:0.75rem 0;
+    }
+
+    .backlink{
+      display:inline-block;
+      margin-top:2rem;
+      color:var(--color-orange);
+      font-weight:600;
+      text-decoration:none;
+    }
+    .backlink:hover{ text-decoration:underline; }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="logo" href="index.html">
+        <img src="assets/brand/Logo.png" alt="EveryVoyage">
+      </a>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="card">
+      <h1>About EveryVoyage</h1>
+
+      <p>
+        EveryVoyage is a motorhome travel companion built for life on the road — from spontaneous overnight stops to long, unforgettable journeys.
+      </p>
+
+      <h2>Why we built it</h2>
+      <p>
+        Motorhome travel is about freedom, discovery, and stories worth remembering. Yet most travel tools are built for hotels, flights, and rigid itineraries.
+      </p>
+      <p>
+        We wanted something different — a tool that quietly tracks your journeys, helps you capture memories as they happen, and lets you look back on years of adventure.
+      </p>
+
+      <h2>Built with the community</h2>
+      <p>
+        EveryVoyage is being built alongside real motorhome travellers. Our Founding Members help shape the features that matter most — from journey recording,
+        to discovering great stops, to sharing experiences with fellow voyagers.
+      </p>
+
+      <h2>Our mission</h2>
+      <p>
+        To help motorhome travellers record every voyage, remember the moments that matter, and share the adventure — simply and beautifully.
+      </p>
+
+      <a class="backlink" href="index.html">← Back to homepage</a>
+    </section>
+  </main>
+</body>
+</html>

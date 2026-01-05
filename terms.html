@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Service • EveryVoyage</title>
+  <meta name="description" content="EveryVoyage Terms of Service">
+  <link rel="icon" type="image/png" href="assets/icons/favicon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --color-cream:#F7F4ED;
+      --color-warm-white:#FEFDFB;
+      --color-peach:#fac189;
+      --color-orange-light:#f15614;
+      --color-orange:#f54a00;
+      --color-charcoal:#2A2A28;
+      --color-slate:#5A5A58;
+      --color-mist:#E8E5DE;
+
+      --font-display:'Fraunces', Georgia, serif;
+      --font-body:'DM Sans', system-ui, sans-serif;
+
+      --ease-smooth:cubic-bezier(0.4,0,0.2,1);
+      --ease-bounce:cubic-bezier(0.34,1.56,0.64,1);
+    }
+
+    *,*::before,*::after{ margin:0; padding:0; box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+
+    body{
+      font-family:var(--font-body);
+      background:var(--color-cream);
+      color:var(--color-charcoal);
+      line-height:1.7;
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:'';
+      position:fixed;
+      inset:0;
+      opacity:0.03;
+      pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      z-index:0;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      padding:1.5rem 2rem;
+      background:rgba(247,244,237,0.92);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--color-mist);
+    }
+    .topbar-inner{
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:flex-start;
+    }
+    .logo{
+      display:inline-flex;
+      align-items:center;
+      text-decoration:none;
+    }
+    .logo-img{ height:50px; width:auto; display:block; }
+
+    .page{
+      position:relative;
+      z-index:1;
+      max-width:900px;
+      margin:2.5rem auto 5rem;
+      padding:0 1.5rem;
+    }
+
+    .card{
+      background:rgba(254,253,251,0.92);
+      border:1px solid rgba(232,229,222,0.95);
+      border-radius:24px;
+      padding:2.25rem;
+      box-shadow:0 18px 50px rgba(0,0,0,0.08);
+    }
+
+    h1{
+      font-family:var(--font-display);
+      font-weight:500;
+      font-size:clamp(2rem, 4vw, 2.75rem);
+      line-height:1.15;
+      margin-bottom:0.5rem;
+    }
+
+    .meta{
+      color:var(--color-slate);
+      font-size:0.95rem;
+      margin-bottom:1.75rem;
+    }
+
+    h2{
+      font-family:var(--font-display);
+      font-weight:500;
+      font-size:1.35rem;
+      margin:1.75rem 0 0.6rem;
+    }
+
+    p{ color:var(--color-slate); margin:0.65rem 0; }
+
+    ul{
+      margin:0.5rem 0 0.75rem 1.1rem;
+      color:var(--color-slate);
+    }
+    li{ margin:0.35rem 0; }
+
+    .notice{
+      margin-top:1.5rem;
+      padding:1rem 1.1rem;
+      border-radius:16px;
+      background:rgba(245,74,0,0.08);
+      border:1px solid rgba(245,74,0,0.18);
+      color:var(--color-charcoal);
+      font-size:0.95rem;
+    }
+
+    .backlink{
+      display:inline-flex;
+      margin-top:1.75rem;
+      text-decoration:none;
+      color:var(--color-orange);
+      font-weight:600;
+    }
+    .backlink:hover{ text-decoration:underline; }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="logo" href="index.html" aria-label="Back to EveryVoyage homepage">
+        <img src="assets/brand/Logo.png" alt="EveryVoyage" class="logo-img">
+      </a>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="card">
+      <h1>Terms of Service</h1>
+      <div class="meta">Last updated: <strong>January 2026</strong></div>
+
+      <p>
+        These Terms explain how you can use EveryVoyage. This is a holding page while we finalise the full legal version.
+        By using the site/app, you agree to follow these terms.
+      </p>
+
+      <h2>Using EveryVoyage</h2>
+      <ul>
+        <li>You must use the service lawfully and respectfully.</li>
+        <li>Don’t misuse the service (e.g. attempt to disrupt, scrape, or hack it).</li>
+        <li>We may update or change features over time as we improve the product.</li>
+      </ul>
+
+      <h2>Accounts</h2>
+      <ul>
+        <li>You’re responsible for keeping your login details secure.</li>
+        <li>You must provide accurate information when creating an account.</li>
+        <li>We can suspend accounts that violate these terms or put others at risk.</li>
+      </ul>
+
+      <h2>Your content</h2>
+      <ul>
+        <li>You own the content you create (posts, photos, journeys, notes).</li>
+        <li>You should only upload content you have the right to share.</li>
+        <li>If you choose to share content publicly, you understand others may view it.</li>
+      </ul>
+
+      <h2>Acceptable use</h2>
+      <ul>
+        <li>No hate, harassment, or abusive content.</li>
+        <li>No illegal content, impersonation, or misleading behaviour.</li>
+        <li>No spam or unsolicited promotions.</li>
+      </ul>
+
+      <h2>Disclaimers</h2>
+      <p>
+        EveryVoyage is provided “as is”. We aim to keep it reliable, but we can’t guarantee uninterrupted access or that all information will be error-free.
+        Always use your own judgement when travelling and exploring.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Questions about these terms? Contact: <strong>support@everyvoyage.com</strong>
+      </p>
+
+      <div class="notice">
+        Note: This page is a placeholder and will be replaced with the final Terms of Service before launch.
+      </div>
+
+      <a class="backlink" href="index.html">← Back to homepage</a>
+    </section>
+  </main>
+</body>
+</html>
