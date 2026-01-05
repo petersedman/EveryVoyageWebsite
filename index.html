@@ -1,1679 +1,1339 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EveryVoyage - Record Your Motorhome Adventures</title>
-    <meta name="description" content="The motorhome travel companion. Record journeys, capture memories, and share adventures with fellow travelers.">
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --color-cream: #F7F4ED;
-            --color-warm-white: #FEFDFB;
-            --color-peach: #fac189;
-            --color-orange-light: #f15614;
-            --color-orange: #f54a00;
-            --color-earth: #B8860B;
-            --color-earth-light: #D4A84B;
-            --color-charcoal: #2A2A28;
-            --color-slate: #5A5A58;
-            --color-mist: #E8E5DE;
-            
-            --font-display: 'Fraunces', Georgia, serif;
-            --font-body: 'DM Sans', system-ui, sans-serif;
-            
-            --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-            --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
-            --founder-banner-height: 48px;
-
-        }
-        
-        *, *::before, *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        html {
-            scroll-behavior: smooth;
-        }
-        
-        body {
-            font-family: var(--font-body);
-            background: var(--color-cream);
-            color: var(--color-charcoal);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        
-        /* Noise texture overlay */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.03;
-            pointer-events: none;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-            z-index: 0;
-        }
-        
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            padding: 1.5rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: linear-gradient(to bottom, var(--color-cream), transparent);
-            transition: background 0.3s var(--ease-smooth);
-        }
-        
-        nav.scrolled {
-            background: rgba(247, 244, 237, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 1px 0 var(--color-mist);
-        }
-
-        /* Banner sits above nav */
-.founder-banner{
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: var(--founder-banner-height);
-  z-index: 2000;
-  display: none;                 /* turned on by JS when available */
-  text-decoration: none;
-  color: var(--color-charcoal);
-  background: rgba(254, 253, 251, 0.92);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--color-mist);
-}
-
-.founder-banner-inner{
-  max-width: 1200px;
-  margin: 0 auto;
-  height: 100%;
-  padding: 0 1.25rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.founder-dot{
-  width: 10px;
-  height: 10px;
-  border-radius: 999px;
-  background: var(--color-orange);
-  box-shadow: 0 0 0 6px rgba(245, 74, 0, 0.12);
-  flex: 0 0 auto;
-}
-
-.founder-banner-text{
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  color: var(--color-slate);
-  font-size: 0.95rem;
-  flex: 1 1 auto;
-}
-
-.founder-banner-text strong{
-  color: var(--color-charcoal);
-  font-weight: 700;
-}
-
-.founder-banner-pill{
-  flex: 0 0 auto;
-  background: var(--color-orange);
-  color: var(--color-cream);
-  padding: 0.45rem 0.9rem;
-  border-radius: 999px;
-  font-weight: 700;
-  font-size: 0.9rem;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.10);
-}
-
-.founder-banner:hover .founder-banner-pill{
-  transform: translateY(-1px);
-}
-
-/* When banner is on, push the nav down */
-body.has-founder-banner nav{
-  top: var(--founder-banner-height);
-}
-
-/* Default nav top must be 0 when banner off */
-nav{ top: 0; }
-
-/* Show banner only when JS adds the class */
-body.has-founder-banner .founder-banner{
-  display: block;
-}
-
-/* Hero callout box */
-.hero-founder-callout{
-  display: none; /* enabled by JS */
-  margin: 1.25rem;
-  width: 100%;
-  max-width: 640px;
-  text-decoration: none;
-  background: rgba(254, 253, 251, 0.92);
-  border: 1px solid rgba(232, 229, 222, 0.9);
-  border-radius: 18px;
-  padding: 1rem 1rem 0.9rem;
-  box-shadow: 0 18px 40px rgba(0,0,0,0.08);
-  color: var(--color-charcoal);
-  text-align: left;
-}
-
-.hero-founder-callout:hover{
-  transform: translateY(-2px);
-  transition: transform 0.2s var(--ease-bounce);
-}
-
-.hero-founder-top{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0.6rem;
-}
-
-.hero-founder-kicker{
-  font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-orange-light);
-}
-
-.hero-founder-badge{
-  font-size: 0.8rem;
-  font-weight: 800;
-  padding: 0.25rem 0.6rem;
-  border-radius: 999px;
-  background: rgba(245, 74, 0, 0.12);
-  color: var(--color-orange);
-}
-
-.hero-founder-title{
-  font-weight: 800;
-  font-size: 1.05rem;
-  line-height: 1.25;
-  margin-bottom: 0.25rem;
-}
-
-.hero-founder-sub{
-  color: var(--color-slate);
-  font-size: 0.95rem;
-  line-height: 1.4;
-  margin-bottom: 0.85rem;
-}
-
-.hero-founder-meter{
-  height: 8px;
-  border-radius: 999px;
-  background: rgba(232, 229, 222, 0.9);
-  overflow: hidden;
-}
-
-.hero-founder-meter-fill{
-  height: 100%;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--color-peach), var(--color-orange));
-  width: 0%;
-}
-
-/* Show hero callout when banner is on */
-body.has-founder-banner .hero-founder-callout{
-  display: block;
-}
-
-/* Mobile: slightly tighter banner */
-@media (max-width: 768px){
-  :root{ --founder-banner-height: 52px; }
-
-  .founder-banner-inner{
-    padding: 0 1rem;
-  }
-  .founder-banner-text{
-    font-size: 0.9rem;
-  }
-}
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            text-decoration: none;
-        }
-
-        .logo-img{
-            height: 50px;     /* tweak as needed */
-            width: auto;
-            display: block;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-        }
-        
-        .nav-links a {
-            color: var(--color-slate);
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 500;
-            transition: color 0.2s var(--ease-smooth);
-        }
-        
-        .nav-links a:hover {
-            color: var(--color-orange);
-        }
-        
-        .nav-cta {
-            background: var(--color-orange);
-            color: var(--color-cream) !important;
-            padding: 0.75rem 1.5rem;
-            border-radius: 100px;
-            transition: transform 0.2s var(--ease-bounce), box-shadow 0.2s var(--ease-smooth) !important;
-        }
-        
-        .nav-cta:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(45, 74, 62, 0.3);
-        }
-        
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 4rem 2rem 4rem;
-            position: relative;
-            overflow: hidden;
-            margin-top:2.5rem;
-        }
-
-        .hero-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: -1;
-        }
-        
-        .hero-bg::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: 
-                radial-gradient(ellipse at 20% 20%, rgba(139, 168, 136, 0.15) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 80%, rgba(184, 134, 11, 0.1) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 50%, rgba(139, 168, 136, 0.08) 0%, transparent 70%);
-            animation: float 20s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            33% { transform: translate(30px, -30px) rotate(1deg); }
-            66% { transform: translate(-20px, 20px) rotate(-1deg); }
-        }
-        
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: var(--color-warm-white);
-            border: 1px solid var(--color-mist);
-            padding: 0.5rem 1rem;
-            border-radius: 100px;
-            font-size: 0.85rem;
-            color: var(--color-slate);
-            margin-bottom: 2rem;
-            opacity: 0;
-            animation: fadeInUp 0.8s var(--ease-smooth) 0.2s forwards;
-        }
-        
-        .hero-badge svg {
-            width: 16px;
-            height: 16px;
-            color: var(--color-peach);
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .hero h1 {
-            font-family: var(--font-display);
-            font-size: clamp(2rem, 5vw, 4rem);
-            font-weight: 400;
-            line-height: 1.1;
-            color: var(--color-charcoal);
-            max-width: 900px;
-            margin-bottom: 1.5rem;
-            opacity: 0;
-            animation: fadeInUp 0.8s var(--ease-smooth) 0.4s forwards;
-        }
-        
-        .hero h1 em {
-            font-style: italic;
-            color: var(--color-orange-light);
-        }
-        
-        .hero-subtitle {
-            font-size: 1.25rem;
-            color: var(--color-slate);
-            max-width: 540px;
-            margin-bottom: 1rem;
-            opacity: 0;
-            animation: fadeInUp 0.8s var(--ease-smooth) 0.6s forwards;
-        }
-        
-        .hero-actions {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            justify-content: center;
-            opacity: 0;
-            animation: fadeInUp 0.8s var(--ease-smooth) 0.8s forwards;
-        }
-        
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 1rem 2rem;
-            font-family: var(--font-body);
-            font-size: 1rem;
-            font-weight: 500;
-            border-radius: 100px;
-            text-decoration: none;
-            transition: all 0.2s var(--ease-bounce);
-            cursor: pointer;
-            border: none;
-        }
-        
-        .btn-primary {
-            background: var(--color-orange);
-            color: var(--color-cream);
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(45, 74, 62, 0.35);
-        }
-        
-        .btn-secondary {
-            background: transparent;
-            color: var(--color-charcoal);
-            border: 1.5px solid var(--color-mist);
-        }
-        
-        .btn-secondary:hover {
-            border-color: var(--color-peach);
-            background: var(--color-warm-white);
-        }
-        
-        .btn svg {
-            width: 20px;
-            height: 20px;
-        }
-        
-        .store-badges {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-            opacity: 0;
-            animation: fadeInUp 0.8s var(--ease-smooth) 1s forwards;
-        }
-        
-        .store-badge {
-            height: 48px;
-            opacity: 0.9;
-            transition: opacity 0.2s, transform 0.2s var(--ease-bounce);
-        }
-        
-        .store-badge:hover {
-            opacity: 1;
-            transform: scale(1.05);
-        }
-
-        /* HERO PREVIEW IMAGE */
-        .hero-preview{
-            width: 100%;
-            max-width: 1100px;      /* keeps it classy on big screens */
-            margin: 3rem auto 0;
-            opacity: 0;
-            animation: fadeInUp 1s var(--ease-smooth) 1.2s forwards;
-        }
-
-        .app-preview{
-            width: 100%;
-            height: auto;           /* preserves 1600x900 ratio */
-            display: block;
-            border-radius: 24px;
-            box-shadow:
-                0 50px 100px -20px rgba(0,0,0,0.22),
-                0 30px 60px -30px rgba(0,0,0,0.25);
-        }
-        
-        /* Features Section */
-        .features {
-            padding: 8rem 2rem;
-            background: var(--color-warm-white);
-        }
-        
-        .section-header {
-            text-align: center;
-            max-width: 700px;
-            margin: 0 auto 5rem;
-        }
-        
-        .section-label {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--color-orange-light);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 1rem;
-        }
-        
-        .section-title {
-            font-family: var(--font-display);
-            font-size: clamp(2.5rem, 5vw, 3.5rem);
-            font-weight: 400;
-            color: var(--color-charcoal);
-            line-height: 1.2;
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .feature-card {
-            position:relative;
-            background: var(--color-cream);
-            border-radius: 24px;
-            padding: 2.5rem;
-            transition: transform 0.3s var(--ease-smooth), box-shadow 0.3s var(--ease-smooth);
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-        }
-        
-        /* Coming soon stamp (PNG) */
-        .coming-soon-stamp {
-            position: absolute;
-            top: 18px;
-            right: 18px;
-            width: 92px;      /* <- change this to taste (70–110px usually) */
-            height: auto;
-            opacity: 0.95;
-            pointer-events: none; /* so it doesn't block clicks */
-            filter: drop-shadow(0 6px 12px rgba(0,0,0,0.12));
-        }
-
-        /* Optional: make "coming soon" cards feel different */
-        .feature-card.coming-soon {
-            background: #F2EFE7;                 /* slightly muted */
-            border: 1px solid rgba(42,42,40,0.08);
-        }
-
-        .feature-card.coming-soon:hover {
-            transform: none;
-            box-shadow: none;
-        }
-
-        /* Optional: mute the icon too */
-        .feature-card.coming-soon .feature-icon {
-            background: linear-gradient(135deg, rgba(90,90,88,0.25), rgba(90,90,88,0.12));
-            color: rgba(42,42,40,0.7);
-        }
-        
-        .feature-icon {
-            width: 56px;
-            height: 56px;
-            background: linear-gradient(135deg, var(--color-peach) 0%, var(--color-orange) 100%);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            color: white;
-        }
-        
-        .feature-icon svg {
-            width: 28px;
-            height: 28px;
-        }
-        
-        .feature-card h3 {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            font-weight: 500;
-            color: var(--color-charcoal);
-            margin-bottom: 0.75rem;
-        }
-        
-        .feature-card p {
-            color: var(--color-slate);
-            line-height: 1.7;
-        }
-        
-        /* How It Works */
-        .how-it-works {
-            padding: 8rem 2rem;
-            background: var(--color-cream);
-        }
-        
-        .steps {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: grid;
-            gap: 4rem;
-        }
-        
-        .step {
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 2rem;
-            align-items: start;
-        }
-        
-        .step-number {
-            width: 64px;
-            height: 64px;
-            background: var(--color-orange);
-            color: var(--color-cream);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            font-weight: 500;
-        }
-        
-        .step-content h3 {
-            font-family: var(--font-display);
-            font-size: 1.75rem;
-            font-weight: 500;
-            color: var(--color-charcoal);
-            margin-bottom: 0.75rem;
-        }
-        
-        .step-content p {
-            color: var(--color-slate);
-            font-size: 1.1rem;
-            line-height: 1.7;
-            max-width: 600px;
-        }
-        
-        /* Founders */
-        .founders {
-            padding: 8rem 2rem;
-            background: var(--color-orange);
-            color: var(--color-cream);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .founders::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: 
-                radial-gradient(ellipse at 0% 0%, rgba(139, 168, 136, 0.18) 0%, transparent 52%),
-                radial-gradient(ellipse at 100% 100%, rgba(184, 134, 11, 0.14) 0%, transparent 55%);
-        }
-
-        .founders .section-header,
-        .founders .founders-grid {
-            position: relative;
-            z-index: 1;
-        }
-        
-        .founders .section-label {
-            color: var(--color-peach);
-        }
-        
-        .founders .section-title {
-            color: var(--color-cream);
-        }
-
-        .founders-subtitle{
-            margin: 1rem auto 0;
-            max-width: 720px;
-            color: rgba(255,255,255,0.82);
-            opacity: 1;
-        }
-
-        /* Keep the nice side-by-side card layout */
-        .founders-grid {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        @media (max-width: 900px) {
-            .founders-grid { grid-template-columns: 1fr; }
-        }
-
-        .founders-card {
-            background: rgba(255,255,255,0.08);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.12);
-            border-radius: 24px;
-            padding: 2.25rem;
-            position: relative;
-        }
-
-        .founders-kicker{
-            font-size: 0.85rem;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            font-weight: 700;
-            color: rgba(255,255,255,0.78);
-            margin-bottom: 0.9rem;
-        }
-
-        .founders-big{
-            font-family: var(--font-display);
-            font-size: 1.9rem;
-            line-height: 1.15;
-            font-weight: 500;
-            margin-bottom: 1rem;
-        }
-
-        .founders-lead{
-            font-size: 1.05rem;
-            line-height: 1.7;
-            color: rgba(255,255,255,0.86);
-            margin-bottom: 1.35rem;
-        }
-
-        .founders-perks{
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: grid;
-            gap: 0.9rem;
-        }
-
-        .founders-perks li{
-            display: flex;
-            gap: 0.7rem;
-            align-items: flex-start;
-            line-height: 1.6;
-            color: rgba(255,255,255,0.92);
-            font-size: 1.02rem;
-        }
-
-        .perk-tick{
-            width: 24px;
-            height: 24px;
-            border-radius: 8px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            flex: 0 0 24px;
-            background: rgba(255,255,255,0.14);
-            border: 1px solid rgba(255,255,255,0.18);
-            font-weight: 900;
-        }
-
-        .perk-note{
-            display: block;
-            margin-top: 0.15rem;
-            font-size: 0.92rem;
-            color: rgba(255,255,255,0.72);
-        }
-
-        .founders-cta{
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-top: 1.5rem;
-        }
-
-        /* In founders section, make primary button pop on orange */
-        .founders .btn-primary{
-            background: var(--color-cream);
-            color: var(--color-charcoal);
-        }
-
-        .founders .btn-primary:hover{
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-        }
-
-        .founders .btn-secondary{
-            color: var(--color-cream);
-            border-color: rgba(255,255,255,0.28);
-        }
-
-        .founders .btn-secondary:hover{
-            border-color: rgba(255,255,255,0.48);
-            background: rgba(255,255,255,0.08);
-        }
-
-        .founders-note{
-            margin-top: 1rem;
-            font-size: 0.95rem;
-            color: rgba(255,255,255,0.72);
-        }
-
-        /* CTA Section (Sunset background full-width) */
-        .cta {
-            position: relative;
-            padding: 8rem 2rem;
-            text-align: center;
-
-            /* IMPORTANT: your image */
-            background-image: url("assets/img/SunsetBackground.png");
-            background-size: cover;          /* fills the whole section */
-            background-position: center;     /* keeps it nicely framed */
-            background-repeat: no-repeat;
-        }
-
-        /* dark overlay for readable text */
-        .cta::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(
-                to bottom,
-                rgba(0,0,0,0.35),
-                rgba(0,0,0,0.25)
-            );
-            pointer-events: none;
-        }
-
-        /* keep content above overlay */
-        .cta-content {
-            position: relative;
-            z-index: 1;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .cta h2 {
-            font-family: var(--font-display);
-            font-size: clamp(2.5rem, 5vw, 3.5rem);
-            font-weight: 400;
-            color: #fff;
-            margin-bottom: 1.5rem;
-            text-shadow: 0 8px 30px rgba(0,0,0,0.35);
-        }
-
-        .cta p {
-            font-size: 1.2rem;
-            color: rgba(255,255,255,0.88);
-            margin-bottom: 2.5rem;
-            text-shadow: 0 6px 20px rgba(0,0,0,0.25);
-        }
-
-        
-        .cta-stores {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        /* Footer */
-        footer {
-            background: var(--color-charcoal);
-            color: var(--color-cream);
-            padding: 4rem 2rem 2rem;
-        }
-        
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 2fr repeat(3, 1fr);
-            gap: 3rem;
-        }
-        
-        .footer-brand {
-            max-width: 300px;
-        }
-        
-        .footer-logo {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            font-weight: 500;
-            color: var(--color-cream);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .footer-logo-img{
-            height: 50px;       
-            width: auto;
-            display: block;
-        }
-
-        
-        .footer-brand p {
-            color: rgba(255,255,255,0.6);
-            line-height: 1.7;
-            text-align: left;
-        }
-        
-        .footer-col h4 {
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            text-align:left;
-        }
-        
-        .footer-col ul {
-            list-style: none;
-            text-align:left;
-        }
-        
-        .footer-col li {
-            margin-bottom: 0.75rem;
-        }
-        
-        .footer-col a {
-            color: rgba(255,255,255,0.6);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-        
-        .footer-col a:hover {
-            color: var(--color-cream);
-        }
-        
-        .footer-bottom {
-            max-width: 1200px;
-            margin: 4rem auto 0;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        
-        .footer-bottom p {
-            color: rgba(255,255,255,0.5);
-            font-size: 0.9rem;
-        }
-        
-        .footer-social {
-            display: flex;
-            gap: 1rem;
-        }
-        
-        .footer-social a {
-            width: 40px;
-            height: 40px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--color-cream);
-            transition: background 0.2s;
-        }
-        
-        .footer-social a:hover {
-            background: rgba(255,255,255,0.2);
-        }
-
-        /* Hamburger button (hidden on desktop) */
-        .nav-toggle{
-        display: none;
-        width: 44px;
-        height: 44px;
-        border: 1px solid var(--color-mist);
-        background: var(--color-warm-white);
-        border-radius: 12px;
-        cursor: pointer;
-        padding: 10px;
-        gap: 6px;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        }
-
-        .nav-toggle span{
-        display: block;
-        width: 20px;
-        height: 2px;
-        background: var(--color-charcoal);
-        border-radius: 999px;
-        transition: transform 0.25s var(--ease-smooth), opacity 0.2s var(--ease-smooth);
-        }
-
-        /* Mobile menu overlay */
-        .mobile-menu{
-        position: fixed;
-        inset: 0;
-        background: rgba(247, 244, 237, 0.96);
-        backdrop-filter: blur(12px);
-        z-index: 999;
-        display: none;
-        }
-
-        .mobile-menu-inner{
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;   
-        align-items: flex-start;       
-        padding: 7.5rem 2rem 2rem;    
-        gap: 1.75rem;
-        text-align: left;
-        }
-
-        .mobile-menu-inner > *{
-        max-width: 420px;
-        }
-        .mobile-menu a{
-        font-family: var(--font-display);
-        font-size: 1rem;
-        font-weight: 500;
-        color: var(--color-charcoal);
-        text-decoration: none;
-        }
-
-        .mobile-menu a:hover{
-        color: var(--color-orange);
-        }
-
-        .mobile-cta{
-            margin-top: 0.5rem;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.9rem 1.6rem;
-            border-radius: 999px;
-            background: var(--color-orange);
-            color: var(--color-cream) !important;
-            font-family: var(--font-body);
-            font-size: 1.05rem;
-        }
-
-        .mobile-divider{
-            width: 100%;
-            border: none;
-            height: 1px;
-            background: var(--color-mist);
-            margin: 0.25rem 0;
-        }
-
-        /* Open state */
-        body.menu-open .mobile-menu{ display: block; }
-        body.menu-open { overflow: hidden; }
-
-        /* Animate hamburger to X when open */
-        body.menu-open .nav-toggle span:nth-child(1){ transform: translateY(8px) rotate(45deg); }
-        body.menu-open .nav-toggle span:nth-child(2){ opacity: 0; }
-        body.menu-open .nav-toggle span:nth-child(3){ transform: translateY(-8px) rotate(-45deg); }
-
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero{
-                padding: 7rem 1.25rem 3rem;  /* tighter spacing on mobile */
-            }
-
-            .hero-preview{
-                max-width: none;
-                width: 100vw;               /* full width */
-                margin-left: calc(50% - 50vw);
-                margin-right: calc(50% - 50vw);
-                margin-top: 2rem;
-            }
-            .app-preview{
-                border-radius: 0;           /* no rounding on mobile */
-            }
-
-            .step {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            
-            .footer-brand {
-                max-width: none;
-            }
-            
-            .footer-bottom {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .nav-toggle{ display: inline-flex; }
-            .nav-links{ display: none; }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EveryVoyage - Record Your Motorhome Adventures</title>
+  <meta name="description" content="The motorhome travel companion. Record journeys, capture memories, and share adventures with fellow travelers.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --color-cream:#F7F4ED;
+      --color-warm-white:#FEFDFB;
+      --color-peach:#fac189;
+      --color-orange-light:#f15614;
+      --color-orange:#f54a00;
+      --color-charcoal:#2A2A28;
+      --color-slate:#5A5A58;
+      --color-mist:#E8E5DE;
+
+      --font-display:'Fraunces', Georgia, serif;
+      --font-body:'DM Sans', system-ui, sans-serif;
+
+      --ease-smooth:cubic-bezier(0.4,0,0.2,1);
+      --ease-bounce:cubic-bezier(0.34,1.56,0.64,1);
+    }
+
+    *,*::before,*::after{ margin:0; padding:0; box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+
+    body{
+      font-family:var(--font-body);
+      background:var(--color-cream);
+      color:var(--color-charcoal);
+      line-height:1.6;
+      overflow-x:hidden;
+    }
+
+    /* Noise overlay */
+    body::before{
+      content:'';
+      position:fixed;
+      inset:0;
+      opacity:0.03;
+      pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      z-index:0;
+    }
+
+    /* Navigation */
+    nav{
+      position:fixed;
+      top:0; left:0; right:0;
+      z-index:1000;
+      padding:1.5rem 2rem;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      background:linear-gradient(to bottom, var(--color-cream), transparent);
+      transition:background 0.3s var(--ease-smooth);
+    }
+    nav.scrolled{
+      background:rgba(247,244,237,0.95);
+      backdrop-filter:blur(10px);
+      box-shadow:0 1px 0 var(--color-mist);
+    }
+
+    .logo{ display:flex; align-items:center; gap:0.5rem; text-decoration:none; }
+    .logo-img{ height:50px; width:auto; display:block; }
+
+    .nav-links{ display:flex; gap:2.5rem; list-style:none; }
+    .nav-links a{
+      color:var(--color-slate);
+      text-decoration:none;
+      font-size:0.95rem;
+      font-weight:500;
+      transition:color 0.2s var(--ease-smooth);
+    }
+    .nav-links a:hover{ color:var(--color-orange); }
+
+    .nav-cta{
+      background:var(--color-orange);
+      color:var(--color-cream) !important;
+      padding:0.75rem 1.5rem;
+      border-radius:100px;
+      transition:transform 0.2s var(--ease-bounce), box-shadow 0.2s var(--ease-smooth) !important;
+    }
+    .nav-cta:hover{
+      transform:translateY(-2px);
+      box-shadow:0 4px 20px rgba(45,74,62,0.3);
+    }
+
+    /* Mobile nav */
+    .nav-toggle{
+      display:none;
+      width:44px; height:44px;
+      border:1px solid var(--color-mist);
+      background:var(--color-warm-white);
+      border-radius:12px;
+      cursor:pointer;
+      padding:10px;
+      gap:6px;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+    }
+    .nav-toggle span{
+      display:block;
+      width:20px;
+      height:2px;
+      background:var(--color-charcoal);
+      border-radius:999px;
+      transition:transform 0.25s var(--ease-smooth), opacity 0.2s var(--ease-smooth);
+    }
+
+    .mobile-menu{
+      position:fixed;
+      inset:0;
+      background:rgba(247,244,237,0.96);
+      backdrop-filter:blur(12px);
+      z-index:999;
+      display:none;
+    }
+    .mobile-menu-inner{
+      height:100%;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-start;
+      align-items:flex-start;
+      padding:7.5rem 2rem 2rem;
+      gap:1.75rem;
+      text-align:left;
+    }
+    .mobile-menu-inner > *{ max-width:420px; }
+    .mobile-menu a{
+      font-family:var(--font-display);
+      font-size:1rem;
+      font-weight:500;
+      color:var(--color-charcoal);
+      text-decoration:none;
+    }
+    .mobile-menu a:hover{ color:var(--color-orange); }
+    .mobile-cta{
+      margin-top:0.5rem;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:0.9rem 1.6rem;
+      border-radius:999px;
+      background:var(--color-orange);
+      color:var(--color-cream) !important;
+      font-family:var(--font-body);
+      font-size:1.05rem;
+    }
+    .mobile-divider{
+      width:100%;
+      border:none;
+      height:1px;
+      background:var(--color-mist);
+      margin:0.25rem 0;
+    }
+    body.menu-open .mobile-menu{ display:block; }
+    body.menu-open{ overflow:hidden; }
+    body.menu-open .nav-toggle span:nth-child(1){ transform:translateY(8px) rotate(45deg); }
+    body.menu-open .nav-toggle span:nth-child(2){ opacity:0; }
+    body.menu-open .nav-toggle span:nth-child(3){ transform:translateY(-8px) rotate(-45deg); }
+
+    /* Hero */
+    .hero{
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      padding:4rem 2rem 4rem;
+      position:relative;
+      overflow:hidden;
+      margin-top:1rem;
+    }
+    .hero-bg{
+      position:absolute;
+      inset:0;
+      z-index:-1;
+    }
+    .hero-bg::before{
+      content:'';
+      position:absolute;
+      top:-50%;
+      left:-50%;
+      width:200%;
+      height:200%;
+      background:
+        radial-gradient(ellipse at 20% 20%, rgba(139,168,136,0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(184,134,11,0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(139,168,136,0.08) 0%, transparent 70%);
+      animation:float 20s ease-in-out infinite;
+    }
+    @keyframes float{
+      0%,100%{ transform:translate(0,0) rotate(0deg); }
+      33%{ transform:translate(30px,-30px) rotate(1deg); }
+      66%{ transform:translate(-20px,20px) rotate(-1deg); }
+    }
+
+    @keyframes fadeInUp{
+      from{ opacity:0; transform:translateY(20px); }
+      to{ opacity:1; transform:translateY(0); }
+    }
+
+    .hero-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:0.5rem;
+      background:var(--color-warm-white);
+      border:1px solid var(--color-mist);
+      padding:0.5rem 1rem;
+      border-radius:100px;
+      font-size:0.85rem;
+      color:var(--color-slate);
+      margin-bottom:2rem;
+      opacity:0;
+      animation:fadeInUp 0.8s var(--ease-smooth) 0.2s forwards;
+    }
+    .hero-badge svg{
+      width:16px;
+      height:16px;
+      color:var(--color-peach);
+      flex:0 0 auto;
+    }
+
+    .hero h1{
+      font-family:var(--font-display);
+      font-size:clamp(2rem,5vw,4rem);
+      font-weight:400;
+      line-height:1.1;
+      color:var(--color-charcoal);
+      max-width:900px;
+      margin-bottom:1.5rem;
+      opacity:0;
+      animation:fadeInUp 0.8s var(--ease-smooth) 0.4s forwards;
+    }
+    .hero h1 em{ font-style:italic; color:var(--color-orange-light); }
+
+    .hero-subtitle{
+      font-size:1.25rem;
+      color:var(--color-slate);
+      max-width:540px;
+      margin-bottom:1rem;
+      opacity:0;
+      animation:fadeInUp 0.8s var(--ease-smooth) 0.6s forwards;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:1rem;
+      flex-wrap:wrap;
+      justify-content:center;
+      opacity:0;
+      animation:fadeInUp 0.8s var(--ease-smooth) 0.8s forwards;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:0.5rem;
+      padding:1rem 2rem;
+      font-family:var(--font-body);
+      font-size:1rem;
+      font-weight:500;
+      border-radius:100px;
+      text-decoration:none;
+      transition:all 0.2s var(--ease-bounce);
+      cursor:pointer;
+      border:none;
+    }
+    .btn svg{ width:20px; height:20px; }
+
+    .btn-primary{
+      background:var(--color-orange);
+      color:var(--color-cream);
+    }
+    .btn-primary:hover{
+      transform:translateY(-2px);
+      box-shadow:0 8px 30px rgba(45,74,62,0.35);
+    }
+    .btn-secondary{
+      background:transparent;
+      color:var(--color-charcoal);
+      border:1.5px solid var(--color-mist);
+    }
+    .btn-secondary:hover{
+      border-color:var(--color-peach);
+      background:var(--color-warm-white);
+    }
+
+    .store-badges{
+      display:flex;
+      gap:1rem;
+      margin-top:2rem;
+      opacity:0;
+      animation:fadeInUp 0.8s var(--ease-smooth) 1s forwards;
+    }
+    .store-badge{
+      height:48px;
+      opacity:0.9;
+      transition:opacity 0.2s, transform 0.2s var(--ease-bounce);
+    }
+    .store-badge:hover{ opacity:1; transform:scale(1.05); }
+
+    .hero-preview{
+      width:100%;
+      max-width:1100px;
+      margin:3rem auto 0;
+      opacity:0;
+      animation:fadeInUp 1s var(--ease-smooth) 1.2s forwards;
+    }
+    .app-preview{
+      width:100%;
+      height:auto;
+      display:block;
+      border-radius:24px;
+      box-shadow:
+        0 50px 100px -20px rgba(0,0,0,0.22),
+        0 30px 60px -30px rgba(0,0,0,0.25);
+    }
+
+    /* Founding Member status card (reused in hero + founders section) */
+    .founder-status-card{
+      display:block;
+      width: 100%;
+      text-decoration:none;
+      background:rgba(254,253,251,0.92);
+      border:1px solid rgba(232,229,222,0.9);
+      border-radius:18px;
+      padding:1rem 1rem 0.9rem;
+      box-shadow:0 18px 40px rgba(0,0,0,0.08);
+      color:var(--color-charcoal);
+      text-align:left;
+      margin-bottom:2rem;
+    }
+    .founder-status-card:hover{
+      transform:translateY(-2px);
+      transition:transform 0.2s var(--ease-bounce);
+    }
+    .founder-status-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:0.6rem;
+      gap:1rem;
+    }
+    .founder-status-kicker{
+      font-size:0.78rem;
+      font-weight:800;
+      letter-spacing:0.12em;
+      text-transform:uppercase;
+      color:var(--color-orange-light);
+    }
+    .founder-status-badge{
+      font-size:0.8rem;
+      font-weight:800;
+      padding:0.25rem 0.6rem;
+      border-radius:999px;
+      background:rgba(245,74,0,0.12);
+      color:var(--color-orange);
+      flex:0 0 auto;
+      white-space:nowrap;
+    }
+    .founder-status-title{
+      font-weight:800;
+      font-size:1.05rem;
+      line-height:1.25;
+      margin-bottom:0.25rem;
+    }
+    .founder-status-sub{
+      color:var(--color-slate);
+      font-size:0.85rem;
+      line-height:1.4;
+      margin-bottom:0.85rem;
+    }
+    .founder-status-meter{
+      height:8px;
+      border-radius:999px;
+      background:rgba(232,229,222,0.9);
+      overflow:hidden;
+    }
+    .founder-status-meter-fill{
+      height:100%;
+      border-radius:999px;
+      background:linear-gradient(90deg, var(--color-peach), var(--color-orange));
+      width:0%;
+    }
+
+    /* Hero placement of card */
+    .hero-founder-wrap{
+      width:100%;
+      max-width:640px;
+      margin: 1.25rem auto 0;   
+      opacity:0;
+      animation:fadeInUp 0.8s var(--ease-smooth) 0.2s forwards;
+    }
+
+    /* Sections */
+    .features{
+      padding:8rem 2rem;
+      background:var(--color-warm-white);
+    }
+    .how-it-works{
+      padding:8rem 2rem;
+      background:var(--color-cream);
+    }
+    .section-header{
+      text-align:center;
+      max-width:700px;
+      margin:0 auto 5rem;
+    }
+    .section-label{
+      font-size:0.85rem;
+      font-weight:600;
+      color:var(--color-orange-light);
+      text-transform:uppercase;
+      letter-spacing:0.1em;
+      margin-bottom:1rem;
+    }
+    .section-title{
+      font-family:var(--font-display);
+      font-size:clamp(2.5rem,5vw,3.5rem);
+      font-weight:400;
+      color:var(--color-charcoal);
+      line-height:1.2;
+    }
+
+    /* Feature cards */
+    .features-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(320px,1fr));
+      gap:2rem;
+      max-width:1200px;
+      margin:0 auto;
+    }
+    .feature-card{
+      position:relative;
+      background:var(--color-cream);
+      border-radius:24px;
+      padding:2.5rem;
+      transition:transform 0.3s var(--ease-smooth), box-shadow 0.3s var(--ease-smooth);
+    }
+    .feature-card:hover{
+      transform:translateY(-4px);
+      box-shadow:0 20px 40px rgba(0,0,0,0.08);
+    }
+    .feature-icon{
+      width:56px;
+      height:56px;
+      background:linear-gradient(135deg, var(--color-peach) 0%, var(--color-orange) 100%);
+      border-radius:16px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin-bottom:1.5rem;
+      color:white;
+    }
+    .feature-icon svg{ width:28px; height:28px; }
+    .feature-card h3{
+      font-family:var(--font-display);
+      font-size:1.5rem;
+      font-weight:500;
+      color:var(--color-charcoal);
+      margin-bottom:0.75rem;
+    }
+    .feature-card p{ color:var(--color-slate); line-height:1.7; }
+
+    .coming-soon-stamp{
+      position:absolute;
+      top:18px;
+      right:18px;
+      width:92px;
+      height:auto;
+      opacity:0.95;
+      pointer-events:none;
+      filter:drop-shadow(0 6px 12px rgba(0,0,0,0.12));
+    }
+    .feature-card.coming-soon{
+      background:#F2EFE7;
+      border:1px solid rgba(42,42,40,0.08);
+    }
+    .feature-card.coming-soon:hover{
+      transform:none;
+      box-shadow:none;
+    }
+    .feature-card.coming-soon .feature-icon{
+      background:linear-gradient(135deg, rgba(90,90,88,0.25), rgba(90,90,88,0.12));
+      color:rgba(42,42,40,0.7);
+    }
+
+    /* How It Works steps */
+    .steps{
+      max-width:1000px;
+      margin:0 auto;
+      display:grid;
+      gap:4rem;
+    }
+    .step{
+      display:grid;
+      grid-template-columns:auto 1fr;
+      gap:2rem;
+      align-items:start;
+    }
+    .step-number{
+      width:64px;
+      height:64px;
+      background:var(--color-orange);
+      color:var(--color-cream);
+      border-radius:20px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-family:var(--font-display);
+      font-size:1.5rem;
+      font-weight:500;
+    }
+    .step-content h3{
+      font-family:var(--font-display);
+      font-size:1.75rem;
+      font-weight:500;
+      color:var(--color-charcoal);
+      margin-bottom:0.75rem;
+    }
+    .step-content p{
+      color:var(--color-slate);
+      font-size:1.1rem;
+      line-height:1.7;
+      max-width:600px;
+    }
+
+    /* Founders */
+    .founders{
+      padding:8rem 2rem;
+      background:var(--color-orange);
+      color:var(--color-cream);
+      position:relative;
+      overflow:hidden;
+    }
+    .founders::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(ellipse at 0% 0%, rgba(139,168,136,0.18) 0%, transparent 52%),
+        radial-gradient(ellipse at 100% 100%, rgba(184,134,11,0.14) 0%, transparent 55%);
+    }
+    .founders .section-header,
+    .founders .founders-grid,
+    .founders .founders-status-wrap{
+      position:relative;
+      z-index:1;
+    }
+    .founders .section-label{ color:var(--color-peach); }
+    .founders .section-title{ color:var(--color-cream); }
+
+    .founders-subtitle{
+      margin:1rem auto 0;
+      max-width:720px;
+      color:rgba(255,255,255,0.82);
+    }
+
+    /* Founders status card placement (under subtitle) */
+    .founders-status-wrap{
+      max-width:720px;
+      margin:1.25rem auto 0;
+    }
+    /* Make the card read well on orange */
+    .founders .founder-status-card{
+      background:rgba(254,253,251,0.96);
+      border-color:rgba(255,255,255,0.18);
+    }
+
+    .founders-grid{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:2rem;
+      max-width:1200px;
+      margin:3rem auto 0;
+    }
+    @media (max-width:900px){
+      .founders-grid{ grid-template-columns:1fr; }
+    }
+    .founders-card{
+      background:rgba(255,255,255,0.08);
+      backdrop-filter:blur(10px);
+      border:1px solid rgba(255,255,255,0.12);
+      border-radius:24px;
+      padding:2.25rem;
+    }
+    .founders-kicker{
+      font-size:0.85rem;
+      letter-spacing:0.12em;
+      text-transform:uppercase;
+      font-weight:700;
+      color:rgba(255,255,255,0.78);
+      margin-bottom:0.9rem;
+    }
+    .founders-big{
+      font-family:var(--font-display);
+      font-size:1.9rem;
+      line-height:1.15;
+      font-weight:500;
+      margin-bottom:1rem;
+    }
+    .founders-lead{
+      font-size:1.05rem;
+      line-height:1.7;
+      color:rgba(255,255,255,0.86);
+      margin-bottom:1.35rem;
+    }
+    .founders-perks{
+      list-style:none;
+      display:grid;
+      gap:0.9rem;
+    }
+    .founders-perks li{
+      display:flex;
+      gap:0.7rem;
+      align-items:flex-start;
+      line-height:1.6;
+      color:rgba(255,255,255,0.92);
+      font-size:1.02rem;
+    }
+    .perk-tick{
+      width:24px;
+      height:24px;
+      border-radius:8px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      flex:0 0 24px;
+      background:rgba(255,255,255,0.14);
+      border:1px solid rgba(255,255,255,0.18);
+      font-weight:900;
+    }
+    .founders-cta{
+      display:flex;
+      gap:1rem;
+      flex-wrap:wrap;
+      margin-top:1.5rem;
+    }
+    .founders .btn-primary{
+      background:var(--color-cream);
+      color:var(--color-charcoal);
+      width: 100%;
+      display: flex;            
+      justify-content: center;    
+      align-items: center;        
+      text-align: center;   
+    }
+    .founders .btn-primary:hover{
+      transform:translateY(-2px);
+      box-shadow:0 10px 30px rgba(0,0,0,0.25);
+    }
+    .founders .btn-secondary{
+      color:var(--color-cream);
+      border-color:rgba(255,255,255,0.28);
+      width: 100%;
+      display: flex;            
+      justify-content: center;    
+      align-items: center;        
+      text-align: center;       
+    }
+    .founders .btn-secondary:hover{
+      border-color:rgba(255,255,255,0.48);
+      background:rgba(255,255,255,0.08);
+    }
+    .founders-note{
+      margin-top:1rem;
+      font-size:0.95rem;
+      color:rgba(255,255,255,0.72);
+    }
+
+    /* CTA */
+    .cta{
+      position:relative;
+      padding:8rem 2rem;
+      text-align:center;
+      background-image:url("assets/img/SunsetBackground.png");
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+    }
+    .cta::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.25));
+      pointer-events:none;
+    }
+    .cta-content{
+      position:relative;
+      z-index:1;
+      max-width:700px;
+      margin:0 auto;
+    }
+    .cta h2{
+      font-family:var(--font-display);
+      font-size:clamp(2.5rem,5vw,3.5rem);
+      font-weight:400;
+      color:#fff;
+      margin-bottom:1.5rem;
+      text-shadow:0 8px 30px rgba(0,0,0,0.35);
+    }
+    .cta p{
+      font-size:1.2rem;
+      color:rgba(255,255,255,0.88);
+      margin-bottom:2.5rem;
+      text-shadow:0 6px 20px rgba(0,0,0,0.25);
+    }
+    .cta-stores{
+      display:flex;
+      gap:1rem;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+
+    /* Footer */
+    footer{
+      background:var(--color-charcoal);
+      color:var(--color-cream);
+      padding:4rem 2rem 2rem;
+    }
+    .footer-content{
+      max-width:1200px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:2fr repeat(3,1fr);
+      gap:3rem;
+    }
+    .footer-brand{ max-width:300px; }
+    .footer-logo{ display:flex; align-items:center; gap:0.5rem; margin-bottom:1rem; }
+    .footer-logo-img{ height:50px; width:auto; display:block; }
+    .footer-brand p{
+      color:rgba(255,255,255,0.6);
+      line-height:1.7;
+      text-align:left;
+    }
+    .footer-col h4{
+      font-weight:600;
+      margin-bottom:1.5rem;
+      font-size:0.9rem;
+      text-transform:uppercase;
+      letter-spacing:0.05em;
+      text-align:left;
+    }
+    .footer-col ul{ list-style:none; text-align:left; }
+    .footer-col li{ margin-bottom:0.75rem; }
+    .footer-col a{
+      color:rgba(255,255,255,0.6);
+      text-decoration:none;
+      transition:color 0.2s;
+    }
+    .footer-col a:hover{ color:var(--color-cream); }
+    .footer-bottom{
+      max-width:1200px;
+      margin:4rem auto 0;
+      padding-top:2rem;
+      border-top:1px solid rgba(255,255,255,0.1);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:1rem;
+    }
+    .footer-bottom p{ color:rgba(255,255,255,0.5); font-size:0.9rem; }
+    .footer-social{ display:flex; gap:1rem; }
+    .footer-social a{
+      width:40px;
+      height:40px;
+      background:rgba(255,255,255,0.1);
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:var(--color-cream);
+      transition:background 0.2s;
+    }
+    .footer-social a:hover{ background:rgba(255,255,255,0.2); }
+
+    /* Responsive */
+    @media (max-width:768px){
+      .hero{ padding:7rem 1.25rem 3rem; }
+      .hero-preview{
+        max-width:none;
+        width:100vw;
+        margin-left:calc(50% - 50vw);
+        margin-right:calc(50% - 50vw);
+        margin-top:2rem;
+      }
+      .app-preview{ border-radius:0; }
+      .step{ grid-template-columns:1fr; gap:1rem; }
+      .footer-content{ grid-template-columns:1fr; text-align:center; }
+      .footer-brand{ max-width:none; }
+      .footer-bottom{ flex-direction:column; text-align:center; }
+      .nav-toggle{ display:inline-flex; }
+      .nav-links{ display:none; }
+    }
+  </style>
 </head>
+
 <body>
-    <a href="#founders" class="founder-banner founder-promo" id="founderBanner" aria-label="Founding Member spots are limited. Jump to Founders section.">
-        <div class="founder-banner-inner">
-          <span class="founder-dot" aria-hidden="true"></span>
-          <span class="founder-banner-text">
-            <strong>Founding Member:</strong>
-            <span id="founderBannerRemainingText">1,000 spots available</span>
-          </span>
-          <span class="founder-banner-pill" id="founderBannerPill">Claim yours</span>
+  <!-- Navigation -->
+  <nav id="navbar">
+    <a href="#" class="logo">
+      <img src="assets/brand/Logo.png" alt="EveryVoyage" class="logo-img">
+    </a>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#how-it-works">How It Works</a></li>
+      <li><a href="#download" class="nav-cta">Download</a></li>
+    </ul>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="mobile-menu-inner">
+      <hr class="mobile-divider">
+      <a href="#features">Features</a>
+      <a href="#how-it-works">How It Works</a>
+      <hr class="mobile-divider">
+      <a href="#download" class="mobile-cta">Download</a>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+
+    <!-- Shown when founders are NOT available -->
+    <div class="hero-badge" id="heroTrustBadge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+      </svg>
+        Trusted by 10,000+ motorhome adventurers
+    </div>
+
+    <!-- Shown when founders ARE available -->
+    <div class="hero-founder-wrap founder-promo" id="heroFounderWrap" style="display:none;">
+      <a href="#founders" class="founder-status-card" id="heroFounderCard" aria-label="Founding Member spots are limited. Jump to Founders section.">
+        <div class="founder-status-top">
+          <span class="founder-status-kicker">Founding Member</span>
+          <span class="founder-status-badge" id="heroFounderBadge">Limited</span>
+        </div>
+
+        <div class="founder-status-title">
+          Free access for life • <span id="heroRemainingText">1,000 spots available</span>
+        </div>
+        <div class="founder-status-sub">Tap to learn about Founder perks & claim a spot.</div>
+
+        <div class="founder-status-meter" aria-hidden="true">
+          <div class="founder-status-meter-fill" id="heroMeterFill" style="width:0%"></div>
         </div>
       </a>
-    <!-- Navigation -->
-    <nav id="navbar">
-        <a href="#" class="logo">
-            <img src="assets/brand/Logo.png" alt="EveryVoyage" class="logo-img">
-        </a>
-        <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
-            <span></span><span></span><span></span>
-          </button>
-        <ul class="nav-links">
-            <li><a href="#features">Features</a></li>
-            <li><a href="#how-it-works">How It Works</a></li>
-            <li><a href="#download" class="nav-cta">Download</a></li>
-        </ul>
-    </nav>
-    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-        
-        <div class="mobile-menu-inner">
-          <hr class="mobile-divider">
-          <a href="#features">Features</a>
-          <a href="#how-it-works">How It Works</a>
-          <hr class="mobile-divider">
-          <a href="#download" class="mobile-cta">Download</a>
+    </div>
+
+    <h1>Record <em>every</em> voyage.<br>Share the adventure.</h1>
+    <p class="hero-subtitle">
+      The motorhome travel companion. Automatically track your journeys, capture memories, and share adventures with fellow voyagers.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#download" class="btn btn-primary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        Download Free
+      </a>
+      <a href="#features" class="btn btn-secondary">See Features</a>
+    </div>
+
+    <div class="store-badges">
+      <a href="#"><img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" class="store-badge"></a>
+      <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" class="store-badge"></a>
+    </div>
+
+    <div class="hero-preview">
+      <img src="assets/img/AppPreview.png" alt="EveryVoyage app preview" class="app-preview" loading="lazy">
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features" id="features">
+    <div class="section-header">
+      <p class="section-label">Features</p>
+      <h2 class="section-title">Everything you need to capture your travels</h2>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/>
+            <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+          </svg>
+        </div>
+        <h3>GPS Journey Recording</h3>
+        <p>Automatically track your route as you drive. Our battery-efficient GPS recording captures every twist and turn of your adventure.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+            <circle cx="8.5" cy="8.5" r="1.5"/>
+            <polyline points="21 15 16 10 5 21"/>
+          </svg>
+        </div>
+        <h3>Photo Memories</h3>
+        <p>Post photos and updates from the road. Link them to your recorded journeys, highlight hidden gems, and inspire fellow friends.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+            <polyline points="10 9 9 9 8 9"/>
+          </svg>
+        </div>
+        <h3>Travel Diary</h3>
+        <p>Write diary entries at each stop. Document your experiences, favourite campsites, and hidden gems you discover along the way.</p>
+      </div>
+
+      <div class="feature-card coming-soon">
+        <img class="coming-soon-stamp" src="assets/img/ComingSoon.png" alt="Coming soon">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+        </div>
+        <h3>Discover Stops</h3>
+        <p>Access thousands of motorhome-friendly stops across Europe. Find campsites, aires, and wild camping spots recommended by the community.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <h3>Connect & Share</h3>
+        <p>Follow other explorers, share your voyages, and get inspired by adventures from the motorhome community across the UK and Europe.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <line x1="18" y1="20" x2="18" y2="10"/>
+            <line x1="12" y1="20" x2="12" y2="4"/>
+            <line x1="6" y1="20" x2="6" y2="14"/>
+          </svg>
+        </div>
+        <h3>Trip Summaries</h3>
+        <p>See your total miles traveled, countries visited, and days on the road. Track your motorhome mileage and look back on years of adventure.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="how-it-works" id="how-it-works">
+    <div class="section-header">
+      <p class="section-label">How It Works</p>
+      <h2 class="section-title">Start recording in seconds</h2>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h3>Hit Record</h3>
+          <p>Tap to start recording when you set off. EveryVoyage runs quietly in the background, tracking your route without draining your battery.</p>
         </div>
       </div>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-bg"></div>
-        
-        <div class="hero-badge">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-            </svg>
-            New app for motorhome adventurers
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h3>Capture Memories</h3>
+          <p>Stop for a view? Add a photo. Found a great campsite? Write a diary entry. Your memories are automatically pinned to your journey.</p>
         </div>
-        
-        <h1>Record <em>every</em> voyage.<br>Share the adventure.</h1>
-        
-        <p class="hero-subtitle">The motorhome travel companion. Automatically track your journeys, capture memories, and share adventures with fellow voyagers.</p>
-        <!-- Founder callout (auto-hides when sold out) -->
-        <a href="#founders" class="hero-founder-callout founder-promo" id="heroFounderCallout" aria-label="Founding Member spots are limited. Jump to Founders section.">
-            <div class="hero-founder-top">
-            <span class="hero-founder-kicker">Founding Member</span>
-            <span class="hero-founder-badge" id="heroFounderBadge">Limited</span>
-            </div>
-        
-            <div class="hero-founder-body">
-            <div class="hero-founder-title">
-                Free access for life • <span id="heroFounderRemainingText">1,000 spots available</span>
-            </div>
-            <div class="hero-founder-sub">
-                Tap to learn about Founder perks & claim a spot.
-            </div>
-            </div>
-        
-            <div class="hero-founder-meter" aria-hidden="true">
-            <div class="hero-founder-meter-fill" id="heroFounderMeterFill" style="width: 0%"></div>
-            </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h3>Create Voyages</h3>
+          <p>Group your journeys into voyages—like "French Alps Summer 2025". See beautiful maps, statistics, and a timeline of your adventure.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <h3>Explore Together</h3>
+          <p>Share your voyages with friends and the community. Discover routes from fellow travelers and plan your next adventure.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Founders -->
+  <section class="founders" id="founders">
+    <div class="section-header">
+      <p class="section-label">Founders</p>
+      <h2 class="section-title">Become a Founding Member</h2>
+      <p class="founders-subtitle">
+        Download today and you’ll be marked as a Founder — with perks that last forever. We’re building EveryVoyage for motorhome travellers,
+        and we want to build it <em>with you</em>.
+      </p>
+
+      <!-- Repeated founding status card under subtitle (only shown when available) -->
+      <div class="founders-status-wrap founder-promo" id="foundersStatusWrap" style="display:none;">
+        <div class="founder-status-card" id="foundersStatusCard">
+          <div class="founder-status-top">
+            <span class="founder-status-kicker">Founding Member</span>
+            <span class="founder-status-badge" id="foundersFounderBadge">Limited</span>
+          </div>
+
+          <div class="founder-status-title">
+            Free access for life • <span id="foundersRemainingText">1,000 spots available</span>
+          </div>
+          <div class="founder-status-sub">Download and create an account to claim a Founder spot.</div>
+
+          <div class="founder-status-meter" aria-hidden="true">
+            <div class="founder-status-meter-fill" id="foundersMeterFill" style="width:0%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="founders-grid">
+      <div class="founders-card">
+        <div class="founders-kicker">Founder perks</div>
+        <div class="founders-big">Founder status, for life.</div>
+        <p class="founders-lead">
+          The first 1,000 people to download and create an account become Founders. You’ll get early access, recognition, and a direct voice in what we build next.
+        </p>
+
+        <ul class="founders-perks">
+          <li><span class="perk-tick">✔</span><div><strong>Free access for life</strong></div></li>
+          <li><span class="perk-tick">✔</span><div><strong>Founder badge on your profile</strong></div></li>
+          <li><span class="perk-tick">✔</span><div><strong>Early access to new features</strong></div></li>
+          <li><span class="perk-tick">✔</span><div><strong>Help shape the future of the app</strong></div></li>
+        </ul>
+
+        <div class="founders-cta">
+          <a href="#download" class="btn btn-primary">Download</a>
+          <a href="#features" class="btn btn-secondary">See features</a>
+        </div>
+
+        <p class="founders-note">Founder spots are limited to the first 1,000 voyagers who download and create an account.</p>
+      </div>
+
+      <div class="founders-card">
+        <div class="founders-kicker">Why we’re doing this</div>
+        <div class="founders-big">Built with the community.</div>
+        <p class="founders-lead">
+          EveryVoyage is made for life on the road — the quick overnight stops, the hidden gems, the “how did we find this place?” moments.
+        </p>
+        <p class="founders-lead" style="margin-bottom:0;">
+          Founders are our inner circle: you’ll get early access and a direct line to influence the details that matter — from journey recording,
+          to posts, to discovering stops across Europe.
+        </p>
+
+        <div class="founders-cta" style="margin-top:1.5rem;">
+          <a href="#download" class="btn btn-primary">Claim a founder spot</a>
+          <a href="#how-it-works" class="btn btn-secondary">How it works</a>
+        </div>
+
+        <p class="founders-note">Tip: add your first journey and post to lock in your Founder status feel from day one.</p>
+      </div>
+
+      <div class="founders-card">
+        <div class="founders-kicker">Founder badge preview</div>
+        <div class="founders-big">Stand out in the feed.</div>
+        <p class="founders-lead">
+          Founders get a visible badge and a special profile picture shape — so everyone knows you were there from the start.
+        </p>
+        <p class="founders-note">You’ll also get early access to new features and help decide what we build next.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta" id="download">
+    <div class="cta-content">
+      <h2>Start your next adventure today</h2>
+      <p>Join thousands of motorhome travelers who record, remember, and share their journeys with EveryVoyage.</p>
+      <div class="cta-stores">
+        <a href="#"><img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" class="store-badge"></a>
+        <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" class="store-badge"></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="assets/brand/LogoWhite.png" alt="EveryVoyage" class="footer-logo-img">
+        </div>
+        <p>The motorhome travel companion. Record journeys, capture memories, and share adventures.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#download">Download</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Information</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Cookie Policy</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 EveryVoyage. All rights reserved.</p>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+          </svg>
         </a>
-  
-        
-        <div class="hero-actions">
-            <a href="#download" class="btn btn-primary">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                    <polyline points="7 10 12 15 17 10"/>
-                    <line x1="12" y1="15" x2="12" y2="3"/>
-                </svg>
-                Download Free
-            </a>
-            <a href="#features" class="btn btn-secondary">See Features</a>
-        </div>
-        
-        <div class="store-badges">
-            <a href="#"><img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" class="store-badge"></a>
-            <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" class="store-badge"></a>
-        </div>
-        
-        <div class="hero-preview">
-            <img
-              src="assets/img/AppPreview.png"
-              alt="EveryVoyage app preview"
-              class="app-preview"
-              loading="lazy"
-            >
-        </div>
-    </section>
+        <a href="#" aria-label="Twitter">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="Facebook">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="YouTube">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/>
+            <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
 
-    <!-- Features Section -->
-    <section class="features" id="features">
-        <div class="section-header">
-            <p class="section-label">Features</p>
-            <h2 class="section-title">Everything you need to capture your travels</h2>
-        </div>
-        
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
-                    </svg>
-                </div>
-                <h3>GPS Journey Recording</h3>
-                <p>Automatically track your route as you drive. Our battery-efficient GPS recording captures every twist and turn of your adventure.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                        <circle cx="8.5" cy="8.5" r="1.5"/>
-                        <polyline points="21 15 16 10 5 21"/>
-                    </svg>
-                </div>
-                <h3>Photo Memories</h3>
-                <p>Post photos and updates from the road. Link them to your recorded journeys, highlight hidden gems, and inspire fellow friends.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                        <polyline points="14 2 14 8 20 8"/>
-                        <line x1="16" y1="13" x2="8" y2="13"/>
-                        <line x1="16" y1="17" x2="8" y2="17"/>
-                        <polyline points="10 9 9 9 8 9"/>
-                    </svg>
-                </div>
-                <h3>Travel Diary</h3>
-                <p>Write diary entries at each stop. Document your experiences, favourite campsites, and hidden gems you discover along the way.</p>
-            </div>
-            
-            <div class="feature-card coming-soon">
-                <img class="coming-soon-stamp" src="assets/img/ComingSoon.png" alt="Coming soon">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                        <circle cx="12" cy="10" r="3"/>
-                    </svg>
-                </div>
-                <h3>Discover Stops</h3>
-                <p>Access thousands of motorhome-friendly stops across Europe. Find campsites, aires, and wild camping spots recommended by the community.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                        <circle cx="9" cy="7" r="4"/>
-                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                    </svg>
-                </div>
-                <h3>Connect & Share</h3>
-                <p>Follow other explorers, share your voyages, and get inspired by adventures from the motorhome community across the UK and Europe.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="18" y1="20" x2="18" y2="10"/>
-                        <line x1="12" y1="20" x2="12" y2="4"/>
-                        <line x1="6" y1="20" x2="6" y2="14"/>
-                    </svg>
-                </div>
-                <h3>Trip Summaries</h3>
-                <p>See your total miles traveled, countries visited, and days on the road. Track your motorhome mileage and look back on years of adventure.</p>
-            </div>
-        </div>
-    </section>
+  <script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) navbar.classList.add('scrolled');
+      else navbar.classList.remove('scrolled');
+    });
 
-    <!-- How It Works -->
-    <section class="how-it-works" id="how-it-works">
-        <div class="section-header">
-            <p class="section-label">How It Works</p>
-            <h2 class="section-title">Start recording in seconds</h2>
-        </div>
-        
-        <div class="steps">
-            <div class="step">
-                <div class="step-number">1</div>
-                <div class="step-content">
-                    <h3>Hit Record</h3>
-                    <p>Tap to start recording when you set off. EveryVoyage runs quietly in the background, tracking your route without draining your battery.</p>
-                </div>
-            </div>
-            
-            <div class="step">
-                <div class="step-number">2</div>
-                <div class="step-content">
-                    <h3>Capture Memories</h3>
-                    <p>Stop for a view? Add a photo. Found a great campsite? Write a diary entry. Your memories are automatically pinned to your journey.</p>
-                </div>
-            </div>
-            
-            <div class="step">
-                <div class="step-number">3</div>
-                <div class="step-content">
-                    <h3>Create Voyages</h3>
-                    <p>Group your journeys into voyages—like "French Alps Summer 2025". See beautiful maps, statistics, and a timeline of your adventure.</p>
-                </div>
-            </div>
-            
-            <div class="step">
-                <div class="step-number">4</div>
-                <div class="step-content">
-                    <h3>Explore Together</h3>
-                    <p>Share your voyages with friends and the community. Discover routes from fellow travelers and plan your next adventure.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
 
-    <!-- Founders -->
-    <section class="founders" id="founders">
-        <div class="section-header">
-            <p class="section-label">Founders</p>
-            <h2 class="section-title">Become a Founding Member</h2>
-            <p class="founders-subtitle">
-                Download today and you’ll be marked as a Founder — with perks that last forever. We’re building EveryVoyage for motorhome travellers,
-                and we want to build it <em>with you</em>.
-            </p>
-        </div>
-        
-        <div class="founders-grid">
-            <!-- Card 1: Perks + CTA -->
-            <div class="founders-card">
-                <div class="founders-kicker">Founder perks</div>
-                <div class="founders-big">Founder status, for life.</div>
-                <p class="founders-lead">
-                    The first 1,000 people to download and create an account become Founders. You’ll get early access, recognition, and a direct voice in what we build next.
-                </p>
-
-                <ul class="founders-perks">
-                    <li>
-                        <span class="perk-tick">✔</span>
-                        <div>
-                            <strong>Free access for life</strong>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="perk-tick">✔</span>
-                        <div>
-                            <strong>Founder badge on your profile</strong>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="perk-tick">✔</span>
-                        <div>
-                            <strong>Early access to new features</strong>
-                        </div>
-                    </li>
-                    <li>
-                        <span class="perk-tick">✔</span>
-                        <div>
-                            <strong>Help shape the future of the app</strong>
-                        </div>
-                    </li>
-                </ul>
-
-                <div class="founders-cta">
-                    <a href="#download" class="btn btn-primary">Download & become a founder</a>
-                    <a href="#features" class="btn btn-secondary">See features</a>
-                </div>
-
-                <p class="founders-note">Founder spots are limited to the first 1,000 voyagers who download and create an account.</p>
-            </div>
-
-            <!-- Card 2: “Why founders” -->
-            <div class="founders-card">
-                <div class="founders-kicker">Why we’re doing this</div>
-                <div class="founders-big">Built with the community.</div>
-                <p class="founders-lead">
-                    EveryVoyage is made for life on the road — the quick overnight stops, the hidden gems, the “how did we find this place?” moments.
-                </p>
-                <p class="founders-lead" style="margin-bottom: 0;">
-                    Founders are our inner circle: you’ll get early access and a direct line to influence the details that matter — from journey recording,
-                    to posts, to discovering stops across Europe.
-                </p>
-
-                <div class="founders-cta" style="margin-top: 1.5rem;">
-                    <a href="#download" class="btn btn-primary">Claim a founder spot</a>
-                    <a href="#how-it-works" class="btn btn-secondary">How it works</a>
-                </div>
-
-                <p class="founders-note">Tip: add your first journey and post to lock in your Founder status feel from day one.</p>
-            </div>
-
-            <!-- Card 3: Badge preview -->
-            <div class="founders-card">
-                <div class="founders-kicker">Founder badge preview</div>
-                <div class="founders-big">Stand out in the feed.</div>
-                <p class="founders-lead">
-                    Founders get a visible badge and a special profile picture shape — so everyone knows you were there from the start.
-                </p>
-
-
-
-                <p class="founders-note">You’ll also get early access to new features and help decide what we build next.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta" id="download">
-        <div class="cta-content">
-            <h2>Start your next adventure today</h2>
-            <p>Join thousands of motorhome travelers who record, remember, and share their journeys with EveryVoyage.</p>
-            <div class="cta-stores">
-                <a href="#"><img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" class="store-badge"></a>
-                <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" class="store-badge"></a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-brand">
-                <div class="footer-logo">
-                    <img
-                        src="assets/brand/LogoWhite.png"
-                        alt="EveryVoyage"
-                        class="footer-logo-img"
-                    >
-                </div>
-                <p>The motorhome travel companion. Record journeys, capture memories, and share adventures.</p>
-            </div>
-            
-            <div class="footer-col">
-                <h4>Product</h4>
-                <ul>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#download">Download</a></li>
-                    <!-- <li><a href="#">Roadmap</a></li> -->
-                </ul>
-            </div>
-            
-            <div class="footer-col">
-                <h4>Company</h4>
-                <ul>
-                    <li><a href="#">About</a></li>
-                    <!-- <li><a href="#">Blog</a></li> -->
-                    <li><a href="#">Contact</a></li>
-                    <!-- <li><a href="#">Press Kit</a></li> -->
-                </ul>
-            </div>
-            
-            <div class="footer-col">
-                <h4>Information</h4>
-                <ul>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">Cookie Policy</a></li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <p>&copy; 2025 EveryVoyage. All rights reserved.</p>
-            <div class="footer-social">
-                <a href="#" aria-label="Instagram">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-                    </svg>
-                </a>
-                <a href="#" aria-label="Twitter">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
-                    </svg>
-                </a>
-                <a href="#" aria-label="Facebook">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-                    </svg>
-                </a>
-                <a href="#" aria-label="YouTube">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/>
-                        <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/>
-                    </svg>
-                </a>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Navbar scroll effect
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Intersection Observer for fade-in animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe feature cards, steps, founders
-        document.querySelectorAll('.feature-card, .step, .founders-card').forEach((el, index) => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
-            observer.observe(el);
-        });
-
-        // Mobile menu toggle
-        const navToggle = document.getElementById('navToggle');
-        const mobileMenu = document.getElementById('mobileMenu');
-
-        function openMenu(){
-        document.body.classList.add('menu-open');
-        navToggle.setAttribute('aria-expanded', 'true');
-        mobileMenu.setAttribute('aria-hidden', 'false');
-        navToggle.setAttribute('aria-label', 'Close menu');
+    // Intersection Observer for fade-in animations
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
         }
+      });
+    }, observerOptions);
 
-        function closeMenu(){
-        document.body.classList.remove('menu-open');
-        navToggle.setAttribute('aria-expanded', 'false');
-        mobileMenu.setAttribute('aria-hidden', 'true');
-        navToggle.setAttribute('aria-label', 'Open menu');
-        }
+    document.querySelectorAll('.feature-card, .step, .founders-card').forEach((el, index) => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+      observer.observe(el);
+    });
 
-        navToggle?.addEventListener('click', () => {
-        document.body.classList.contains('menu-open') ? closeMenu() : openMenu();
-        });
+    // Mobile menu toggle
+    const navToggle = document.getElementById('navToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
 
-        // Close when clicking a link
-        mobileMenu?.querySelectorAll('a').forEach(a => {
-        a.addEventListener('click', closeMenu);
-        });
+    function openMenu(){
+      document.body.classList.add('menu-open');
+      navToggle.setAttribute('aria-expanded', 'true');
+      mobileMenu.setAttribute('aria-hidden', 'false');
+      navToggle.setAttribute('aria-label', 'Close menu');
+    }
 
-        // Close on ESC
-        window.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && document.body.classList.contains('menu-open')) closeMenu();
-        });
+    function closeMenu(){
+      document.body.classList.remove('menu-open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      navToggle.setAttribute('aria-label', 'Open menu');
+    }
 
-        // Optional: close if user taps outside inner content
-        mobileMenu?.addEventListener('click', (e) => {
-        if (e.target === mobileMenu) closeMenu();
-        });
+    navToggle?.addEventListener('click', () => {
+      document.body.classList.contains('menu-open') ? closeMenu() : openMenu();
+    });
 
-        // ===== Founder slots logic (LIVE via API) =====
+    mobileMenu?.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && document.body.classList.contains('menu-open')) closeMenu();
+    });
+    mobileMenu?.addEventListener('click', (e) => {
+      if (e.target === mobileMenu) closeMenu();
+    });
 
-        function updateFounderUI({ total, remaining, available }) {
-            const foundersSection = document.getElementById('founders');
-            const promoEls = document.querySelectorAll('.founder-promo');
+    // ===== Founder slots logic (LIVE via API) =====
 
-            const isAvailable = Boolean(available) && Number(remaining) > 0;
+    function setFounderCardUI(prefix, { total, remaining }) {
+      const remainingEl = document.getElementById(prefix + "RemainingText");
+      const badgeEl = document.getElementById(prefix + "FounderBadge");
+      const fillEl = document.getElementById(prefix + "MeterFill");
 
-            if (!isAvailable) {
-            // SOLD OUT: hide banner + hero callout + founders section
-            document.body.classList.remove('has-founder-banner');
-            promoEls.forEach(el => (el.style.display = 'none'));
-            if (foundersSection) foundersSection.style.display = 'none';
-            return;
-            }
+      const totalNum = Number(total) || 0;
+      const remainingNum = Number(remaining) || 0;
 
-            // AVAILABLE: show promo + founders
-            document.body.classList.add('has-founder-banner');
-            promoEls.forEach(el => (el.style.display = ''));
-            if (foundersSection) foundersSection.style.display = '';
+      const taken = Math.max(0, totalNum - remainingNum);
+      const takenPct = totalNum ? Math.max(0, Math.min(100, (taken / totalNum) * 100)) : 0;
 
-            // Update text
-            const bannerRemainingText = document.getElementById('founderBannerRemainingText');
-            const heroRemainingText = document.getElementById('heroFounderRemainingText');
-            const bannerPill = document.getElementById('founderBannerPill');
-            const heroBadge = document.getElementById('heroFounderBadge');
+      if (remainingEl) {
+        remainingEl.textContent = `${remainingNum.toLocaleString()} of ${totalNum.toLocaleString()} spots remaining`;
+      }
 
-            const taken = Math.max(0, Number(total) - Number(remaining));
-            const takenPct = total ? Math.max(0, Math.min(100, (taken / total) * 100)) : 0;
+      if (badgeEl) {
+        if (remainingNum <= 50) badgeEl.textContent = "Almost gone";
+        else if (remainingNum <= 200) badgeEl.textContent = "Limited";
+        else badgeEl.textContent = "Limited";
+      }
 
-            if (bannerRemainingText) {
-            bannerRemainingText.textContent = `${Number(remaining).toLocaleString()} of ${Number(total).toLocaleString()} spots remaining`;
-            }
-            if (heroRemainingText) {
-            heroRemainingText.textContent = `${Number(remaining).toLocaleString()} of ${Number(total).toLocaleString()} spots remaining`;
-            }
+      if (fillEl) fillEl.style.width = `${takenPct}%`;
+    }
 
-            // Urgency text
-            if (remaining <= 50) {
-            if (bannerPill) bannerPill.textContent = "Almost gone";
-            if (heroBadge) heroBadge.textContent = "Almost gone";
-            } else if (remaining <= 200) {
-            if (bannerPill) bannerPill.textContent = "Limited";
-            if (heroBadge) heroBadge.textContent = "Limited";
-            } else {
-            if (bannerPill) bannerPill.textContent = "Claim yours";
-            if (heroBadge) heroBadge.textContent = "Limited";
-            }
+    function updateFounderUI({ total, remaining, available }) {
+      const foundersSection = document.getElementById('founders');
 
-            // Progress bar
-            const fill = document.getElementById('heroFounderMeterFill');
-            if (fill) fill.style.width = `${takenPct}%`;
-        }
+      const heroTrustBadge = document.getElementById('heroTrustBadge');
+      const heroFounderWrap = document.getElementById('heroFounderWrap');
+      const foundersStatusWrap = document.getElementById('foundersStatusWrap');
 
-        async function fetchFounderStatus() {
-            const url = "https://api.everyvoyage.com/api/founding-members/status";
+      const isAvailable = Boolean(available) && Number(remaining) > 0;
 
-            const res = await fetch(url, {
-            method: "GET",
-            headers: { "accept": "application/json" },
-            cache: "no-store"
-            });
+      if (!isAvailable) {
+        // Sold out: show trust badge, hide founder card + founders section
+        if (heroTrustBadge) heroTrustBadge.style.display = 'inline-flex';
+        if (heroFounderWrap) heroFounderWrap.style.display = 'none';
+        if (foundersSection) foundersSection.style.display = 'none';
+        if (foundersStatusWrap) foundersStatusWrap.style.display = 'none';
+        return;
+      }
 
-            if (!res.ok) throw new Error(`Status fetch failed: ${res.status}`);
+      // Available: hide trust badge, show founder card + founders section
+      if (heroTrustBadge) heroTrustBadge.style.display = 'none';
+      if (heroFounderWrap) heroFounderWrap.style.display = '';
+      if (foundersSection) foundersSection.style.display = '';
+      if (foundersStatusWrap) foundersStatusWrap.style.display = '';
 
-            const data = await res.json();
-            // expected: { total: 1000, remaining: 847, available: true }
-            return data;
-        }
+      // Update both cards
+      setFounderCardUI("hero", { total, remaining });
+      setFounderCardUI("founders", { total, remaining });
+    }
 
-        async function initFounderUI() {
-            try {
-            const status = await fetchFounderStatus();
-            updateFounderUI(status);
-            } catch (err) {
-            console.warn("Founder status unavailable, hiding promo:", err);
-            // safest fallback: hide promo if API is down
-            updateFounderUI({ total: 0, remaining: 0, available: false });
-            }
-        }
+    async function fetchFounderStatus() {
+      const isLocal =
+        location.hostname === "localhost" ||
+        location.hostname === "127.0.0.1" ||
+        location.hostname === "0.0.0.0";
 
-        initFounderUI();
+      // Local dev mock (edit these numbers whenever you want)
+      if (isLocal) {
+          return { total: 1000, remaining: 847, available: true };
+      }
+      const url = "https://api.everyvoyage.com/api/founding-members/status";
+      const res = await fetch(url, {
+        method: "GET",
+        headers: { "accept": "application/json" },
+        cache: "no-store"
+      });
+      if (!res.ok) throw new Error(`Status fetch failed: ${res.status}`);
+      return res.json(); // expected: { total: 1000, remaining: 847, available: true }
+    }
 
-        // Optional: refresh every 60s so the page updates while open
-        setInterval(initFounderUI, 60000);
+    async function initFounderUI() {
+      try {
+        const status = await fetchFounderStatus();
+        updateFounderUI(status);
+      } catch (err) {
+        console.warn("Founder status unavailable, defaulting to non-founder UI:", err);
+        // safest fallback: show trust badge, hide founders
+        updateFounderUI({ total: 0, remaining: 0, available: false });
+      }
+    }
 
-
-
-    </script>
+    initFounderUI();
+    setInterval(initFounderUI, 60000);
+  </script>
 </body>
 </html>
