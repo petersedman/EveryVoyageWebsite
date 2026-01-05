@@ -29,6 +29,8 @@
             
             --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
             --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+            --founder-banner-height: 48px;
+
         }
         
         *, *::before, *::after {
@@ -60,7 +62,7 @@
             opacity: 0.03;
             pointer-events: none;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-            z-index: 9999;
+            z-index: 0;
         }
         
         /* Navigation */
@@ -69,7 +71,7 @@
             top: 0;
             left: 0;
             right: 0;
-            z-index: 100;
+            z-index: 1000;
             padding: 1.5rem 2rem;
             display: flex;
             justify-content: space-between;
@@ -83,6 +85,174 @@
             backdrop-filter: blur(10px);
             box-shadow: 0 1px 0 var(--color-mist);
         }
+
+        /* Banner sits above nav */
+.founder-banner{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--founder-banner-height);
+  z-index: 2000;
+  display: none;                 /* turned on by JS when available */
+  text-decoration: none;
+  color: var(--color-charcoal);
+  background: rgba(254, 253, 251, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--color-mist);
+}
+
+.founder-banner-inner{
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 100%;
+  padding: 0 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.founder-dot{
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--color-orange);
+  box-shadow: 0 0 0 6px rgba(245, 74, 0, 0.12);
+  flex: 0 0 auto;
+}
+
+.founder-banner-text{
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--color-slate);
+  font-size: 0.95rem;
+  flex: 1 1 auto;
+}
+
+.founder-banner-text strong{
+  color: var(--color-charcoal);
+  font-weight: 700;
+}
+
+.founder-banner-pill{
+  flex: 0 0 auto;
+  background: var(--color-orange);
+  color: var(--color-cream);
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.10);
+}
+
+.founder-banner:hover .founder-banner-pill{
+  transform: translateY(-1px);
+}
+
+/* When banner is on, push the nav down */
+body.has-founder-banner nav{
+  top: var(--founder-banner-height);
+}
+
+/* Default nav top must be 0 when banner off */
+nav{ top: 0; }
+
+/* Show banner only when JS adds the class */
+body.has-founder-banner .founder-banner{
+  display: block;
+}
+
+/* Hero callout box */
+.hero-founder-callout{
+  display: none; /* enabled by JS */
+  margin: 1.25rem;
+  width: 100%;
+  max-width: 640px;
+  text-decoration: none;
+  background: rgba(254, 253, 251, 0.92);
+  border: 1px solid rgba(232, 229, 222, 0.9);
+  border-radius: 18px;
+  padding: 1rem 1rem 0.9rem;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.08);
+  color: var(--color-charcoal);
+  text-align: left;
+}
+
+.hero-founder-callout:hover{
+  transform: translateY(-2px);
+  transition: transform 0.2s var(--ease-bounce);
+}
+
+.hero-founder-top{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.6rem;
+}
+
+.hero-founder-kicker{
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-orange-light);
+}
+
+.hero-founder-badge{
+  font-size: 0.8rem;
+  font-weight: 800;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(245, 74, 0, 0.12);
+  color: var(--color-orange);
+}
+
+.hero-founder-title{
+  font-weight: 800;
+  font-size: 1.05rem;
+  line-height: 1.25;
+  margin-bottom: 0.25rem;
+}
+
+.hero-founder-sub{
+  color: var(--color-slate);
+  font-size: 0.95rem;
+  line-height: 1.4;
+  margin-bottom: 0.85rem;
+}
+
+.hero-founder-meter{
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(232, 229, 222, 0.9);
+  overflow: hidden;
+}
+
+.hero-founder-meter-fill{
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--color-peach), var(--color-orange));
+  width: 0%;
+}
+
+/* Show hero callout when banner is on */
+body.has-founder-banner .hero-founder-callout{
+  display: block;
+}
+
+/* Mobile: slightly tighter banner */
+@media (max-width: 768px){
+  :root{ --founder-banner-height: 52px; }
+
+  .founder-banner-inner{
+    padding: 0 1rem;
+  }
+  .founder-banner-text{
+    font-size: 0.9rem;
+  }
+}
         
         .logo {
             display: flex;
@@ -92,7 +262,7 @@
         }
 
         .logo-img{
-            height: 32px;     /* tweak as needed */
+            height: 50px;     /* tweak as needed */
             width: auto;
             display: block;
         }
@@ -139,8 +309,9 @@
             padding: 4rem 2rem 4rem;
             position: relative;
             overflow: hidden;
+            margin-top:2.5rem;
         }
-        
+
         .hero-bg {
             position: absolute;
             top: 0;
@@ -223,7 +394,7 @@
             font-size: 1.25rem;
             color: var(--color-slate);
             max-width: 540px;
-            margin-bottom: 3rem;
+            margin-bottom: 1rem;
             opacity: 0;
             animation: fadeInUp 0.8s var(--ease-smooth) 0.6s forwards;
         }
@@ -717,10 +888,18 @@
             gap: 0.5rem;
             margin-bottom: 1rem;
         }
+
+        .footer-logo-img{
+            height: 50px;       
+            width: auto;
+            display: block;
+        }
+
         
         .footer-brand p {
             color: rgba(255,255,255,0.6);
             line-height: 1.7;
+            text-align: left;
         }
         
         .footer-col h4 {
@@ -729,10 +908,12 @@
             font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
+            text-align:left;
         }
         
         .footer-col ul {
             list-style: none;
+            text-align:left;
         }
         
         .footer-col li {
@@ -786,6 +967,98 @@
         .footer-social a:hover {
             background: rgba(255,255,255,0.2);
         }
+
+        /* Hamburger button (hidden on desktop) */
+        .nav-toggle{
+        display: none;
+        width: 44px;
+        height: 44px;
+        border: 1px solid var(--color-mist);
+        background: var(--color-warm-white);
+        border-radius: 12px;
+        cursor: pointer;
+        padding: 10px;
+        gap: 6px;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        }
+
+        .nav-toggle span{
+        display: block;
+        width: 20px;
+        height: 2px;
+        background: var(--color-charcoal);
+        border-radius: 999px;
+        transition: transform 0.25s var(--ease-smooth), opacity 0.2s var(--ease-smooth);
+        }
+
+        /* Mobile menu overlay */
+        .mobile-menu{
+        position: fixed;
+        inset: 0;
+        background: rgba(247, 244, 237, 0.96);
+        backdrop-filter: blur(12px);
+        z-index: 999;
+        display: none;
+        }
+
+        .mobile-menu-inner{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;   
+        align-items: flex-start;       
+        padding: 7.5rem 2rem 2rem;    
+        gap: 1.75rem;
+        text-align: left;
+        }
+
+        .mobile-menu-inner > *{
+        max-width: 420px;
+        }
+        .mobile-menu a{
+        font-family: var(--font-display);
+        font-size: 1rem;
+        font-weight: 500;
+        color: var(--color-charcoal);
+        text-decoration: none;
+        }
+
+        .mobile-menu a:hover{
+        color: var(--color-orange);
+        }
+
+        .mobile-cta{
+            margin-top: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.9rem 1.6rem;
+            border-radius: 999px;
+            background: var(--color-orange);
+            color: var(--color-cream) !important;
+            font-family: var(--font-body);
+            font-size: 1.05rem;
+        }
+
+        .mobile-divider{
+            width: 100%;
+            border: none;
+            height: 1px;
+            background: var(--color-mist);
+            margin: 0.25rem 0;
+        }
+
+        /* Open state */
+        body.menu-open .mobile-menu{ display: block; }
+        body.menu-open { overflow: hidden; }
+
+        /* Animate hamburger to X when open */
+        body.menu-open .nav-toggle span:nth-child(1){ transform: translateY(8px) rotate(45deg); }
+        body.menu-open .nav-toggle span:nth-child(2){ opacity: 0; }
+        body.menu-open .nav-toggle span:nth-child(3){ transform: translateY(-8px) rotate(-45deg); }
+
         
         /* Responsive */
         @media (max-width: 768px) {
@@ -803,10 +1076,7 @@
             .app-preview{
                 border-radius: 0;           /* no rounding on mobile */
             }
-            .nav-links {
-                display: none;
-            }
-            
+
             .step {
                 grid-template-columns: 1fr;
                 gap: 1rem;
@@ -826,26 +1096,46 @@
                 text-align: center;
             }
             
-            .phone-frame {
-                width: 240px;
-                height: 500px;
-            }
+            .nav-toggle{ display: inline-flex; }
+            .nav-links{ display: none; }
         }
-
     </style>
 </head>
 <body>
+    <a href="#founders" class="founder-banner founder-promo" id="founderBanner" aria-label="Founding Member spots are limited. Jump to Founders section.">
+        <div class="founder-banner-inner">
+          <span class="founder-dot" aria-hidden="true"></span>
+          <span class="founder-banner-text">
+            <strong>Founding Member:</strong>
+            <span id="founderBannerRemainingText">1,000 spots available</span>
+          </span>
+          <span class="founder-banner-pill" id="founderBannerPill">Claim yours</span>
+        </div>
+      </a>
     <!-- Navigation -->
     <nav id="navbar">
         <a href="#" class="logo">
             <img src="assets/brand/Logo.png" alt="EveryVoyage" class="logo-img">
         </a>
+        <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
         <ul class="nav-links">
             <li><a href="#features">Features</a></li>
             <li><a href="#how-it-works">How It Works</a></li>
             <li><a href="#download" class="nav-cta">Download</a></li>
         </ul>
     </nav>
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+        
+        <div class="mobile-menu-inner">
+          <hr class="mobile-divider">
+          <a href="#features">Features</a>
+          <a href="#how-it-works">How It Works</a>
+          <hr class="mobile-divider">
+          <a href="#download" class="mobile-cta">Download</a>
+        </div>
+      </div>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -861,6 +1151,27 @@
         <h1>Record <em>every</em> voyage.<br>Share the adventure.</h1>
         
         <p class="hero-subtitle">The motorhome travel companion. Automatically track your journeys, capture memories, and share adventures with fellow voyagers.</p>
+        <!-- Founder callout (auto-hides when sold out) -->
+        <a href="#founders" class="hero-founder-callout founder-promo" id="heroFounderCallout" aria-label="Founding Member spots are limited. Jump to Founders section.">
+            <div class="hero-founder-top">
+            <span class="hero-founder-kicker">Founding Member</span>
+            <span class="hero-founder-badge" id="heroFounderBadge">Limited</span>
+            </div>
+        
+            <div class="hero-founder-body">
+            <div class="hero-founder-title">
+                Free access for life • <span id="heroFounderRemainingText">1,000 spots available</span>
+            </div>
+            <div class="hero-founder-sub">
+                Tap to learn about Founder perks & claim a spot.
+            </div>
+            </div>
+        
+            <div class="hero-founder-meter" aria-hidden="true">
+            <div class="hero-founder-meter-fill" id="heroFounderMeterFill" style="width: 0%"></div>
+            </div>
+        </a>
+  
         
         <div class="hero-actions">
             <a href="#download" class="btn btn-primary">
@@ -1122,12 +1433,11 @@
         <div class="footer-content">
             <div class="footer-brand">
                 <div class="footer-logo">
-                    <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="2"/>
-                        <path d="M8 16C8 16 12 8 16 8C20 8 24 16 24 16C24 16 20 24 16 24C12 24 8 16 8 16Z" stroke="currentColor" stroke-width="2" fill="none"/>
-                        <circle cx="16" cy="16" r="3" fill="currentColor"/>
-                    </svg>
-                    EveryVoyage
+                    <img
+                        src="assets/brand/LogoWhite.png"
+                        alt="EveryVoyage"
+                        class="footer-logo-img"
+                    >
                 </div>
                 <p>The motorhome travel companion. Record journeys, capture memories, and share adventures.</p>
             </div>
@@ -1137,7 +1447,7 @@
                 <ul>
                     <li><a href="#features">Features</a></li>
                     <li><a href="#download">Download</a></li>
-                    <li><a href="#">Roadmap</a></li>
+                    <!-- <li><a href="#">Roadmap</a></li> -->
                 </ul>
             </div>
             
@@ -1145,14 +1455,14 @@
                 <h4>Company</h4>
                 <ul>
                     <li><a href="#">About</a></li>
-                    <li><a href="#">Blog</a></li>
+                    <!-- <li><a href="#">Blog</a></li> -->
                     <li><a href="#">Contact</a></li>
-                    <li><a href="#">Press Kit</a></li>
+                    <!-- <li><a href="#">Press Kit</a></li> -->
                 </ul>
             </div>
             
             <div class="footer-col">
-                <h4>Legal</h4>
+                <h4>Information</h4>
                 <ul>
                     <li><a href="#">Privacy Policy</a></li>
                     <li><a href="#">Terms of Service</a></li>
@@ -1238,6 +1548,132 @@
             el.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
             observer.observe(el);
         });
+
+        // Mobile menu toggle
+        const navToggle = document.getElementById('navToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        function openMenu(){
+        document.body.classList.add('menu-open');
+        navToggle.setAttribute('aria-expanded', 'true');
+        mobileMenu.setAttribute('aria-hidden', 'false');
+        navToggle.setAttribute('aria-label', 'Close menu');
+        }
+
+        function closeMenu(){
+        document.body.classList.remove('menu-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+        navToggle.setAttribute('aria-label', 'Open menu');
+        }
+
+        navToggle?.addEventListener('click', () => {
+        document.body.classList.contains('menu-open') ? closeMenu() : openMenu();
+        });
+
+        // Close when clicking a link
+        mobileMenu?.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', closeMenu);
+        });
+
+        // Close on ESC
+        window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && document.body.classList.contains('menu-open')) closeMenu();
+        });
+
+        // Optional: close if user taps outside inner content
+        mobileMenu?.addEventListener('click', (e) => {
+        if (e.target === mobileMenu) closeMenu();
+        });
+
+        // ===== Founder slots logic (LIVE via API) =====
+
+        function updateFounderUI({ total, remaining, available }) {
+            const foundersSection = document.getElementById('founders');
+            const promoEls = document.querySelectorAll('.founder-promo');
+
+            const isAvailable = Boolean(available) && Number(remaining) > 0;
+
+            if (!isAvailable) {
+            // SOLD OUT: hide banner + hero callout + founders section
+            document.body.classList.remove('has-founder-banner');
+            promoEls.forEach(el => (el.style.display = 'none'));
+            if (foundersSection) foundersSection.style.display = 'none';
+            return;
+            }
+
+            // AVAILABLE: show promo + founders
+            document.body.classList.add('has-founder-banner');
+            promoEls.forEach(el => (el.style.display = ''));
+            if (foundersSection) foundersSection.style.display = '';
+
+            // Update text
+            const bannerRemainingText = document.getElementById('founderBannerRemainingText');
+            const heroRemainingText = document.getElementById('heroFounderRemainingText');
+            const bannerPill = document.getElementById('founderBannerPill');
+            const heroBadge = document.getElementById('heroFounderBadge');
+
+            const taken = Math.max(0, Number(total) - Number(remaining));
+            const takenPct = total ? Math.max(0, Math.min(100, (taken / total) * 100)) : 0;
+
+            if (bannerRemainingText) {
+            bannerRemainingText.textContent = `${Number(remaining).toLocaleString()} of ${Number(total).toLocaleString()} spots remaining`;
+            }
+            if (heroRemainingText) {
+            heroRemainingText.textContent = `${Number(remaining).toLocaleString()} of ${Number(total).toLocaleString()} spots remaining`;
+            }
+
+            // Urgency text
+            if (remaining <= 50) {
+            if (bannerPill) bannerPill.textContent = "Almost gone";
+            if (heroBadge) heroBadge.textContent = "Almost gone";
+            } else if (remaining <= 200) {
+            if (bannerPill) bannerPill.textContent = "Limited";
+            if (heroBadge) heroBadge.textContent = "Limited";
+            } else {
+            if (bannerPill) bannerPill.textContent = "Claim yours";
+            if (heroBadge) heroBadge.textContent = "Limited";
+            }
+
+            // Progress bar
+            const fill = document.getElementById('heroFounderMeterFill');
+            if (fill) fill.style.width = `${takenPct}%`;
+        }
+
+        async function fetchFounderStatus() {
+            const url = "https://api.everyvoyage.com/api/founding-members/status";
+
+            const res = await fetch(url, {
+            method: "GET",
+            headers: { "accept": "application/json" },
+            cache: "no-store"
+            });
+
+            if (!res.ok) throw new Error(`Status fetch failed: ${res.status}`);
+
+            const data = await res.json();
+            // expected: { total: 1000, remaining: 847, available: true }
+            return data;
+        }
+
+        async function initFounderUI() {
+            try {
+            const status = await fetchFounderStatus();
+            updateFounderUI(status);
+            } catch (err) {
+            console.warn("Founder status unavailable, hiding promo:", err);
+            // safest fallback: hide promo if API is down
+            updateFounderUI({ total: 0, remaining: 0, available: false });
+            }
+        }
+
+        initFounderUI();
+
+        // Optional: refresh every 60s so the page updates while open
+        setInterval(initFounderUI, 60000);
+
+
+
     </script>
 </body>
 </html>
