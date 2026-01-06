@@ -3,9 +3,58 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About EveryVoyage</title>
-  <meta name="description" content="Learn more about EveryVoyage and why we’re building a better motorhome travel companion.">
+
+  <!-- Primary Meta Tags -->
+  <title>About EveryVoyage - Built by Simplr Labs | Motorhome Travel App</title>
+  <meta name="title" content="About EveryVoyage - Built by Simplr Labs | Motorhome Travel App">
+  <meta name="description" content="Learn about EveryVoyage, the motorhome travel companion proudly built by Simplr Labs. Discover why we're creating a better way to record your motorhome adventures.">
+  <meta name="keywords" content="about EveryVoyage, Simplr Labs, motorhome app company, travel app development, vanlife community, motorhome software">
+  <meta name="author" content="Simplr Labs">
+  <meta name="robots" content="index, follow">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://everyvoyage.com/about.html">
+
+  <!-- Favicon & Icons -->
   <link rel="icon" type="image/png" href="assets/icons/favicon.png">
+  <link rel="apple-touch-icon" href="assets/icons/favicon.png">
+  <meta name="theme-color" content="#f54a00">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://everyvoyage.com/about.html">
+  <meta property="og:title" content="About EveryVoyage - Built by Simplr Labs">
+  <meta property="og:description" content="Learn about EveryVoyage, the motorhome travel companion proudly built by Simplr Labs.">
+  <meta property="og:image" content="https://everyvoyage.com/assets/brand/Logo.png">
+  <meta property="og:site_name" content="EveryVoyage">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:url" content="https://everyvoyage.com/about.html">
+  <meta name="twitter:title" content="About EveryVoyage - Built by Simplr Labs">
+  <meta name="twitter:description" content="Learn about EveryVoyage, the motorhome travel companion proudly built by Simplr Labs.">
+  <meta name="twitter:image" content="https://everyvoyage.com/assets/brand/Logo.png">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": "About EveryVoyage",
+    "description": "Learn about EveryVoyage, the motorhome travel companion proudly built by Simplr Labs.",
+    "url": "https://everyvoyage.com/about.html",
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "EveryVoyage",
+      "description": "The motorhome travel companion built by Simplr Labs",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Simplr Labs",
+        "url": "https://simplrlabs.com"
+      }
+    }
+  }
+  </script>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,6 +74,9 @@
 
       --font-display:'Fraunces', Georgia, serif;
       --font-body:'DM Sans', system-ui, sans-serif;
+
+      --ease-smooth:cubic-bezier(0.4,0,0.2,1);
+      --ease-bounce:cubic-bezier(0.34,1.56,0.64,1);
     }
 
     *,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
@@ -34,6 +86,9 @@
       background:var(--color-cream);
       color:var(--color-charcoal);
       line-height:1.7;
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
     }
 
     body::before{
@@ -45,24 +100,94 @@
       background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
     }
 
-    .topbar{
+    /* Navigation */
+    nav{
       position:sticky;
       top:0;
       z-index:100;
       padding:1.5rem 2rem;
-      background:rgba(247,244,237,0.92);
+      background:rgba(247,244,237,0.95);
       backdrop-filter:blur(10px);
       border-bottom:1px solid var(--color-mist);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
     }
-    .topbar-inner{
+
+    .logo{ display:flex; align-items:center; gap:0.5rem; text-decoration:none; }
+    .logo-img{ height:50px; width:auto; display:block; }
+
+    .nav-links{ display:flex; gap:2rem; list-style:none; }
+    .nav-links a{
+      color:var(--color-slate);
+      text-decoration:none;
+      font-size:0.95rem;
+      font-weight:500;
+      transition:color 0.2s var(--ease-smooth);
+    }
+    .nav-links a:hover{ color:var(--color-orange); }
+    .nav-links a.active{ color:var(--color-orange); }
+
+    .nav-cta{
+      background:var(--color-orange);
+      color:var(--color-cream) !important;
+      padding:0.75rem 1.5rem;
+      border-radius:100px;
+      transition:transform 0.2s var(--ease-bounce), box-shadow 0.2s var(--ease-smooth) !important;
+    }
+    .nav-cta:hover{
+      transform:translateY(-2px);
+      box-shadow:0 4px 20px rgba(45,74,62,0.3);
+    }
+
+    /* Hero Section */
+    .hero{
+      background:var(--color-warm-white);
+      padding:5rem 2rem 4rem;
+      text-align:center;
+    }
+
+    .hero-content{
+      max-width:800px;
       margin:0 auto;
     }
-    .logo img{ height:50px; }
 
-    .page{
-      max-width:900px;
-      margin:2.5rem auto 5rem;
-      padding:0 1.5rem;
+    .section-label{
+      font-size:0.85rem;
+      font-weight:600;
+      color:var(--color-orange-light);
+      text-transform:uppercase;
+      letter-spacing:0.1em;
+      margin-bottom:1rem;
+    }
+
+    .hero h1{
+      font-family:var(--font-display);
+      font-size:clamp(2.5rem,5vw,3.5rem);
+      font-weight:400;
+      margin-bottom:1.5rem;
+      line-height:1.2;
+    }
+
+    .hero-subtitle{
+      font-size:1.25rem;
+      color:var(--color-slate);
+      max-width:600px;
+      margin:0 auto;
+    }
+
+    /* Main Content */
+    main{
+      flex:1;
+      padding:4rem 2rem;
+    }
+
+    .content-grid{
+      max-width:1000px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+      gap:2rem;
     }
 
     .card{
@@ -71,76 +196,343 @@
       border-radius:24px;
       padding:2.5rem;
       box-shadow:0 18px 50px rgba(0,0,0,0.08);
+      transition:transform 0.3s var(--ease-smooth), box-shadow 0.3s var(--ease-smooth);
     }
 
-    h1{
+    .card:hover{
+      transform:translateY(-4px);
+      box-shadow:0 24px 60px rgba(0,0,0,0.1);
+    }
+
+    .card-icon{
+      width:56px;
+      height:56px;
+      background:linear-gradient(135deg, var(--color-peach) 0%, var(--color-orange) 100%);
+      border-radius:16px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin-bottom:1.5rem;
+      color:white;
+    }
+    .card-icon svg{ width:28px; height:28px; }
+
+    .card h2{
       font-family:var(--font-display);
-      font-size:clamp(2.1rem,4vw,2.8rem);
+      font-size:1.5rem;
       font-weight:500;
+      margin-bottom:1rem;
+      color:var(--color-charcoal);
+    }
+
+    .card p{
+      color:var(--color-slate);
+      margin:0.75rem 0;
+      line-height:1.7;
+    }
+
+    /* Simplr Labs Section */
+    .simplr-section{
+      background:var(--color-charcoal);
+      padding:5rem 2rem;
+      margin-top:4rem;
+    }
+
+    .simplr-content{
+      max-width:800px;
+      margin:0 auto;
+      text-align:center;
+    }
+
+    .simplr-section .section-label{
+      color:var(--color-peach);
+    }
+
+    .simplr-section h2{
+      font-family:var(--font-display);
+      font-size:clamp(2rem,4vw,2.5rem);
+      font-weight:400;
+      color:var(--color-cream);
+      margin-bottom:1.5rem;
+    }
+
+    .simplr-section p{
+      color:rgba(255,255,255,0.8);
+      font-size:1.1rem;
+      line-height:1.8;
       margin-bottom:1rem;
     }
 
-    h2{
-      font-family:var(--font-display);
-      font-size:1.4rem;
-      margin:2rem 0 0.6rem;
-      font-weight:500;
-    }
-
-    p{
-      color:var(--color-slate);
-      margin:0.75rem 0;
-    }
-
-    .backlink{
-      display:inline-block;
-      margin-top:2rem;
-      color:var(--color-orange);
-      font-weight:600;
+    .simplr-cta{
+      display:inline-flex;
+      align-items:center;
+      gap:0.5rem;
+      margin-top:1.5rem;
+      padding:1rem 2rem;
+      background:var(--color-orange);
+      color:var(--color-cream);
       text-decoration:none;
+      border-radius:100px;
+      font-weight:500;
+      transition:transform 0.2s var(--ease-bounce), box-shadow 0.2s var(--ease-smooth);
     }
-    .backlink:hover{ text-decoration:underline; }
+    .simplr-cta:hover{
+      transform:translateY(-2px);
+      box-shadow:0 8px 30px rgba(0,0,0,0.35);
+    }
+    .simplr-cta svg{ width:20px; height:20px; }
+
+    /* Footer */
+    footer{
+      background:var(--color-charcoal);
+      color:var(--color-cream);
+      padding:4rem 2rem 2rem;
+    }
+    .footer-content{
+      max-width:1200px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:2fr repeat(3,1fr);
+      gap:3rem;
+    }
+    .footer-brand{ max-width:300px; }
+    .footer-logo{ display:flex; align-items:center; gap:0.5rem; margin-bottom:1rem; }
+    .footer-logo-img{ height:50px; width:auto; display:block; }
+    .footer-brand p{
+      color:rgba(255,255,255,0.6);
+      line-height:1.7;
+      text-align:left;
+    }
+    .footer-col h4{
+      font-weight:600;
+      margin-bottom:1.5rem;
+      font-size:0.9rem;
+      text-transform:uppercase;
+      letter-spacing:0.05em;
+      text-align:left;
+    }
+    .footer-col ul{ list-style:none; text-align:left; }
+    .footer-col li{ margin-bottom:0.75rem; }
+    .footer-col a{
+      color:rgba(255,255,255,0.6);
+      text-decoration:none;
+      transition:color 0.2s;
+    }
+    .footer-col a:hover{ color:var(--color-cream); }
+    .footer-bottom{
+      max-width:1200px;
+      margin:4rem auto 0;
+      padding-top:2rem;
+      border-top:1px solid rgba(255,255,255,0.1);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:1rem;
+    }
+    .footer-bottom p{ color:rgba(255,255,255,0.5); font-size:0.9rem; }
+    .footer-bottom a{
+      color:rgba(255,255,255,0.7);
+      text-decoration:none;
+      transition:color 0.2s;
+    }
+    .footer-bottom a:hover{ color:#fff; }
+    .footer-social{ display:flex; gap:1rem; }
+    .footer-social a{
+      width:40px;
+      height:40px;
+      background:rgba(255,255,255,0.1);
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:var(--color-cream);
+      transition:background 0.2s;
+    }
+    .footer-social a:hover{ background:rgba(255,255,255,0.2); }
+
+    /* Responsive */
+    @media (max-width:768px){
+      nav{ padding:1rem 1.25rem; }
+      .nav-links{ display:none; }
+      .hero{ padding:3rem 1.25rem 2.5rem; }
+      main{ padding:2rem 1.25rem; }
+      .content-grid{ grid-template-columns:1fr; }
+      .simplr-section{ padding:3rem 1.25rem; }
+      .footer-content{ grid-template-columns:1fr; text-align:center; }
+      .footer-brand{ max-width:none; }
+      .footer-brand p{ text-align:center; }
+      .footer-col h4{ text-align:center; }
+      .footer-col ul{ text-align:center; }
+      .footer-bottom{ flex-direction:column; text-align:center; }
+    }
   </style>
 </head>
 
 <body>
-  <header class="topbar">
-    <div class="topbar-inner">
-      <a class="logo" href="index.html">
-        <img src="assets/brand/Logo.png" alt="EveryVoyage">
+  <!-- Navigation -->
+  <nav>
+    <a href="index.html" class="logo">
+      <img src="assets/brand/Logo.png" alt="EveryVoyage" class="logo-img">
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#features">Features</a></li>
+      <li><a href="index.html#how-it-works">How It Works</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="index.html#download" class="nav-cta">Download</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <p class="section-label">About Us</p>
+      <h1>Built for life on the road</h1>
+      <p class="hero-subtitle">
+        EveryVoyage is a motorhome travel companion designed for spontaneous overnight stops, scenic detours, and unforgettable journeys.
+      </p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main>
+    <div class="content-grid">
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 6v6l4 2"/>
+          </svg>
+        </div>
+        <h2>Why we built it</h2>
+        <p>
+          Motorhome travel is about freedom, discovery, and stories worth remembering. Yet most travel tools are built for hotels, flights, and rigid itineraries.
+        </p>
+        <p>
+          We wanted something different — a tool that quietly tracks your journeys, helps you capture memories as they happen, and lets you look back on years of adventure.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <h2>Built with the community</h2>
+        <p>
+          EveryVoyage is being built alongside real motorhome travellers. Our Founding Members help shape the features that matter most.
+        </p>
+        <p>
+          From journey recording, to discovering great stops, to sharing experiences with fellow voyagers — we're building what our community needs.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
+        </div>
+        <h2>Our mission</h2>
+        <p>
+          To help motorhome travellers record every voyage, remember the moments that matter, and share the adventure — simply and beautifully.
+        </p>
+        <p>
+          We believe the best memories are the ones you can relive. EveryVoyage makes that effortless.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Simplr Labs Section -->
+  <section class="simplr-section">
+    <div class="simplr-content">
+      <p class="section-label">The Team Behind EveryVoyage</p>
+      <h2>Proudly built by Simplr Labs</h2>
+      <p>
+        Simplr Labs is a software studio dedicated to creating innovative applications that simplify life. We believe the best software is thoughtfully crafted, beautifully designed, and genuinely useful.
+      </p>
+      <p>
+        EveryVoyage is our flagship product — designed with care to make motorhome travel easier and more enjoyable for adventurers everywhere.
+      </p>
+      <a href="https://simplrlabs.com" target="_blank" rel="noopener" class="simplr-cta">
+        Learn more about Simplr Labs
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="5" y1="12" x2="19" y2="12"/>
+          <polyline points="12 5 19 12 12 19"/>
+        </svg>
       </a>
     </div>
-  </header>
+  </section>
 
-  <main class="page">
-    <section class="card">
-      <h1>About EveryVoyage</h1>
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="assets/brand/LogoWhite.png" alt="EveryVoyage" class="footer-logo-img">
+        </div>
+        <p>The motorhome travel companion. Record journeys, capture memories, and share adventures.</p>
+      </div>
 
-      <p>
-        EveryVoyage is a motorhome travel companion built for life on the road — from spontaneous overnight stops to long, unforgettable journeys.
-      </p>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="index.html#features">Features</a></li>
+          <li><a href="index.html#download">Download</a></li>
+        </ul>
+      </div>
 
-      <h2>Why we built it</h2>
-      <p>
-        Motorhome travel is about freedom, discovery, and stories worth remembering. Yet most travel tools are built for hotels, flights, and rigid itineraries.
-      </p>
-      <p>
-        We wanted something different — a tool that quietly tracks your journeys, helps you capture memories as they happen, and lets you look back on years of adventure.
-      </p>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
 
-      <h2>Built with the community</h2>
-      <p>
-        EveryVoyage is being built alongside real motorhome travellers. Our Founding Members help shape the features that matter most — from journey recording,
-        to discovering great stops, to sharing experiences with fellow voyagers.
-      </p>
+      <div class="footer-col">
+        <h4>Information</h4>
+        <ul>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="cookie-policy.html">Cookie Policy</a></li>
+        </ul>
+      </div>
+    </div>
 
-      <h2>Our mission</h2>
-      <p>
-        To help motorhome travellers record every voyage, remember the moments that matter, and share the adventure — simply and beautifully.
-      </p>
-
-      <a class="backlink" href="index.html">← Back to homepage</a>
-    </section>
-  </main>
+    <div class="footer-bottom">
+      <p>&copy; 2026 EveryVoyage. All rights reserved. Built with care by <a href="https://simplrlabs.com" target="_blank" rel="noopener">Simplr Labs</a></p>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="Twitter">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="Facebook">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="YouTube">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/>
+            <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>

@@ -3,9 +3,58 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact EveryVoyage</title>
-  <meta name="description" content="Get in touch with the EveryVoyage team.">
+
+  <!-- Primary Meta Tags -->
+  <title>Contact EveryVoyage - Get in Touch | Simplr Labs</title>
+  <meta name="title" content="Contact EveryVoyage - Get in Touch | Simplr Labs">
+  <meta name="description" content="Get in touch with the EveryVoyage team at Simplr Labs. Questions, feedback, feature requests, or support - we'd love to hear from you.">
+  <meta name="keywords" content="contact EveryVoyage, EveryVoyage support, motorhome app help, Simplr Labs contact, feature request">
+  <meta name="author" content="Simplr Labs">
+  <meta name="robots" content="index, follow">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://everyvoyage.com/contact.html">
+
+  <!-- Favicon & Icons -->
   <link rel="icon" type="image/png" href="assets/icons/favicon.png">
+  <link rel="apple-touch-icon" href="assets/icons/favicon.png">
+  <meta name="theme-color" content="#f54a00">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://everyvoyage.com/contact.html">
+  <meta property="og:title" content="Contact EveryVoyage - Get in Touch">
+  <meta property="og:description" content="Get in touch with the EveryVoyage team at Simplr Labs. Questions, feedback, or ideas welcome.">
+  <meta property="og:image" content="https://everyvoyage.com/assets/brand/Logo.png">
+  <meta property="og:site_name" content="EveryVoyage">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:url" content="https://everyvoyage.com/contact.html">
+  <meta name="twitter:title" content="Contact EveryVoyage - Get in Touch">
+  <meta name="twitter:description" content="Get in touch with the EveryVoyage team at Simplr Labs. Questions, feedback, or ideas welcome.">
+  <meta name="twitter:image" content="https://everyvoyage.com/assets/brand/Logo.png">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Contact EveryVoyage",
+    "description": "Get in touch with the EveryVoyage team at Simplr Labs.",
+    "url": "https://everyvoyage.com/contact.html",
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "EveryVoyage",
+      "email": "support@everyvoyage.com",
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Simplr Labs",
+        "url": "https://simplrlabs.com"
+      }
+    }
+  }
+  </script>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,6 +65,8 @@
     :root{
       --color-cream:#F7F4ED;
       --color-warm-white:#FEFDFB;
+      --color-peach:#fac189;
+      --color-orange-light:#f15614;
       --color-orange:#f54a00;
       --color-charcoal:#2A2A28;
       --color-slate:#5A5A58;
@@ -23,6 +74,9 @@
 
       --font-display:'Fraunces', Georgia, serif;
       --font-body:'DM Sans', system-ui, sans-serif;
+
+      --ease-smooth:cubic-bezier(0.4,0,0.2,1);
+      --ease-bounce:cubic-bezier(0.34,1.56,0.64,1);
     }
 
     *,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
@@ -32,6 +86,9 @@
       background:var(--color-cream);
       color:var(--color-charcoal);
       line-height:1.7;
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
     }
 
     body::before{
@@ -43,95 +100,408 @@
       background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
     }
 
-    .topbar{
+    /* Navigation */
+    nav{
       position:sticky;
       top:0;
+      z-index:100;
       padding:1.5rem 2rem;
-      background:rgba(247,244,237,0.92);
+      background:rgba(247,244,237,0.95);
       backdrop-filter:blur(10px);
       border-bottom:1px solid var(--color-mist);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
     }
-    .topbar-inner{
+
+    .logo{ display:flex; align-items:center; gap:0.5rem; text-decoration:none; }
+    .logo-img{ height:50px; width:auto; display:block; }
+
+    .nav-links{ display:flex; gap:2rem; list-style:none; }
+    .nav-links a{
+      color:var(--color-slate);
+      text-decoration:none;
+      font-size:0.95rem;
+      font-weight:500;
+      transition:color 0.2s var(--ease-smooth);
+    }
+    .nav-links a:hover{ color:var(--color-orange); }
+    .nav-links a.active{ color:var(--color-orange); }
+
+    .nav-cta{
+      background:var(--color-orange);
+      color:var(--color-cream) !important;
+      padding:0.75rem 1.5rem;
+      border-radius:100px;
+      transition:transform 0.2s var(--ease-bounce), box-shadow 0.2s var(--ease-smooth) !important;
+    }
+    .nav-cta:hover{
+      transform:translateY(-2px);
+      box-shadow:0 4px 20px rgba(45,74,62,0.3);
+    }
+
+    /* Hero Section */
+    .hero{
+      background:var(--color-warm-white);
+      padding:5rem 2rem 4rem;
+      text-align:center;
+    }
+
+    .hero-content{
+      max-width:800px;
       margin:0 auto;
     }
-    .logo img{ height:50px; }
 
-    .page{
-      max-width:800px;
-      margin:2.5rem auto 5rem;
-      padding:0 1.5rem;
+    .section-label{
+      font-size:0.85rem;
+      font-weight:600;
+      color:var(--color-orange-light);
+      text-transform:uppercase;
+      letter-spacing:0.1em;
+      margin-bottom:1rem;
     }
 
-    .card{
+    .hero h1{
+      font-family:var(--font-display);
+      font-size:clamp(2.5rem,5vw,3.5rem);
+      font-weight:400;
+      margin-bottom:1.5rem;
+      line-height:1.2;
+    }
+
+    .hero-subtitle{
+      font-size:1.25rem;
+      color:var(--color-slate);
+      max-width:600px;
+      margin:0 auto;
+    }
+
+    /* Main Content */
+    main{
+      flex:1;
+      padding:4rem 2rem;
+    }
+
+    .contact-grid{
+      max-width:900px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+      gap:2rem;
+    }
+
+    .contact-card{
       background:rgba(254,253,251,0.95);
       border:1px solid rgba(232,229,222,0.95);
       border-radius:24px;
       padding:2.5rem;
       box-shadow:0 18px 50px rgba(0,0,0,0.08);
+      transition:transform 0.3s var(--ease-smooth), box-shadow 0.3s var(--ease-smooth);
     }
 
-    h1{
+    .contact-card:hover{
+      transform:translateY(-4px);
+      box-shadow:0 24px 60px rgba(0,0,0,0.1);
+    }
+
+    .contact-icon{
+      width:56px;
+      height:56px;
+      background:linear-gradient(135deg, var(--color-peach) 0%, var(--color-orange) 100%);
+      border-radius:16px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin-bottom:1.5rem;
+      color:white;
+    }
+    .contact-icon svg{ width:28px; height:28px; }
+
+    .contact-card h2{
       font-family:var(--font-display);
-      font-size:clamp(2rem,4vw,2.6rem);
-      margin-bottom:1rem;
+      font-size:1.5rem;
       font-weight:500;
-    }
-
-    p{ color:var(--color-slate); margin:0.75rem 0; }
-
-    .contact-box{
-      margin-top:1.5rem;
-      padding:1.25rem;
-      border-radius:18px;
-      background:rgba(245,74,0,0.08);
-      border:1px solid rgba(245,74,0,0.18);
-    }
-
-    .contact-box strong{
+      margin-bottom:0.75rem;
       color:var(--color-charcoal);
     }
 
-    .backlink{
-      display:inline-block;
-      margin-top:2rem;
+    .contact-card p{
+      color:var(--color-slate);
+      margin:0.5rem 0;
+      line-height:1.7;
+    }
+
+    .contact-link{
+      display:inline-flex;
+      align-items:center;
+      gap:0.5rem;
+      margin-top:1rem;
       color:var(--color-orange);
       font-weight:600;
       text-decoration:none;
+      transition:gap 0.2s var(--ease-smooth);
     }
-    .backlink:hover{ text-decoration:underline; }
+    .contact-link:hover{ gap:0.75rem; }
+    .contact-link svg{ width:18px; height:18px; }
+
+    /* Note Section */
+    .note-section{
+      max-width:700px;
+      margin:4rem auto 0;
+      text-align:center;
+    }
+
+    .note-section p{
+      color:var(--color-slate);
+      font-size:1.1rem;
+      line-height:1.8;
+    }
+
+    .note-section strong{
+      color:var(--color-charcoal);
+    }
+
+    /* Footer */
+    footer{
+      background:var(--color-charcoal);
+      color:var(--color-cream);
+      padding:4rem 2rem 2rem;
+    }
+    .footer-content{
+      max-width:1200px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:2fr repeat(3,1fr);
+      gap:3rem;
+    }
+    .footer-brand{ max-width:300px; }
+    .footer-logo{ display:flex; align-items:center; gap:0.5rem; margin-bottom:1rem; }
+    .footer-logo-img{ height:50px; width:auto; display:block; }
+    .footer-brand p{
+      color:rgba(255,255,255,0.6);
+      line-height:1.7;
+      text-align:left;
+    }
+    .footer-col h4{
+      font-weight:600;
+      margin-bottom:1.5rem;
+      font-size:0.9rem;
+      text-transform:uppercase;
+      letter-spacing:0.05em;
+      text-align:left;
+    }
+    .footer-col ul{ list-style:none; text-align:left; }
+    .footer-col li{ margin-bottom:0.75rem; }
+    .footer-col a{
+      color:rgba(255,255,255,0.6);
+      text-decoration:none;
+      transition:color 0.2s;
+    }
+    .footer-col a:hover{ color:var(--color-cream); }
+    .footer-bottom{
+      max-width:1200px;
+      margin:4rem auto 0;
+      padding-top:2rem;
+      border-top:1px solid rgba(255,255,255,0.1);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:1rem;
+    }
+    .footer-bottom p{ color:rgba(255,255,255,0.5); font-size:0.9rem; }
+    .footer-bottom a{
+      color:rgba(255,255,255,0.7);
+      text-decoration:none;
+      transition:color 0.2s;
+    }
+    .footer-bottom a:hover{ color:#fff; }
+    .footer-social{ display:flex; gap:1rem; }
+    .footer-social a{
+      width:40px;
+      height:40px;
+      background:rgba(255,255,255,0.1);
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:var(--color-cream);
+      transition:background 0.2s;
+    }
+    .footer-social a:hover{ background:rgba(255,255,255,0.2); }
+
+    /* Responsive */
+    @media (max-width:768px){
+      nav{ padding:1rem 1.25rem; }
+      .nav-links{ display:none; }
+      .hero{ padding:3rem 1.25rem 2.5rem; }
+      main{ padding:2rem 1.25rem; }
+      .contact-grid{ grid-template-columns:1fr; }
+      .note-section{ margin-top:2rem; }
+      .footer-content{ grid-template-columns:1fr; text-align:center; }
+      .footer-brand{ max-width:none; }
+      .footer-brand p{ text-align:center; }
+      .footer-col h4{ text-align:center; }
+      .footer-col ul{ text-align:center; }
+      .footer-bottom{ flex-direction:column; text-align:center; }
+    }
   </style>
 </head>
 
 <body>
-  <header class="topbar">
-    <div class="topbar-inner">
-      <a class="logo" href="index.html">
-        <img src="assets/brand/Logo.png" alt="EveryVoyage">
-      </a>
-    </div>
-  </header>
+  <!-- Navigation -->
+  <nav>
+    <a href="index.html" class="logo">
+      <img src="assets/brand/Logo.png" alt="EveryVoyage" class="logo-img">
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#features">Features</a></li>
+      <li><a href="index.html#how-it-works">How It Works</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="index.html#download" class="nav-cta">Download</a></li>
+    </ul>
+  </nav>
 
-  <main class="page">
-    <section class="card">
-      <h1>Contact us</h1>
-
-      <p>
-        Have a question, idea, or feedback about EveryVoyage? We’d love to hear from you.
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <p class="section-label">Get In Touch</p>
+      <h1>We'd love to hear from you</h1>
+      <p class="hero-subtitle">
+        Have a question, idea, or feedback about EveryVoyage? Our team is here to help.
       </p>
+    </div>
+  </section>
 
-      <div class="contact-box">
-        <p>
-          <strong>Email</strong><br>
+  <!-- Main Content -->
+  <main>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+        </div>
+        <h2>Email Us</h2>
+        <p>For questions, feedback, or partnership inquiries.</p>
+        <a href="mailto:support@everyvoyage.com" class="contact-link">
           support@everyvoyage.com
-        </p>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
       </div>
 
-      <p>
-        We’re a small team building thoughtfully — responses may take a little time, but we read every message.
-      </p>
+      <div class="contact-card">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+          </svg>
+        </div>
+        <h2>Feature Requests</h2>
+        <p>Got an idea for EveryVoyage? We're always listening to our community.</p>
+        <a href="mailto:support@everyvoyage.com?subject=Feature Request" class="contact-link">
+          Share your idea
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+      </div>
 
-      <a class="backlink" href="index.html">← Back to homepage</a>
-    </section>
+      <div class="contact-card">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+            <line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+        </div>
+        <h2>Support</h2>
+        <p>Need help with the app? We're here to assist you on your journey.</p>
+        <a href="mailto:support@everyvoyage.com?subject=Support Request" class="contact-link">
+          Get help
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="note-section">
+      <p>
+        <strong>We're a small team building thoughtfully.</strong> Responses may take a little time, but we read every message and appreciate your patience.
+      </p>
+    </div>
   </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="assets/brand/LogoWhite.png" alt="EveryVoyage" class="footer-logo-img">
+        </div>
+        <p>The motorhome travel companion. Record journeys, capture memories, and share adventures.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="index.html#features">Features</a></li>
+          <li><a href="index.html#download">Download</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Information</h4>
+        <ul>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="cookie-policy.html">Cookie Policy</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 EveryVoyage. All rights reserved. Built with care by <a href="https://simplrlabs.com" target="_blank" rel="noopener">Simplr Labs</a></p>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="Twitter">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="Facebook">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="YouTube">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/>
+            <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
