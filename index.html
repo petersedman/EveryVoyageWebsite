@@ -1457,6 +1457,12 @@
         } else if (lang.startsWith('es')) {
           localStorage.setItem('langPref', 'es');
           window.location.href = '/es/';
+        } else if (lang.startsWith('da')) {
+          localStorage.setItem('langPref', 'da');
+          window.location.href = '/da/';
+        } else if (lang.startsWith('no') || lang.startsWith('nb') || lang.startsWith('nn')) {
+          localStorage.setItem('langPref', 'no');
+          window.location.href = '/no/';
         } else {
           localStorage.setItem('langPref', 'en-GB');
         }
