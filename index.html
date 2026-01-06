@@ -1436,7 +1436,13 @@
       // Only redirect on first visit - check if language preference is already set
       if (!localStorage.getItem('langPref')) {
         const lang = navigator.language || navigator.languages[0];
-        if (lang.startsWith('it')) {
+        if (lang.startsWith('nl')) {
+          localStorage.setItem('langPref', 'nl');
+          window.location.href = '/nl/';
+        } else if (lang.startsWith('fr')) {
+          localStorage.setItem('langPref', 'fr');
+          window.location.href = '/fr/';
+        } else if (lang.startsWith('it')) {
           localStorage.setItem('langPref', 'it');
           window.location.href = '/it/';
         } else if (lang.startsWith('sv')) {

@@ -41,6 +41,7 @@
             <a href="sv/index.html">Svenska</a>
             <a href="it/index.html">Italiano</a>
             <a href="fr/index.html">Français</a>
+            <a href="nl/index.html">Nederlands</a>
           </div>
         </div>
       </li>
@@ -66,6 +67,7 @@
         <a href="sv/index.html">SV</a>
         <a href="it/index.html">IT</a>
         <a href="fr/index.html">FR</a>
+        <a href="nl/index.html">NL</a>
       </div>
       <hr class="mobile-divider">
       <a href="${href('#download')}" class="mobile-cta">Download</a>
