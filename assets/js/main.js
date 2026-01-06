@@ -24,6 +24,7 @@
       <li><a href="${href('#features')}">Features</a></li>
       <li><a href="${href('#how-it-works')}">How It Works</a></li>
       <li><a href="about.html"${isActive('about.html') ? ' class="active"' : ''}>About</a></li>
+      <li><a href="faq.html"${isActive('faq.html') ? ' class="active"' : ''}>FAQ</a></li>
       <li><a href="contact.html"${isActive('contact.html') ? ' class="active"' : ''}>Contact</a></li>
       <li><a href="${href('#download')}" class="nav-cta">Download</a></li>
     `;
@@ -37,6 +38,7 @@
       <a href="${href('#features')}">Features</a>
       <a href="${href('#how-it-works')}">How It Works</a>
       <a href="about.html"${isActive('about.html') ? ' class="active"' : ''}>About</a>
+      <a href="faq.html"${isActive('faq.html') ? ' class="active"' : ''}>FAQ</a>
       <a href="contact.html"${isActive('contact.html') ? ' class="active"' : ''}>Contact</a>
       <hr class="mobile-divider">
       <a href="${href('#download')}" class="mobile-cta">Download</a>

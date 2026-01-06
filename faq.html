@@ -5,15 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- Primary Meta Tags -->
-  <title>Contact EveryVoyage - Get in Touch | Simplr Labs</title>
-  <meta name="title" content="Contact EveryVoyage - Get in Touch | Simplr Labs">
-  <meta name="description" content="Get in touch with the EveryVoyage team at Simplr Labs. Questions, feedback, feature requests, or support - we'd love to hear from you.">
-  <meta name="keywords" content="contact EveryVoyage, EveryVoyage support, motorhome app help, Simplr Labs contact, feature request">
+  <title>FAQ - EveryVoyage | Frequently Asked Questions</title>
+  <meta name="title" content="FAQ - EveryVoyage | Frequently Asked Questions">
+  <meta name="description" content="Find answers to common questions about EveryVoyage, the motorhome travel companion app. Learn about features, pricing, device support, and more.">
+  <meta name="keywords" content="EveryVoyage FAQ, motorhome app questions, travel app help, founding member, GPS recording">
   <meta name="author" content="Simplr Labs">
   <meta name="robots" content="index, follow">
 
   <!-- Canonical URL -->
-  <link rel="canonical" href="https://everyvoyage.com/contact.html">
+  <link rel="canonical" href="https://everyvoyage.com/faq.html">
 
   <!-- Favicon & Icons -->
   <link rel="icon" type="image/png" href="assets/icons/favicon.png">
@@ -22,37 +22,58 @@
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://everyvoyage.com/contact.html">
-  <meta property="og:title" content="Contact EveryVoyage - Get in Touch">
-  <meta property="og:description" content="Get in touch with the EveryVoyage team at Simplr Labs. Questions, feedback, or ideas welcome.">
+  <meta property="og:url" content="https://everyvoyage.com/faq.html">
+  <meta property="og:title" content="FAQ - EveryVoyage">
+  <meta property="og:description" content="Find answers to common questions about EveryVoyage, the motorhome travel companion app.">
   <meta property="og:image" content="https://everyvoyage.com/assets/brand/Logo.png">
   <meta property="og:site_name" content="EveryVoyage">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:url" content="https://everyvoyage.com/contact.html">
-  <meta name="twitter:title" content="Contact EveryVoyage - Get in Touch">
-  <meta name="twitter:description" content="Get in touch with the EveryVoyage team at Simplr Labs. Questions, feedback, or ideas welcome.">
+  <meta name="twitter:url" content="https://everyvoyage.com/faq.html">
+  <meta name="twitter:title" content="FAQ - EveryVoyage">
+  <meta name="twitter:description" content="Find answers to common questions about EveryVoyage, the motorhome travel companion app.">
   <meta name="twitter:image" content="https://everyvoyage.com/assets/brand/Logo.png">
 
   <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "ContactPage",
-    "name": "Contact EveryVoyage",
-    "description": "Get in touch with the EveryVoyage team at Simplr Labs.",
-    "url": "https://everyvoyage.com/contact.html",
-    "mainEntity": {
-      "@type": "Organization",
-      "name": "EveryVoyage",
-      "email": "support@everyvoyage.com",
-      "parentOrganization": {
-        "@type": "Organization",
-        "name": "Simplr Labs",
-        "url": "https://simplrlabs.com"
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is EveryVoyage really free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes! The core app is completely free. Founding Members get free access for life, including any premium features we add later."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which devices are supported?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "EveryVoyage is available on iOS and Android. Download from the App Store or Google Play."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does it work offline?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, GPS recording works without an internet connection. Your journeys sync when you're back online."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I become a Founding Member?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Just download the app and create an account while spots are available. It's that simple!"
+        }
       }
-    }
+    ]
   }
   </script>
 
@@ -221,35 +242,11 @@
       background:var(--color-warm-white);
       padding:5rem 2rem 4rem;
       text-align:center;
-      position:relative;
-      overflow:hidden;
-    }
-
-    .hero::before{
-      content:'';
-      position:absolute;
-      top:-50%;
-      left:-50%;
-      width:200%;
-      height:200%;
-      background:
-        radial-gradient(ellipse at 20% 20%, rgba(250,193,137,0.15) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 80%, rgba(245,74,0,0.08) 0%, transparent 50%);
-      animation:float 20s ease-in-out infinite;
-      z-index:0;
-    }
-
-    @keyframes float{
-      0%,100%{ transform:translate(0,0) rotate(0deg); }
-      33%{ transform:translate(30px,-30px) rotate(1deg); }
-      66%{ transform:translate(-20px,20px) rotate(-1deg); }
     }
 
     .hero-content{
       max-width:800px;
       margin:0 auto;
-      position:relative;
-      z-index:1;
     }
 
     .section-label{
@@ -269,11 +266,6 @@
       line-height:1.2;
     }
 
-    .hero h1 em{
-      font-style:italic;
-      color:var(--color-orange-light);
-    }
-
     .hero-subtitle{
       font-size:1.25rem;
       color:var(--color-slate);
@@ -287,238 +279,68 @@
       padding:4rem 2rem;
     }
 
-    /* Primary Contact Section */
-    .primary-contact{
-      max-width:800px;
-      margin:0 auto 4rem;
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:2rem;
-      align-items:stretch;
-    }
-
-    .contact-main-card{
-      background:var(--color-orange);
-      border-radius:24px;
-      padding:3rem;
-      color:var(--color-cream);
-      position:relative;
-      overflow:hidden;
-    }
-
-    .contact-main-card::before{
-      content:'';
-      position:absolute;
-      inset:0;
-      background:
-        radial-gradient(ellipse at 0% 0%, rgba(255,255,255,0.15) 0%, transparent 52%),
-        radial-gradient(ellipse at 100% 100%, rgba(0,0,0,0.1) 0%, transparent 55%);
-    }
-
-    .contact-main-card > *{
-      position:relative;
-      z-index:1;
-    }
-
-    .contact-main-card .contact-icon{
-      width:64px;
-      height:64px;
-      background:rgba(255,255,255,0.15);
-      border:1px solid rgba(255,255,255,0.2);
-      border-radius:18px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      margin-bottom:1.5rem;
-      color:white;
-    }
-
-    .contact-main-card .contact-icon svg{ width:32px; height:32px; }
-
-    .contact-main-card h2{
-      font-family:var(--font-display);
-      font-size:1.75rem;
-      font-weight:500;
-      margin-bottom:0.75rem;
-    }
-
-    .contact-main-card p{
-      color:rgba(255,255,255,0.85);
-      margin-bottom:1.5rem;
-      line-height:1.7;
-    }
-
-    .email-link{
-      display:inline-flex;
-      align-items:center;
-      gap:0.75rem;
-      background:var(--color-cream);
-      color:var(--color-charcoal);
-      padding:1rem 1.5rem;
-      border-radius:100px;
-      font-weight:600;
-      text-decoration:none;
-      transition:transform 0.2s var(--ease-bounce), box-shadow 0.2s var(--ease-smooth);
-    }
-
-    .email-link:hover{
-      transform:translateY(-2px);
-      box-shadow:0 8px 30px rgba(0,0,0,0.2);
-    }
-
-    .email-link svg{ width:20px; height:20px; color:var(--color-orange); }
-
-    /* Response Time Card */
-    .response-card{
-      background:rgba(254,253,251,0.95);
-      border:1px solid rgba(232,229,222,0.95);
-      border-radius:24px;
-      padding:3rem;
-      box-shadow:0 18px 50px rgba(0,0,0,0.08);
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-    }
-
-    .response-card .stat-icon{
-      width:48px;
-      height:48px;
-      background:linear-gradient(135deg, var(--color-peach) 0%, var(--color-orange) 100%);
-      border-radius:14px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      margin-bottom:1.25rem;
-      color:white;
-    }
-
-    .response-card .stat-icon svg{ width:24px; height:24px; }
-
-    .response-card h3{
-      font-family:var(--font-display);
-      font-size:1.25rem;
-      font-weight:500;
-      margin-bottom:0.5rem;
-      color:var(--color-charcoal);
-    }
-
-    .response-card p{
-      color:var(--color-slate);
-      line-height:1.7;
-      margin-bottom:1.5rem;
-    }
-
-    .team-note{
-      display:flex;
-      align-items:center;
-      gap:0.75rem;
-      padding:1rem;
-      background:rgba(245,74,0,0.06);
-      border-radius:12px;
-      border:1px solid rgba(245,74,0,0.1);
-    }
-
-    .team-note svg{
-      width:20px;
-      height:20px;
-      color:var(--color-orange);
-      flex-shrink:0;
-    }
-
-    .team-note span{
-      font-size:0.9rem;
-      color:var(--color-slate);
-    }
-
-    /* Secondary Contact Grid */
-    .contact-grid{
-      max-width:1000px;
+    /* FAQ Grid */
+    .faq-grid{
+      max-width:900px;
       margin:0 auto;
       display:grid;
-      grid-template-columns:repeat(3, 1fr);
+      grid-template-columns:repeat(2, 1fr);
       gap:1.5rem;
     }
 
-    .contact-card{
+    .faq-item{
       background:rgba(254,253,251,0.95);
       border:1px solid rgba(232,229,222,0.95);
       border-radius:20px;
       padding:2rem;
-      box-shadow:0 12px 40px rgba(0,0,0,0.06);
-      transition:transform 0.3s var(--ease-smooth), box-shadow 0.3s var(--ease-smooth);
-      text-align:center;
+      transition:border-color 0.2s var(--ease-smooth), transform 0.2s var(--ease-smooth);
     }
 
-    .contact-card:hover{
-      transform:translateY(-4px);
-      box-shadow:0 20px 50px rgba(0,0,0,0.1);
+    .faq-item:hover{
+      border-color:var(--color-peach);
+      transform:translateY(-2px);
     }
 
-    .contact-card .contact-icon{
-      width:52px;
-      height:52px;
-      background:linear-gradient(135deg, var(--color-peach) 0%, var(--color-orange) 100%);
-      border-radius:14px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      margin:0 auto 1.25rem;
-      color:white;
-    }
-
-    .contact-card .contact-icon svg{ width:26px; height:26px; }
-
-    .contact-card h3{
+    .faq-item h3{
       font-family:var(--font-display);
-      font-size:1.2rem;
+      font-size:1.15rem;
       font-weight:500;
-      margin-bottom:0.5rem;
+      margin-bottom:0.75rem;
       color:var(--color-charcoal);
     }
 
-    .contact-card p{
+    .faq-item p{
       color:var(--color-slate);
-      font-size:0.95rem;
-      line-height:1.6;
-      margin-bottom:1rem;
+      font-size:1rem;
+      line-height:1.7;
+      margin:0;
     }
 
-    .contact-link{
-      display:inline-flex;
-      align-items:center;
-      gap:0.4rem;
-      color:var(--color-orange);
-      font-weight:600;
-      font-size:0.95rem;
-      text-decoration:none;
-      transition:gap 0.2s var(--ease-smooth);
-    }
-
-    .contact-link:hover{ gap:0.6rem; }
-    .contact-link svg{ width:16px; height:16px; }
-
-    /* FAQ Link Section */
-    .faq-section{
-      max-width:800px;
+    /* Contact CTA */
+    .contact-cta{
+      max-width:700px;
       margin:4rem auto 0;
       text-align:center;
+      padding:3rem;
+      background:rgba(254,253,251,0.95);
+      border:1px solid rgba(232,229,222,0.95);
+      border-radius:24px;
     }
 
-    .faq-section h2{
+    .contact-cta h2{
       font-family:var(--font-display);
-      font-size:1.75rem;
+      font-size:1.5rem;
       font-weight:400;
       margin-bottom:1rem;
       color:var(--color-charcoal);
     }
 
-    .faq-section p{
+    .contact-cta p{
       color:var(--color-slate);
-      font-size:1.1rem;
       margin-bottom:1.5rem;
     }
 
-    .faq-link{
+    .contact-cta a{
       display:inline-flex;
       align-items:center;
       gap:0.5rem;
@@ -530,11 +352,11 @@
       font-weight:500;
       transition:transform 0.2s var(--ease-bounce), box-shadow 0.2s var(--ease-smooth);
     }
-    .faq-link:hover{
+    .contact-cta a:hover{
       transform:translateY(-2px);
       box-shadow:0 8px 30px rgba(0,0,0,0.2);
     }
-    .faq-link svg{ width:20px; height:20px; }
+    .contact-cta a svg{ width:20px; height:20px; }
 
     /* Footer */
     footer{
@@ -606,20 +428,14 @@
     .footer-social a:hover{ background:rgba(255,255,255,0.2); }
 
     /* Responsive */
-    @media (max-width:900px){
-      .primary-contact{ grid-template-columns:1fr; }
-      .contact-grid{ grid-template-columns:1fr; }
-    }
-
     @media (max-width:768px){
       nav{ padding:1rem 1.25rem; }
       .nav-links{ display:none; }
       .nav-toggle{ display:inline-flex; }
       .hero{ padding:3rem 1.25rem 2.5rem; }
       main{ padding:2rem 1.25rem; }
-      .contact-main-card{ padding:2rem; }
-      .response-card{ padding:2rem; }
-      .faq-section{ margin-top:3rem; }
+      .faq-grid{ grid-template-columns:1fr; }
+      .contact-cta{ padding:2rem; }
       .footer-content{ grid-template-columns:1fr; text-align:center; }
       .footer-brand{ max-width:none; }
       .footer-brand p{ text-align:center; }
@@ -651,135 +467,70 @@
   <!-- Hero -->
   <section class="hero">
     <div class="hero-content">
-      <p class="section-label">Get In Touch</p>
-      <h1>Let's start a <em>conversation</em></h1>
+      <p class="section-label">FAQ</p>
+      <h1>Common questions</h1>
       <p class="hero-subtitle">
-        Whether you have a question, feedback, or just want to say hello — we're always happy to hear from fellow travelers.
+        Quick answers to things we get asked often about EveryVoyage.
       </p>
     </div>
   </section>
 
   <!-- Main Content -->
   <main>
-    <!-- Primary Contact Section -->
-    <div class="primary-contact">
-      <div class="contact-main-card">
-        <div class="contact-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-            <polyline points="22,6 12,13 2,6"/>
-          </svg>
-        </div>
-        <h2>Drop us an email</h2>
-        <p>For questions, feedback, partnership inquiries, or just to share your latest adventure story.</p>
-        <a href="mailto:support@everyvoyage.com" class="email-link">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-            <polyline points="22,6 12,13 2,6"/>
-          </svg>
-          support@everyvoyage.com
-        </a>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <h3>Is EveryVoyage really free?</h3>
+        <p>Yes! The core app is completely free. Founding Members get free access for life, including any premium features we add later.</p>
       </div>
 
-      <div class="response-card">
-        <div class="stat-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10"/>
-            <polyline points="12 6 12 12 16 14"/>
-          </svg>
-        </div>
-        <h3>We typically respond within 24-48 hours</h3>
-        <p>We read every message personally and aim to give you a thoughtful response.</p>
-        <div class="team-note">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-          </svg>
-          <span>Small team, big heart — built by Simplr Labs</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Secondary Contact Options -->
-    <div class="contact-grid">
-      <div class="contact-card">
-        <div class="contact-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M9 18h6"/>
-            <path d="M10 22h4"/>
-            <path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/>
-          </svg>
-        </div>
-        <h3>Feature Ideas</h3>
-        <p>Got an idea that would make EveryVoyage even better? We're all ears.</p>
-        <a href="mailto:support@everyvoyage.com?subject=Feature Idea" class="contact-link">
-          Share your idea
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="5" y1="12" x2="19" y2="12"/>
-            <polyline points="12 5 19 12 12 19"/>
-          </svg>
-        </a>
+      <div class="faq-item">
+        <h3>Which devices are supported?</h3>
+        <p>EveryVoyage is available on iOS and Android. Download from the App Store or Google Play.</p>
       </div>
 
-      <div class="contact-card">
-        <div class="contact-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M8 2l1.88 1.88"/>
-            <path d="M14.12 3.88L16 2"/>
-            <path d="M9 7.13v-1a3.003 3.003 0 1 1 6 0v1"/>
-            <path d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6"/>
-            <path d="M12 20v-9"/>
-            <path d="M6.53 9C4.6 8.8 3 7.1 3 5"/>
-            <path d="M6 13H2"/>
-            <path d="M3 21c0-2.1 1.7-3.9 3.8-4"/>
-            <path d="M20.97 5c0 2.1-1.6 3.8-3.5 4"/>
-            <path d="M22 13h-4"/>
-            <path d="M17.2 17c2.1.1 3.8 1.9 3.8 4"/>
-          </svg>
-        </div>
-        <h3>Bug Reports</h3>
-        <p>Found something that's not working right? Help us squash it.</p>
-        <a href="mailto:support@everyvoyage.com?subject=Bug Report" class="contact-link">
-          Report a bug
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="5" y1="12" x2="19" y2="12"/>
-            <polyline points="12 5 19 12 12 19"/>
-          </svg>
-        </a>
+      <div class="faq-item">
+        <h3>Does it work offline?</h3>
+        <p>Yes, GPS recording works without an internet connection. Your journeys sync when you're back online.</p>
       </div>
 
-      <div class="contact-card">
-        <div class="contact-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-            <circle cx="9" cy="7" r="4"/>
-            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-          </svg>
-        </div>
-        <h3>Partnerships</h3>
-        <p>Interested in working together? Let's explore the possibilities.</p>
-        <a href="mailto:support@everyvoyage.com?subject=Partnership Inquiry" class="contact-link">
-          Get in touch
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="5" y1="12" x2="19" y2="12"/>
-            <polyline points="12 5 19 12 12 19"/>
-          </svg>
-        </a>
+      <div class="faq-item">
+        <h3>How do I become a Founding Member?</h3>
+        <p>Just download the app and create an account while spots are available. It's that simple!</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>How does GPS recording work?</h3>
+        <p>Tap "Record" when you start your journey. EveryVoyage runs in the background, tracking your route with battery-efficient GPS. Stop recording when you arrive.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Can I share my journeys?</h3>
+        <p>Absolutely! You can share your voyages with friends, family, or the EveryVoyage community. Choose who sees your adventures.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>What data do you collect?</h3>
+        <p>We only collect what's needed to make the app work. Your location data stays on your device until you choose to sync. See our Privacy Policy for details.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>How do I contact support?</h3>
+        <p>Email us at support@everyvoyage.com. We typically respond within 24 hours and love hearing from fellow travellers.</p>
       </div>
     </div>
 
-    <!-- FAQ Link -->
-    <section class="faq-section">
-      <h2>Looking for answers?</h2>
-      <p>Check out our frequently asked questions for quick answers.</p>
-      <a href="faq.html" class="faq-link">
-        View FAQ
+    <!-- Contact CTA -->
+    <div class="contact-cta">
+      <h2>Still have questions?</h2>
+      <p>We're here to help. Get in touch and we'll get back to you as soon as we can.</p>
+      <a href="contact.html">
+        Contact us
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <line x1="5" y1="12" x2="19" y2="12"/>
           <polyline points="12 5 19 12 12 19"/>
         </svg>
       </a>
-    </section>
+    </div>
   </main>
 
   <!-- Footer -->
