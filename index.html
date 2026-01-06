@@ -912,25 +912,11 @@
       <span></span><span></span><span></span>
     </button>
 
-    <ul class="nav-links">
-      <li><a href="#features">Features</a></li>
-      <li><a href="#how-it-works">How It Works</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="#download" class="nav-cta">Download</a></li>
-    </ul>
+    <ul class="nav-links" id="navLinks"></ul>
   </nav>
 
   <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-    <div class="mobile-menu-inner">
-      <hr class="mobile-divider">
-      <a href="#features">Features</a>
-      <a href="#how-it-works">How It Works</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-      <hr class="mobile-divider">
-      <a href="#download" class="mobile-cta">Download</a>
-    </div>
+    <div class="mobile-menu-inner" id="mobileMenuInner"></div>
   </div>
 
   <!-- Hero -->
@@ -1339,6 +1325,7 @@
     </div>
   </footer>
 
+  <script src="assets/js/main.js"></script>
   <script>
     // Navbar scroll effect
     const navbar = document.getElementById('navbar');
@@ -1372,36 +1359,6 @@
       el.style.transform = 'translateY(30px)';
       el.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
       observer.observe(el);
-    });
-
-    // Mobile menu toggle
-    const navToggle = document.getElementById('navToggle');
-    const mobileMenu = document.getElementById('mobileMenu');
-
-    function openMenu(){
-      document.body.classList.add('menu-open');
-      navToggle.setAttribute('aria-expanded', 'true');
-      mobileMenu.setAttribute('aria-hidden', 'false');
-      navToggle.setAttribute('aria-label', 'Close menu');
-    }
-
-    function closeMenu(){
-      document.body.classList.remove('menu-open');
-      navToggle.setAttribute('aria-expanded', 'false');
-      mobileMenu.setAttribute('aria-hidden', 'true');
-      navToggle.setAttribute('aria-label', 'Open menu');
-    }
-
-    navToggle?.addEventListener('click', () => {
-      document.body.classList.contains('menu-open') ? closeMenu() : openMenu();
-    });
-
-    mobileMenu?.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && document.body.classList.contains('menu-open')) closeMenu();
-    });
-    mobileMenu?.addEventListener('click', (e) => {
-      if (e.target === mobileMenu) closeMenu();
     });
 
     // ===== Founder slots logic (LIVE via API) =====
