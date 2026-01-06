@@ -1436,7 +1436,10 @@
       // Only redirect on first visit - check if language preference is already set
       if (!localStorage.getItem('langPref')) {
         const lang = navigator.language || navigator.languages[0];
-        if (lang.startsWith('sv')) {
+        if (lang.startsWith('it')) {
+          localStorage.setItem('langPref', 'it');
+          window.location.href = '/it/';
+        } else if (lang.startsWith('sv')) {
           localStorage.setItem('langPref', 'sv');
           window.location.href = '/sv/';
         } else if (lang.startsWith('de')) {
