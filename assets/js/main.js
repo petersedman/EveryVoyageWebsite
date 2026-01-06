@@ -38,6 +38,7 @@
             <a href="index.html" class="active">English (UK)</a>
             <a href="es/index.html">Español</a>
             <a href="de/index.html">Deutsch</a>
+            <a href="sv/index.html">Svenska</a>
           </div>
         </div>
       </li>
@@ -60,6 +61,7 @@
         <a href="index.html" class="active">EN</a>
         <a href="es/index.html">ES</a>
         <a href="de/index.html">DE</a>
+        <a href="sv/index.html">SV</a>
       </div>
       <hr class="mobile-divider">
       <a href="${href('#download')}" class="mobile-cta">Download</a>
