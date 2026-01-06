@@ -26,6 +26,20 @@
       <li><a href="about.html"${isActive('about.html') ? ' class="active"' : ''}>About</a></li>
       <li><a href="faq.html"${isActive('faq.html') ? ' class="active"' : ''}>FAQ</a></li>
       <li><a href="contact.html"${isActive('contact.html') ? ' class="active"' : ''}>Contact</a></li>
+      <li>
+        <div class="lang-switcher" id="langSwitcher">
+          <button class="lang-switcher-btn" aria-label="Change language">
+            EN
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="lang-dropdown">
+            <a href="index.html" class="active">English (UK)</a>
+            <a href="es/index.html">Español</a>
+          </div>
+        </div>
+      </li>
       <li><a href="${href('#download')}" class="nav-cta">Download</a></li>
     `;
   }
@@ -40,6 +54,11 @@
       <a href="about.html"${isActive('about.html') ? ' class="active"' : ''}>About</a>
       <a href="faq.html"${isActive('faq.html') ? ' class="active"' : ''}>FAQ</a>
       <a href="contact.html"${isActive('contact.html') ? ' class="active"' : ''}>Contact</a>
+      <hr class="mobile-divider">
+      <div class="mobile-lang-switch">
+        <a href="index.html" class="active">EN</a>
+        <a href="es/index.html">ES</a>
+      </div>
       <hr class="mobile-divider">
       <a href="${href('#download')}" class="mobile-cta">Download</a>
     `;
@@ -74,4 +93,17 @@ window.addEventListener('keydown', (e) => {
 });
 mobileMenu?.addEventListener('click', (e) => {
   if (e.target === mobileMenu) closeMenu();
+});
+
+// Language switcher toggle
+const langSwitcher = document.getElementById('langSwitcher');
+const langBtn = langSwitcher?.querySelector('.lang-switcher-btn');
+
+langBtn?.addEventListener('click', (e) => {
+  e.stopPropagation();
+  langSwitcher.classList.toggle('open');
+});
+
+document.addEventListener('click', () => {
+  langSwitcher?.classList.remove('open');
 });
