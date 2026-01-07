@@ -1015,7 +1015,7 @@
       <img src="../assets/brand/Logo.png" alt="EveryVoyage" class="logo-img">
     </a>
 
-    <button class="nav-toggle" id="navToggle" aria-label="Apne meny" aria-expanded="false">
+    <button class="nav-toggle" id="navToggle" aria-label="Åpne meny" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
 
@@ -1025,9 +1025,10 @@
       <li><a href="about.html">Om oss</a></li>
       <li><a href="faq.html">FAQ</a></li>
       <li><a href="contact.html">Kontakt</a></li>
+      <li><a href="#download" class="nav-cta">Last ned</a></li>
       <li>
         <div class="lang-switcher" id="langSwitcher">
-          <button class="lang-switcher-btn" aria-label="Bytt sprak">
+          <button class="lang-switcher-btn" aria-label="Bytt språk">
             NO
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <polyline points="6 9 12 15 18 9"></polyline>
@@ -1036,18 +1037,17 @@
           <div class="lang-dropdown">
             <a href="../index.html">English (UK)</a>
             <a href="../en-us/index.html">English (US)</a>
-            <a href="../es/index.html">Espanol</a>
+            <a href="../es/index.html">Español</a>
             <a href="../de/index.html">Deutsch</a>
             <a href="../sv/index.html">Svenska</a>
             <a href="../it/index.html">Italiano</a>
-            <a href="../fr/index.html">Francais</a>
+            <a href="../fr/index.html">Français</a>
             <a href="../nl/index.html">Nederlands</a>
             <a href="../da/index.html">Dansk</a>
             <a href="index.html" class="active">Norsk</a>
           </div>
         </div>
       </li>
-      <li><a href="#download" class="nav-cta">Last ned</a></li>
     </ul>
   </nav>
 
@@ -1492,7 +1492,7 @@
       document.body.classList.remove('menu-open');
       navToggle.setAttribute('aria-expanded', 'false');
       mobileMenu.setAttribute('aria-hidden', 'true');
-      navToggle.setAttribute('aria-label', 'Apne meny');
+      navToggle.setAttribute('aria-label', 'Åpne meny');
     }
 
     navToggle?.addEventListener('click', () => {

@@ -598,24 +598,26 @@
       <li><a href="faq.html" class="active">FAQ</a></li>
       <li><a href="contact.html">Kontakt</a></li>
       <li><a href="index.html#download" class="nav-cta">Download</a></li>
-      <li class="lang-switcher">
-        <button class="lang-switcher-btn" aria-label="Vælg sprog">
-          Dansk
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="6 9 12 15 18 9"/>
-          </svg>
-        </button>
-        <div class="lang-dropdown">
-          <a href="../faq.html">English (UK)</a>
-          <a href="../en-us/faq.html">English (US)</a>
-          <a href="../es/faq.html">Español</a>
-          <a href="../de/faq.html">Deutsch</a>
-          <a href="../sv/faq.html">Svenska</a>
-          <a href="../it/faq.html">Italiano</a>
-          <a href="../fr/faq.html">Français</a>
-          <a href="../nl/faq.html">Nederlands</a>
-          <a href="faq.html" class="active">Dansk</a>
-          <a href="../no/faq.html">Norsk</a>
+      <li>
+        <div class="lang-switcher" id="langSwitcher">
+          <button class="lang-switcher-btn" aria-label="Skift sprog">
+            DA
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="lang-dropdown">
+            <a href="../faq.html">English (UK)</a>
+            <a href="../en-us/faq.html">English (US)</a>
+            <a href="../es/faq.html">Español</a>
+            <a href="../de/faq.html">Deutsch</a>
+            <a href="../sv/faq.html">Svenska</a>
+            <a href="../it/faq.html">Italiano</a>
+            <a href="../fr/faq.html">Français</a>
+            <a href="../nl/faq.html">Nederlands</a>
+            <a href="faq.html" class="active">Dansk</a>
+            <a href="../no/faq.html">Norsk</a>
+          </div>
         </div>
       </li>
     </ul>
@@ -623,13 +625,15 @@
 
   <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
     <div class="mobile-menu-inner">
+      <hr class="mobile-divider">
       <a href="index.html#features">Funktioner</a>
       <a href="index.html#how-it-works">Sådan virker det</a>
       <a href="about.html">Om os</a>
       <a href="faq.html" class="active">FAQ</a>
       <a href="contact.html">Kontakt</a>
+      <a href="index.html#download" class="mobile-cta">Download</a>
       <hr class="mobile-divider">
-      <div class="mobile-lang">
+      <div class="mobile-lang-switch">
         <a href="../faq.html">UK</a>
         <a href="../en-us/faq.html">US</a>
         <a href="../es/faq.html">ES</a>
@@ -641,7 +645,6 @@
         <a href="faq.html" class="active">DA</a>
         <a href="../no/faq.html">NO</a>
       </div>
-      <a href="index.html#download" class="mobile-cta">Download</a>
     </div>
   </div>
 

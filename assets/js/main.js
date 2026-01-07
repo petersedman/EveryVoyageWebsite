@@ -26,6 +26,7 @@
       <li><a href="about.html"${isActive('about.html') ? ' class="active"' : ''}>About</a></li>
       <li><a href="faq.html"${isActive('faq.html') ? ' class="active"' : ''}>FAQ</a></li>
       <li><a href="contact.html"${isActive('contact.html') ? ' class="active"' : ''}>Contact</a></li>
+      <li><a href="${href('#download')}" class="nav-cta">Download</a></li>
       <li>
         <div class="lang-switcher" id="langSwitcher">
           <button class="lang-switcher-btn" aria-label="Change language">
@@ -48,7 +49,6 @@
           </div>
         </div>
       </li>
-      <li><a href="${href('#download')}" class="nav-cta">Download</a></li>
     `;
   }
 
@@ -63,6 +63,8 @@
       <a href="faq.html"${isActive('faq.html') ? ' class="active"' : ''}>FAQ</a>
       <a href="contact.html"${isActive('contact.html') ? ' class="active"' : ''}>Contact</a>
       <hr class="mobile-divider">
+      <a href="${href('#download')}" class="mobile-cta">Download</a>
+      <hr class="mobile-divider">
       <div class="mobile-lang-switch">
         <a href="index.html" class="active">UK</a>
         <a href="en-us/index.html">US</a>
@@ -75,8 +77,6 @@
         <a href="da/index.html">DA</a>
         <a href="no/index.html">NO</a>
       </div>
-      <hr class="mobile-divider">
-      <a href="${href('#download')}" class="mobile-cta">Download</a>
     `;
   }
 })();
