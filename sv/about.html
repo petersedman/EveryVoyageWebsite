@@ -71,6 +71,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
 
+  <!-- Site Navigation Component -->
+  <script src="../assets/js/site-nav.js" defer></script>
+
   <style>
     :root{
       --color-cream:#F7F4ED;
@@ -109,214 +112,6 @@
       pointer-events:none;
       background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
     }
-
-    /* Navigation */
-    nav{
-      position:sticky;
-      top:0;
-      z-index:100;
-      padding:1.5rem 2rem;
-      background:rgba(247,244,237,0.95);
-      backdrop-filter:blur(10px);
-      border-bottom:1px solid var(--color-mist);
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-    }
-
-    .logo{ display:flex; align-items:center; gap:0.5rem; text-decoration:none; }
-    .logo-img{ height:50px; width:auto; display:block; }
-
-    .nav-links{ display:flex; gap:2rem; list-style:none; align-items:center; }
-    .nav-links a{
-      color:var(--color-slate);
-      text-decoration:none;
-      font-size:0.95rem;
-      font-weight:500;
-      transition:color 0.2s var(--ease-smooth);
-    }
-    .nav-links a:hover{ color:var(--color-orange); }
-    .nav-links a.active{ color:var(--color-orange); }
-
-    .nav-cta{
-      background:var(--color-orange);
-      color:var(--color-cream) !important;
-      padding:0.75rem 1.5rem;
-      border-radius:100px;
-      transition:transform 0.2s var(--ease-bounce), box-shadow 0.2s var(--ease-smooth) !important;
-    }
-    .nav-cta:hover{
-      transform:translateY(-2px);
-      box-shadow:0 4px 20px rgba(45,74,62,0.3);
-    }
-
-    /* Language switcher */
-    .lang-switcher{
-      position:relative;
-      display:flex;
-      align-items:center;
-    }
-    .lang-switcher-btn{
-      display:flex;
-      align-items:center;
-      gap:0.4rem;
-      padding:0.5rem 0.75rem;
-      background:var(--color-warm-white);
-      border:1px solid var(--color-mist);
-      border-radius:8px;
-      font-size:0.85rem;
-      font-weight:500;
-      color:var(--color-slate);
-      cursor:pointer;
-      transition:all 0.2s var(--ease-smooth);
-    }
-    .lang-switcher-btn:hover{
-      border-color:var(--color-peach);
-      color:var(--color-charcoal);
-    }
-    .lang-switcher-btn svg{
-      width:16px;
-      height:16px;
-      transition:transform 0.2s var(--ease-smooth);
-    }
-    .lang-switcher.open .lang-switcher-btn svg{
-      transform:rotate(180deg);
-    }
-    .lang-dropdown{
-      position:absolute;
-      top:calc(100% + 8px);
-      right:0;
-      background:var(--color-warm-white);
-      border:1px solid var(--color-mist);
-      border-radius:12px;
-      box-shadow:0 8px 24px rgba(0,0,0,0.12);
-      min-width:140px;
-      opacity:0;
-      visibility:hidden;
-      transform:translateY(-8px);
-      transition:all 0.2s var(--ease-smooth);
-      z-index:1001;
-    }
-    .lang-switcher.open .lang-dropdown{
-      opacity:1;
-      visibility:visible;
-      transform:translateY(0);
-    }
-    .lang-dropdown a{
-      display:block;
-      padding:0.75rem 1rem;
-      color:var(--color-slate);
-      text-decoration:none;
-      font-size:0.9rem;
-      transition:all 0.15s var(--ease-smooth);
-    }
-    .lang-dropdown a:first-child{
-      border-radius:12px 12px 0 0;
-    }
-    .lang-dropdown a:last-child{
-      border-radius:0 0 12px 12px;
-    }
-    .lang-dropdown a:hover{
-      background:var(--color-cream);
-      color:var(--color-charcoal);
-    }
-    .lang-dropdown a.active{
-      background:var(--color-orange);
-      color:var(--color-cream);
-    }
-
-    /* Mobile nav */
-    .nav-toggle{
-      display:none;
-      width:44px; height:44px;
-      border:1px solid var(--color-mist);
-      background:var(--color-warm-white);
-      border-radius:12px;
-      cursor:pointer;
-      padding:10px;
-      gap:6px;
-      align-items:center;
-      justify-content:center;
-      flex-direction:column;
-    }
-    .nav-toggle span{
-      display:block;
-      width:20px;
-      height:2px;
-      background:var(--color-charcoal);
-      border-radius:999px;
-      transition:transform 0.25s var(--ease-smooth), opacity 0.2s var(--ease-smooth);
-    }
-
-    .mobile-menu{
-      position:fixed;
-      inset:0;
-      background:rgba(247,244,237,0.96);
-      backdrop-filter:blur(12px);
-      z-index:999;
-      display:none;
-    }
-    .mobile-menu-inner{
-      height:100%;
-      display:flex;
-      flex-direction:column;
-      justify-content:flex-start;
-      align-items:flex-start;
-      padding:7.5rem 2rem 2rem;
-      gap:1.75rem;
-      text-align:left;
-    }
-    .mobile-menu-inner > *{ max-width:420px; }
-    .mobile-menu a{
-      font-family:var(--font-display);
-      font-size:1rem;
-      font-weight:500;
-      color:var(--color-charcoal);
-      text-decoration:none;
-    }
-    .mobile-menu a:hover{ color:var(--color-orange); }
-    .mobile-menu a.active{ color:var(--color-orange); }
-    .mobile-cta{
-      margin-top:0.5rem;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:0.9rem 1.6rem;
-      border-radius:999px;
-      background:var(--color-orange);
-      color:var(--color-cream) !important;
-      font-family:var(--font-body);
-      font-size:1.05rem;
-    }
-    .mobile-divider{
-      width:100%;
-      border:none;
-      height:1px;
-      background:var(--color-mist);
-      margin:0.25rem 0;
-    }
-    .mobile-lang-switch{
-      display:flex;
-      gap:1rem;
-      margin-top:0.5rem;
-    }
-    .mobile-lang-switch a{
-      font-family:var(--font-body);
-      font-size:0.9rem;
-      padding:0.5rem 1rem;
-      border:1px solid var(--color-mist);
-      border-radius:8px;
-    }
-    .mobile-lang-switch a.active{
-      background:var(--color-orange);
-      color:var(--color-cream);
-      border-color:var(--color-orange);
-    }
-    body.menu-open .mobile-menu{ display:block; }
-    body.menu-open{ overflow:hidden; }
-    body.menu-open .nav-toggle span:nth-child(1){ transform:translateY(8px) rotate(45deg); }
-    body.menu-open .nav-toggle span:nth-child(2){ opacity:0; }
-    body.menu-open .nav-toggle span:nth-child(3){ transform:translateY(-8px) rotate(-45deg); }
 
     /* Hero Section */
     .hero{
@@ -531,9 +326,6 @@
 
     /* Responsive */
     @media (max-width:768px){
-      nav{ padding:1rem 1.25rem; }
-      .nav-links{ display:none; }
-      .nav-toggle{ display:inline-flex; }
       .hero{ padding:3rem 1.25rem 2.5rem; }
       main{ padding:2rem 1.25rem; }
       .content-grid{ grid-template-columns:1fr; }
@@ -550,72 +342,7 @@
 
 <body>
   <!-- Navigation -->
-  <nav>
-    <a href="index.html" class="logo">
-      <img src="../assets/brand/Logo.png" alt="EveryVoyage" class="logo-img">
-    </a>
-
-    <button class="nav-toggle" id="navToggle" aria-label="Öppna meny" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-
-    <ul class="nav-links">
-      <li><a href="index.html#features">Funktioner</a></li>
-      <li><a href="index.html#how-it-works">Så fungerar det</a></li>
-      <li><a href="about.html" class="active">Om oss</a></li>
-      <li><a href="faq.html">FAQ</a></li>
-      <li><a href="contact.html">Kontakt</a></li>
-      <li><a href="index.html#download" class="nav-cta">Ladda ner</a></li>
-      <li>
-        <div class="lang-switcher" id="langSwitcher">
-          <button class="lang-switcher-btn" aria-label="Byt språk">
-            SV
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="6 9 12 15 18 9"></polyline>
-            </svg>
-          </button>
-          <div class="lang-dropdown">
-            <a href="../about.html">English (UK)</a>
-            <a href="../en-us/about.html">English (US)</a>
-            <a href="../es/about.html">Español</a>
-            <a href="../de/about.html">Deutsch</a>
-            <a href="about.html" class="active">Svenska</a>
-            <a href="../it/about.html">Italiano</a>
-            <a href="../fr/about.html">Français</a>
-            <a href="../nl/about.html">Nederlands</a>
-            <a href="../da/about.html">Dansk</a>
-            <a href="../no/about.html">Norsk</a>
-          </div>
-        </div>
-      </li>
-    </ul>
-  </nav>
-
-  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-    <div class="mobile-menu-inner">
-      <hr class="mobile-divider">
-      <a href="index.html#features">Funktioner</a>
-      <a href="index.html#how-it-works">Så fungerar det</a>
-      <a href="about.html" class="active">Om oss</a>
-      <a href="faq.html">FAQ</a>
-      <a href="contact.html">Kontakt</a>
-      <hr class="mobile-divider">
-      <div class="mobile-lang-switch">
-        <a href="../about.html">UK</a>
-        <a href="../en-us/about.html">US</a>
-        <a href="../es/about.html">ES</a>
-        <a href="../de/about.html">DE</a>
-        <a href="about.html" class="active">SV</a>
-        <a href="../it/about.html">IT</a>
-        <a href="../fr/about.html">FR</a>
-        <a href="../nl/about.html">NL</a>
-        <a href="../da/about.html">DA</a>
-        <a href="../no/about.html">NO</a>
-      </div>
-      <hr class="mobile-divider">
-      <a href="index.html#download" class="mobile-cta">Ladda ner</a>
-    </div>
-  </div>
+  <site-nav lang="sv" page="about" base-path="../"></site-nav>
 
   <!-- Hero -->
   <section class="hero">
@@ -773,50 +500,5 @@
       </div>
     </div>
   </footer>
-
-  <script>
-    // Mobile menu toggle
-    const navToggle = document.getElementById('navToggle');
-    const mobileMenu = document.getElementById('mobileMenu');
-
-    function openMenu(){
-      document.body.classList.add('menu-open');
-      navToggle.setAttribute('aria-expanded', 'true');
-      mobileMenu.setAttribute('aria-hidden', 'false');
-      navToggle.setAttribute('aria-label', 'Stang meny');
-    }
-
-    function closeMenu(){
-      document.body.classList.remove('menu-open');
-      navToggle.setAttribute('aria-expanded', 'false');
-      mobileMenu.setAttribute('aria-hidden', 'true');
-      navToggle.setAttribute('aria-label', 'Oppna meny');
-    }
-
-    navToggle?.addEventListener('click', () => {
-      document.body.classList.contains('menu-open') ? closeMenu() : openMenu();
-    });
-
-    mobileMenu?.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && document.body.classList.contains('menu-open')) closeMenu();
-    });
-    mobileMenu?.addEventListener('click', (e) => {
-      if (e.target === mobileMenu) closeMenu();
-    });
-
-    // Language switcher toggle
-    const langSwitcher = document.getElementById('langSwitcher');
-    const langBtn = langSwitcher?.querySelector('.lang-switcher-btn');
-
-    langBtn?.addEventListener('click', (e) => {
-      e.stopPropagation();
-      langSwitcher.classList.toggle('open');
-    });
-
-    document.addEventListener('click', () => {
-      langSwitcher?.classList.remove('open');
-    });
-  </script>
 </body>
 </html>
