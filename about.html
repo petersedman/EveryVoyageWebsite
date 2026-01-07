@@ -140,6 +140,81 @@
       box-shadow:0 4px 20px rgba(45,74,62,0.3);
     }
 
+    /* Language switcher */
+    .lang-switcher{
+      position:relative;
+      display:flex;
+      align-items:center;
+    }
+    .lang-switcher-btn{
+      display:flex;
+      align-items:center;
+      gap:0.4rem;
+      padding:0.5rem 0.75rem;
+      background:var(--color-warm-white);
+      border:1px solid var(--color-mist);
+      border-radius:8px;
+      font-size:0.85rem;
+      font-weight:500;
+      color:var(--color-slate);
+      cursor:pointer;
+      transition:all 0.2s var(--ease-smooth);
+    }
+    .lang-switcher-btn:hover{
+      border-color:var(--color-peach);
+      color:var(--color-charcoal);
+    }
+    .lang-switcher-btn svg{
+      width:16px;
+      height:16px;
+      transition:transform 0.2s var(--ease-smooth);
+    }
+    .lang-switcher.open .lang-switcher-btn svg{
+      transform:rotate(180deg);
+    }
+    .lang-dropdown{
+      position:absolute;
+      top:calc(100% + 8px);
+      right:0;
+      background:var(--color-warm-white);
+      border:1px solid var(--color-mist);
+      border-radius:12px;
+      box-shadow:0 8px 24px rgba(0,0,0,0.12);
+      min-width:140px;
+      opacity:0;
+      visibility:hidden;
+      transform:translateY(-8px);
+      transition:all 0.2s var(--ease-smooth);
+      z-index:1001;
+    }
+    .lang-switcher.open .lang-dropdown{
+      opacity:1;
+      visibility:visible;
+      transform:translateY(0);
+    }
+    .lang-dropdown a{
+      display:block;
+      padding:0.75rem 1rem;
+      color:var(--color-slate);
+      text-decoration:none;
+      font-size:0.9rem;
+      transition:all 0.15s var(--ease-smooth);
+    }
+    .lang-dropdown a:first-child{
+      border-radius:12px 12px 0 0;
+    }
+    .lang-dropdown a:last-child{
+      border-radius:0 0 12px 12px;
+    }
+    .lang-dropdown a:hover{
+      background:var(--color-cream);
+      color:var(--color-charcoal);
+    }
+    .lang-dropdown a.active{
+      background:var(--color-orange);
+      color:var(--color-cream);
+    }
+
     /* Mobile nav */
     .nav-toggle{
       display:none;
