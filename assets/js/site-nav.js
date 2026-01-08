@@ -446,6 +446,8 @@ class SiteNav extends HTMLElement {
         padding: 7.5rem 2rem 2rem;
         gap: 1.75rem;
         text-align: left;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
       }
 
       .mobile-menu-inner > * {
