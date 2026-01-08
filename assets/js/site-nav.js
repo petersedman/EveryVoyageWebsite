@@ -184,6 +184,7 @@ class SiteNav extends HTMLElement {
 
     // Mobile menu toggle
     const openMenu = () => {
+      this.classList.add('menu-open');
       document.body.classList.add('menu-open');
       navToggle.setAttribute('aria-expanded', 'true');
       mobileMenu.setAttribute('aria-hidden', 'false');
@@ -191,6 +192,7 @@ class SiteNav extends HTMLElement {
     };
 
     const closeMenu = () => {
+      this.classList.remove('menu-open');
       document.body.classList.remove('menu-open');
       navToggle.setAttribute('aria-expanded', 'false');
       mobileMenu.setAttribute('aria-hidden', 'true');
@@ -508,20 +510,20 @@ class SiteNav extends HTMLElement {
         border-color: var(--color-orange);
       }
 
-      /* Menu open state - using :host-context to detect body.menu-open */
-      :host-context(body.menu-open) .mobile-menu {
+      /* Menu open state - using :host(.menu-open) to detect component state */
+      :host(.menu-open) .mobile-menu {
         display: block;
       }
 
-      :host-context(body.menu-open) .nav-toggle span:nth-child(1) {
+      :host(.menu-open) .nav-toggle span:nth-child(1) {
         transform: translateY(8px) rotate(45deg);
       }
 
-      :host-context(body.menu-open) .nav-toggle span:nth-child(2) {
+      :host(.menu-open) .nav-toggle span:nth-child(2) {
         opacity: 0;
       }
 
-      :host-context(body.menu-open) .nav-toggle span:nth-child(3) {
+      :host(.menu-open) .nav-toggle span:nth-child(3) {
         transform: translateY(-8px) rotate(-45deg);
       }
 
