@@ -143,6 +143,10 @@ class SiteNav extends HTMLElement {
       <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
         <div class="mobile-menu-inner">
           <hr class="mobile-divider">
+          <div class="mobile-lang-switch">
+            ${this.renderMobileLangSwitch(pageFile)}
+          </div>
+          <hr class="mobile-divider">
           <a href="${this.getHref('#features')}">${labels.features}</a>
           <a href="${this.getHref('#how-it-works')}">${labels.howItWorks}</a>
           <a href="about.html"${this.page === 'about' ? ' class="active"' : ''}>${labels.about}</a>
@@ -150,10 +154,6 @@ class SiteNav extends HTMLElement {
           <a href="contact.html"${this.page === 'contact' ? ' class="active"' : ''}>${labels.contact}</a>
           <hr class="mobile-divider">
           <a href="${this.getHref('#download')}" class="mobile-cta">${labels.download}</a>
-          <hr class="mobile-divider">
-          <div class="mobile-lang-switch">
-            ${this.renderMobileLangSwitch(pageFile)}
-          </div>
         </div>
       </div>
     `;
