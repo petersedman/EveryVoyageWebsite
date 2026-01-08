@@ -143,10 +143,6 @@ class SiteNav extends HTMLElement {
       <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
         <div class="mobile-menu-inner">
           <hr class="mobile-divider">
-          <div class="mobile-lang-switch">
-            ${this.renderMobileLangSwitch(pageFile)}
-          </div>
-          <hr class="mobile-divider">
           <a href="${this.getHref('#features')}">${labels.features}</a>
           <a href="${this.getHref('#how-it-works')}">${labels.howItWorks}</a>
           <a href="about.html"${this.page === 'about' ? ' class="active"' : ''}>${labels.about}</a>
@@ -154,6 +150,10 @@ class SiteNav extends HTMLElement {
           <a href="contact.html"${this.page === 'contact' ? ' class="active"' : ''}>${labels.contact}</a>
           <hr class="mobile-divider">
           <a href="${this.getHref('#download')}" class="mobile-cta">${labels.download}</a>
+          <hr class="mobile-divider">
+          <select class="mobile-lang-select" id="mobileLangSelect" aria-label="${labels.changeLang}">
+            ${this.renderMobileLangSelect(pageFile)}
+          </select>
         </div>
       </div>
     `;
@@ -175,11 +175,20 @@ class SiteNav extends HTMLElement {
     }).join('');
   }
 
+  renderMobileLangSelect(pageFile) {
+    return Object.entries(SiteNav.LANGUAGES).map(([key, config]) => {
+      const isActive = key === this.lang;
+      const href = this.getLangPath(key, pageFile);
+      return `<option value="${href}"${isActive ? ' selected' : ''}>${config.name}</option>`;
+    }).join('');
+  }
+
   setupEventListeners() {
     const navToggle = this.shadowRoot.getElementById('navToggle');
     const mobileMenu = this.shadowRoot.getElementById('mobileMenu');
     const langSwitcher = this.shadowRoot.getElementById('langSwitcher');
     const langBtn = langSwitcher?.querySelector('.lang-switcher-btn');
+    const mobileLangSelect = this.shadowRoot.getElementById('mobileLangSelect');
     const labels = this.getLabels();
 
     // Mobile menu toggle
@@ -228,6 +237,11 @@ class SiteNav extends HTMLElement {
 
     document.addEventListener('click', () => {
       langSwitcher?.classList.remove('open');
+    });
+
+    // Mobile language select
+    mobileLangSelect?.addEventListener('change', (e) => {
+      window.location.href = e.target.value;
     });
   }
 
@@ -435,10 +449,12 @@ class SiteNav extends HTMLElement {
         backdrop-filter: blur(12px);
         z-index: 999;
         display: none;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
       }
 
       .mobile-menu-inner {
-        height: 100%;
+        min-height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
@@ -446,8 +462,6 @@ class SiteNav extends HTMLElement {
         padding: 7.5rem 2rem 2rem;
         gap: 1.75rem;
         text-align: left;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
       }
 
       .mobile-menu-inner > * {
@@ -509,6 +523,24 @@ class SiteNav extends HTMLElement {
       .mobile-lang-switch a.active {
         background: var(--color-orange);
         color: var(--color-cream);
+        border-color: var(--color-orange);
+      }
+
+      .mobile-lang-select {
+        width: 100%;
+        padding: 0.9rem 1rem;
+        font-family: var(--font-body);
+        font-size: 1rem;
+        color: var(--color-charcoal);
+        background: var(--color-warm-white);
+        border: 1px solid var(--color-mist);
+        border-radius: 12px;
+        cursor: pointer;
+        transition: border-color 0.2s var(--ease-smooth);
+      }
+
+      .mobile-lang-select:focus {
+        outline: none;
         border-color: var(--color-orange);
       }
 
