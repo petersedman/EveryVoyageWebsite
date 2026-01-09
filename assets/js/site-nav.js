@@ -142,7 +142,6 @@ class SiteNav extends HTMLElement {
 
       <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
         <div class="mobile-menu-inner">
-          <hr class="mobile-divider">
           <a href="${this.getHref('#features')}">${labels.features}</a>
           <a href="${this.getHref('#how-it-works')}">${labels.howItWorks}</a>
           <a href="about.html"${this.page === 'about' ? ' class="active"' : ''}>${labels.about}</a>
@@ -445,7 +444,7 @@ class SiteNav extends HTMLElement {
       .mobile-menu {
         position: fixed;
         inset: 0;
-        background: rgba(247, 244, 237, 0.96);
+        background: rgba(247, 244, 237, 1);
         backdrop-filter: blur(12px);
         z-index: 999;
         display: none;
