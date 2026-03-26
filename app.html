@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Open EveryVoyage</title>
+  <script>
+    (function () {
+      const ua = navigator.userAgent || navigator.vendor || window.opera;
+
+      const IOS_URL = "https://apps.apple.com/app/idYOUR_APP_ID";
+      const ANDROID_URL = "https://play.google.com/store/apps/details?id=YOUR_PACKAGE_NAME";
+      const FALLBACK_URL = "https://everyvoyage.com/";
+
+      const isAndroid = /android/i.test(ua);
+      const isIOS = /iPad|iPhone|iPod/.test(ua)
+        || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+
+      if (isAndroid) {
+        window.location.replace(ANDROID_URL);
+      } else if (isIOS) {
+        window.location.replace(IOS_URL);
+      } else {
+        window.location.replace(FALLBACK_URL);
+      }
+    })();
+  </script>
+  <noscript>
+    <meta http-equiv="refresh" content="0;url=https://everyvoyage.com/">
+  </noscript>
+</head>
+<body>
+  Redirecting to EveryVoyage…
+</body>
+</html>
