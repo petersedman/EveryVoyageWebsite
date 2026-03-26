@@ -4,7 +4,7 @@
     "target": {
       "namespace": "android_app",
       "package_name": "com.everyvoyage.app",
-      "sha256_cert_fingerprints": ["B7:41:E9:3E:4E:17:9B:66:9D:47:2C:B1:1A:B4:D0:82:71:2D:70:48:00:72:CB:7D:FE:08:9C:16:F4:A4:F4:F8:"]
+      "sha256_cert_fingerprints": ["B7:41:E9:3E:4E:17:9B:66:9D:47:2C:B1:1A:B4:D0:82:71:2D:70:48:00:72:CB:7D:FE:08:9C:16:F4:A4:F4:F8"]
     }
   }
 ]
